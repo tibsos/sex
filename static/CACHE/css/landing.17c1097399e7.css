@@ -1,0 +1,1055 @@
+/* line 3, static/scss/base/landing.scss */
+body, html {
+  margin: 0;
+  color: #1E2330;
+  width: 100%; }
+
+/* line 13, static/scss/base/landing.scss */
+::-webkit-scrollbar {
+  width: 10px; }
+
+/* line 20, static/scss/base/landing.scss */
+::-webkit-scrollbar-track {
+  border-radius: 10px; }
+
+/* line 26, static/scss/base/landing.scss */
+::-webkit-scrollbar-thumb {
+  background: #1E2330;
+  border-radius: 50px; }
+
+/* line 35, static/scss/base/landing.scss */
+#homeBtn {
+  width: 100px; }
+
+/* line 36, static/scss/base/landing.scss */
+#logoutBtn {
+  width: 120px; }
+
+/* line 37, static/scss/base/landing.scss */
+#loginBtn {
+  width: 120px; }
+
+/* line 39, static/scss/base/landing.scss */
+.top-nav {
+  position: relative;
+  top: 20px;
+  width: 100%;
+  height: 50px;
+  z-index: 10; }
+  /* line 49, static/scss/base/landing.scss */
+  .top-nav .brand {
+    position: relative;
+    left: 30px;
+    cursor: pointer; }
+    /* line 56, static/scss/base/landing.scss */
+    .top-nav .brand a {
+      text-decoration: none;
+      color: #1E2330; }
+    /* line 64, static/scss/base/landing.scss */
+    .top-nav .brand svg {
+      position: relative;
+      left: 15px;
+      transform: scale(1.8);
+      fill: #1E2330;
+      float: left; }
+    /* line 76, static/scss/base/landing.scss */
+    .top-nav .brand h1 {
+      position: relative;
+      left: 40px;
+      font-size: 40px; }
+  /* line 89, static/scss/base/landing.scss */
+  .top-nav .btns {
+    position: absolute;
+    bottom: -3px;
+    right: 50px;
+    height: 60px;
+    display: inline-block; }
+    /* line 99, static/scss/base/landing.scss */
+    .top-nav .btns .auth-btn.in {
+      box-shadow: inset 1px 1px 4px #b9b9b7, inset -1px -1px 4px #ffffff; }
+    /* line 106, static/scss/base/landing.scss */
+    .top-nav .btns div {
+      position: relative;
+      height: 20px;
+      padding: 20px;
+      margin-left: 40px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 1px 1px 4px #b9b9b7, -1px -1px 4px #ffffff;
+      float: left; }
+      /* line 128, static/scss/base/landing.scss */
+      .top-nav .btns div svg {
+        position: absolute;
+        left: 20px;
+        fill: #1E2330; }
+      /* line 137, static/scss/base/landing.scss */
+      .top-nav .btns div .home {
+        transform: scale(1.3); }
+      /* line 143, static/scss/base/landing.scss */
+      .top-nav .btns div .logout {
+        margin-top: 3px;
+        transform: scale(1.2); }
+      /* line 151, static/scss/base/landing.scss */
+      .top-nav .btns div .login {
+        transform: scale(1.3); }
+      /* line 158, static/scss/base/landing.scss */
+      .top-nav .btns div span {
+        position: relative;
+        left: 45px;
+        top: 3px;
+        font-size: 20px; }
+    /* line 170, static/scss/base/landing.scss */
+    .top-nav .btns a {
+      text-decoration: none;
+      color: #1E2330;
+      cursor: pointer; }
+
+/* line 182, static/scss/base/landing.scss */
+.main {
+  position: relative;
+  width: 100%; }
+  /* line 187, static/scss/base/landing.scss */
+  .main .circles {
+    position: absolute;
+    left: -20px;
+    top: 100px;
+    width: 100%;
+    height: 1000px;
+    overflow: hidden; }
+    /* line 198, static/scss/base/landing.scss */
+    .main .circles div {
+      position: absolute;
+      transform: scale(1);
+      border-radius: 1000px; }
+    /* line 208, static/scss/base/landing.scss */
+    .main .circles .big {
+      top: 20px;
+      width: 1000px;
+      height: 1000px;
+      background-color: yellow;
+      transition: all 3s ease-in-out; }
+    /* line 221, static/scss/base/landing.scss */
+    .main .circles .medium {
+      top: 350px;
+      left: 100px;
+      width: 550px;
+      height: 550px;
+      background-color: blue;
+      transition: all 1.5s ease-in-out; }
+    /* line 235, static/scss/base/landing.scss */
+    .main .circles .small {
+      top: 50px;
+      left: 500px;
+      width: 400px;
+      height: 400px;
+      background-color: red;
+      transition: all 1s ease-in-out; }
+  /* line 251, static/scss/base/landing.scss */
+  .main .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1122px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(80px);
+    -webkit-backdrop-filter: blur(80px); }
+    /* line 267, static/scss/base/landing.scss */
+    .main .content .info {
+      position: relative;
+      width: 100%;
+      height: 1000px;
+      overflow: hidden; }
+      /* line 276, static/scss/base/landing.scss */
+      .main .content .info .text {
+        position: relative;
+        top: 180px;
+        left: 125px;
+        width: calc(50% - 125px);
+        float: left; }
+        /* line 286, static/scss/base/landing.scss */
+        .main .content .info .text h1 {
+          font-size: 100px;
+          text-shadow: 1px 1px 3px #1E2330; }
+        /* line 294, static/scss/base/landing.scss */
+        .main .content .info .text h2 {
+          font-weight: normal;
+          font-size: 52px; }
+        /* line 301, static/scss/base/landing.scss */
+        .main .content .info .text button {
+          position: relative;
+          top: 30px;
+          height: 70px;
+          width: 450px;
+          padding: 10px;
+          background: rgba(255, 255, 255, 0.2);
+          box-shadow: 1px 1px 4px #b9b9b7, -1px -1px 4px #ffffff;
+          border: none;
+          border-radius: 100px;
+          font-family: Comfortaa;
+          font-size: 30px;
+          cursor: pointer; }
+        /* line 326, static/scss/base/landing.scss */
+        .main .content .info .text button.in {
+          box-shadow: inset 1px 1px 4px #b9b9b7, inset -1px -1px 4px #ffffff; }
+    /* line 337, static/scss/base/landing.scss */
+    .main .content .img {
+      position: relative;
+      top: 30px;
+      width: 50%;
+      float: right;
+      overflow: hidden; }
+      /* line 348, static/scss/base/landing.scss */
+      .main .content .img img {
+        position: relative; }
+
+/* line 361, static/scss/base/landing.scss */
+.bottom-nav {
+  position: relative;
+  top: -70px;
+  left: -15px;
+  width: 100%; }
+  /* line 369, static/scss/base/landing.scss */
+  .bottom-nav .links {
+    position: relative;
+    left: 5px;
+    bottom: 9px;
+    float: left; }
+    /* line 377, static/scss/base/landing.scss */
+    .bottom-nav .links ul {
+      list-style-type: none; }
+      /* line 381, static/scss/base/landing.scss */
+      .bottom-nav .links ul li {
+        display: inline-block;
+        margin-right: 30px;
+        /* Link hover effect */ }
+        /* line 387, static/scss/base/landing.scss */
+        .bottom-nav .links ul li a {
+          text-decoration: none;
+          color: #1E2330;
+          font-size: 23px; }
+          /* line 394, static/scss/base/landing.scss */
+          .bottom-nav .links ul li a .copyright {
+            width: 275px;
+            font-weight: normal;
+            font-size: 27px; }
+        /* line 407, static/scss/base/landing.scss */
+        .bottom-nav .links ul li .link:before, .bottom-nav .links ul li .link:after, .bottom-nav .links ul li .link > span:before, .bottom-nav .links ul li .link > span:after {
+          content: '';
+          position: absolute;
+          transition: transform .5s ease; }
+        /* line 415, static/scss/base/landing.scss */
+        .bottom-nav .links ul li .link, .bottom-nav .links ul li .link > span {
+          position: relative;
+          color: #1E2330;
+          text-decoration: none;
+          line-height: 24px; }
+        /* line 424, static/scss/base/landing.scss */
+        .bottom-nav .links ul li .link {
+          display: inline-flex;
+          padding-top: 10px;
+          padding-bottom: 5px;
+          overflow: hidden; }
+        /* line 433, static/scss/base/landing.scss */
+        .bottom-nav .links ul li .link:before {
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 2px;
+          background: #492059;
+          transform: translateX(-100%); }
+        /* line 444, static/scss/base/landing.scss */
+        .bottom-nav .links ul li .link:hover:before {
+          transform: translateX(0); }
+  /* line 456, static/scss/base/landing.scss */
+  .bottom-nav .social-media {
+    position: absolute;
+    top: 34px;
+    right: 32px; }
+    /* line 462, static/scss/base/landing.scss */
+    .bottom-nav .social-media div {
+      cursor: pointer;
+      transform: scale(1);
+      transition: all 0.5s ease-in-out; }
+    /* line 472, static/scss/base/landing.scss */
+    .bottom-nav .social-media div:hover {
+      transform: scale(1.2); }
+
+/* Telegram icon style */
+/* line 484, static/scss/base/landing.scss */
+.st0 {
+  fill: #FFFFFF; }
+
+/* line 485, static/scss/base/landing.scss */
+.st1 {
+  fill: #F5BB41; }
+
+/* line 486, static/scss/base/landing.scss */
+.st2 {
+  fill: #2167D1; }
+
+/* line 487, static/scss/base/landing.scss */
+.st3 {
+  fill: #3D84F3; }
+
+/* line 488, static/scss/base/landing.scss */
+.st4 {
+  fill: #4CA853; }
+
+/* line 489, static/scss/base/landing.scss */
+.st5 {
+  fill: #398039; }
+
+/* line 490, static/scss/base/landing.scss */
+.st6 {
+  fill: #D74F3F; }
+
+/* line 491, static/scss/base/landing.scss */
+.st7 {
+  fill: #D43C89; }
+
+/* line 492, static/scss/base/landing.scss */
+.st8 {
+  fill: #B2005F; }
+
+/* line 493, static/scss/base/landing.scss */
+.st9 {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10; }
+
+/* line 495, static/scss/base/landing.scss */
+.st10 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: none;
+  stroke: #000000;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10; }
+
+/* line 497, static/scss/base/landing.scss */
+.st11 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: none;
+  stroke: #040404;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10; }
+
+/* line 498, static/scss/base/landing.scss */
+.st12 {
+  fill-rule: evenodd;
+  clip-rule: evenodd; }
+
+/* line 499, static/scss/base/landing.scss */
+.st13 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #040404; }
+
+/* line 500, static/scss/base/landing.scss */
+.st14 {
+  fill: url(#SVGID_1_); }
+
+/* line 501, static/scss/base/landing.scss */
+.st15 {
+  fill: url(#SVGID_2_); }
+
+/* line 502, static/scss/base/landing.scss */
+.st16 {
+  fill: url(#SVGID_3_); }
+
+/* line 503, static/scss/base/landing.scss */
+.st17 {
+  fill: url(#SVGID_4_); }
+
+/* line 504, static/scss/base/landing.scss */
+.st18 {
+  fill: url(#SVGID_5_); }
+
+/* line 505, static/scss/base/landing.scss */
+.st19 {
+  fill: url(#SVGID_6_); }
+
+/* line 506, static/scss/base/landing.scss */
+.st20 {
+  fill: url(#SVGID_7_); }
+
+/* line 507, static/scss/base/landing.scss */
+.st21 {
+  fill: url(#SVGID_8_); }
+
+/* line 508, static/scss/base/landing.scss */
+.st22 {
+  fill: url(#SVGID_9_); }
+
+/* line 509, static/scss/base/landing.scss */
+.st23 {
+  fill: url(#SVGID_10_); }
+
+/* line 510, static/scss/base/landing.scss */
+.st24 {
+  fill: url(#SVGID_11_); }
+
+/* line 511, static/scss/base/landing.scss */
+.st25 {
+  fill: url(#SVGID_12_); }
+
+/* line 512, static/scss/base/landing.scss */
+.st26 {
+  fill: url(#SVGID_13_); }
+
+/* line 513, static/scss/base/landing.scss */
+.st27 {
+  fill: url(#SVGID_14_); }
+
+/* line 514, static/scss/base/landing.scss */
+.st28 {
+  fill: url(#SVGID_15_); }
+
+/* line 515, static/scss/base/landing.scss */
+.st29 {
+  fill: url(#SVGID_16_); }
+
+/* line 516, static/scss/base/landing.scss */
+.st30 {
+  fill: url(#SVGID_17_); }
+
+/* line 517, static/scss/base/landing.scss */
+.st31 {
+  fill: url(#SVGID_18_); }
+
+/* line 518, static/scss/base/landing.scss */
+.st32 {
+  fill: url(#SVGID_19_); }
+
+/* line 519, static/scss/base/landing.scss */
+.st33 {
+  fill: url(#SVGID_20_); }
+
+/* line 520, static/scss/base/landing.scss */
+.st34 {
+  fill: url(#SVGID_21_); }
+
+/* line 521, static/scss/base/landing.scss */
+.st35 {
+  fill: url(#SVGID_22_); }
+
+/* line 522, static/scss/base/landing.scss */
+.st36 {
+  fill: url(#SVGID_23_); }
+
+/* line 523, static/scss/base/landing.scss */
+.st37 {
+  fill: url(#SVGID_24_); }
+
+/* line 524, static/scss/base/landing.scss */
+.st38 {
+  fill: url(#SVGID_25_); }
+
+/* line 525, static/scss/base/landing.scss */
+.st39 {
+  fill: url(#SVGID_26_); }
+
+/* line 526, static/scss/base/landing.scss */
+.st40 {
+  fill: url(#SVGID_27_); }
+
+/* line 527, static/scss/base/landing.scss */
+.st41 {
+  fill: url(#SVGID_28_); }
+
+/* line 528, static/scss/base/landing.scss */
+.st42 {
+  fill: url(#SVGID_29_); }
+
+/* line 529, static/scss/base/landing.scss */
+.st43 {
+  fill: url(#SVGID_30_); }
+
+/* line 530, static/scss/base/landing.scss */
+.st44 {
+  fill: url(#SVGID_31_); }
+
+/* line 531, static/scss/base/landing.scss */
+.st45 {
+  fill: url(#SVGID_32_); }
+
+/* line 532, static/scss/base/landing.scss */
+.st46 {
+  fill: url(#SVGID_33_); }
+
+/* line 533, static/scss/base/landing.scss */
+.st47 {
+  fill: url(#SVGID_34_); }
+
+/* line 534, static/scss/base/landing.scss */
+.st48 {
+  fill: url(#SVGID_35_); }
+
+/* line 535, static/scss/base/landing.scss */
+.st49 {
+  fill: url(#SVGID_36_); }
+
+/* line 536, static/scss/base/landing.scss */
+.st50 {
+  fill: url(#SVGID_37_); }
+
+/* line 537, static/scss/base/landing.scss */
+.st51 {
+  fill: url(#SVGID_38_); }
+
+/* line 538, static/scss/base/landing.scss */
+.st52 {
+  fill: url(#SVGID_39_); }
+
+/* line 539, static/scss/base/landing.scss */
+.st53 {
+  fill: url(#SVGID_40_); }
+
+/* line 540, static/scss/base/landing.scss */
+.st54 {
+  fill: url(#SVGID_41_); }
+
+/* line 541, static/scss/base/landing.scss */
+.st55 {
+  fill: url(#SVGID_42_); }
+
+/* line 542, static/scss/base/landing.scss */
+.st56 {
+  fill: url(#SVGID_43_); }
+
+/* line 543, static/scss/base/landing.scss */
+.st57 {
+  fill: url(#SVGID_44_); }
+
+/* line 544, static/scss/base/landing.scss */
+.st58 {
+  fill: url(#SVGID_45_); }
+
+/* line 545, static/scss/base/landing.scss */
+.st59 {
+  fill: #040404; }
+
+/* line 546, static/scss/base/landing.scss */
+.st60 {
+  fill: url(#SVGID_46_); }
+
+/* line 547, static/scss/base/landing.scss */
+.st61 {
+  fill: url(#SVGID_47_); }
+
+/* line 548, static/scss/base/landing.scss */
+.st62 {
+  fill: url(#SVGID_48_); }
+
+/* line 549, static/scss/base/landing.scss */
+.st63 {
+  fill: url(#SVGID_49_); }
+
+/* line 550, static/scss/base/landing.scss */
+.st64 {
+  fill: url(#SVGID_50_); }
+
+/* line 551, static/scss/base/landing.scss */
+.st65 {
+  fill: url(#SVGID_51_); }
+
+/* line 552, static/scss/base/landing.scss */
+.st66 {
+  fill: url(#SVGID_52_); }
+
+/* line 553, static/scss/base/landing.scss */
+.st67 {
+  fill: url(#SVGID_53_); }
+
+/* line 554, static/scss/base/landing.scss */
+.st68 {
+  fill: url(#SVGID_54_); }
+
+/* line 555, static/scss/base/landing.scss */
+.st69 {
+  fill: url(#SVGID_55_); }
+
+/* line 556, static/scss/base/landing.scss */
+.st70 {
+  fill: url(#SVGID_56_); }
+
+/* line 557, static/scss/base/landing.scss */
+.st71 {
+  fill: url(#SVGID_57_); }
+
+/* line 558, static/scss/base/landing.scss */
+.st72 {
+  fill: url(#SVGID_58_); }
+
+/* line 559, static/scss/base/landing.scss */
+.st73 {
+  fill: url(#SVGID_59_); }
+
+/* line 560, static/scss/base/landing.scss */
+.st74 {
+  fill: url(#SVGID_60_); }
+
+/* line 561, static/scss/base/landing.scss */
+.st75 {
+  fill: url(#SVGID_61_); }
+
+/* line 562, static/scss/base/landing.scss */
+.st76 {
+  fill: url(#SVGID_62_); }
+
+/* line 563, static/scss/base/landing.scss */
+.st77 {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 3;
+  stroke-miterlimit: 10; }
+
+/* line 564, static/scss/base/landing.scss */
+.st78 {
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-miterlimit: 10; }
+
+/* line 565, static/scss/base/landing.scss */
+.st79 {
+  fill: #4BC9FF; }
+
+/* line 566, static/scss/base/landing.scss */
+.st80 {
+  fill: #5500DD; }
+
+/* line 567, static/scss/base/landing.scss */
+.st81 {
+  fill: #FF3A00; }
+
+/* line 568, static/scss/base/landing.scss */
+.st82 {
+  fill: #E6162D; }
+
+/* line 569, static/scss/base/landing.scss */
+.st83 {
+  fill: #F1F1F1; }
+
+/* line 570, static/scss/base/landing.scss */
+.st84 {
+  fill: #FF9933; }
+
+/* line 571, static/scss/base/landing.scss */
+.st85 {
+  fill: #B92B27; }
+
+/* line 572, static/scss/base/landing.scss */
+.st86 {
+  fill: #00ACED; }
+
+/* line 573, static/scss/base/landing.scss */
+.st87 {
+  fill: #BD2125; }
+
+/* line 574, static/scss/base/landing.scss */
+.st88 {
+  fill: #1877F2; }
+
+/* line 575, static/scss/base/landing.scss */
+.st89 {
+  fill: #6665D2; }
+
+/* line 576, static/scss/base/landing.scss */
+.st90 {
+  fill: #CE3056; }
+
+/* line 577, static/scss/base/landing.scss */
+.st91 {
+  fill: #5BB381; }
+
+/* line 578, static/scss/base/landing.scss */
+.st92 {
+  fill: #61C3EC; }
+
+/* line 579, static/scss/base/landing.scss */
+.st93 {
+  fill: #E4B34B; }
+
+/* line 580, static/scss/base/landing.scss */
+.st94 {
+  fill: #181EF2; }
+
+/* line 581, static/scss/base/landing.scss */
+.st95 {
+  fill: #FF0000; }
+
+/* line 582, static/scss/base/landing.scss */
+.st96 {
+  fill: #FE466C; }
+
+/* line 583, static/scss/base/landing.scss */
+.st97 {
+  fill: #FA4778; }
+
+/* line 584, static/scss/base/landing.scss */
+.st98 {
+  fill: #FF7700; }
+
+/* line 585, static/scss/base/landing.scss */
+.st99 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #1F6BF6; }
+
+/* line 586, static/scss/base/landing.scss */
+.st100 {
+  fill: #520094; }
+
+/* line 587, static/scss/base/landing.scss */
+.st101 {
+  fill: #4477E8; }
+
+/* line 588, static/scss/base/landing.scss */
+.st102 {
+  fill: #3D1D1C; }
+
+/* line 589, static/scss/base/landing.scss */
+.st103 {
+  fill: #FFE812; }
+
+/* line 590, static/scss/base/landing.scss */
+.st104 {
+  fill: #344356; }
+
+/* line 591, static/scss/base/landing.scss */
+.st105 {
+  fill: #00CC76; }
+
+/* line 592, static/scss/base/landing.scss */
+.st106 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #345E90; }
+
+/* line 593, static/scss/base/landing.scss */
+.st107 {
+  fill: #1F65D8; }
+
+/* line 594, static/scss/base/landing.scss */
+.st108 {
+  fill: #EB3587; }
+
+/* line 595, static/scss/base/landing.scss */
+.st109 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #603A88; }
+
+/* line 596, static/scss/base/landing.scss */
+.st110 {
+  fill: #E3CE99; }
+
+/* line 597, static/scss/base/landing.scss */
+.st111 {
+  fill: #783AF9; }
+
+/* line 598, static/scss/base/landing.scss */
+.st112 {
+  fill: #FF515E; }
+
+/* line 599, static/scss/base/landing.scss */
+.st113 {
+  fill: #FF4906; }
+
+/* line 600, static/scss/base/landing.scss */
+.st114 {
+  fill: #503227; }
+
+/* line 601, static/scss/base/landing.scss */
+.st115 {
+  fill: #4C7BD9; }
+
+/* line 602, static/scss/base/landing.scss */
+.st116 {
+  fill: #69C9D0; }
+
+/* line 603, static/scss/base/landing.scss */
+.st117 {
+  fill: #1B92D1; }
+
+/* line 604, static/scss/base/landing.scss */
+.st118 {
+  fill: #EB4F4A; }
+
+/* line 605, static/scss/base/landing.scss */
+.st119 {
+  fill: #513728; }
+
+/* line 606, static/scss/base/landing.scss */
+.st120 {
+  fill: #FF6600; }
+
+/* line 607, static/scss/base/landing.scss */
+.st121 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #B61438; }
+
+/* line 608, static/scss/base/landing.scss */
+.st122 {
+  fill: #FFFC00; }
+
+/* line 609, static/scss/base/landing.scss */
+.st123 {
+  fill: #141414; }
+
+/* line 610, static/scss/base/landing.scss */
+.st124 {
+  fill: #94D137; }
+
+/* line 611, static/scss/base/landing.scss */
+.st125 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #F1F1F1; }
+
+/* line 612, static/scss/base/landing.scss */
+.st126 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #66E066; }
+
+/* line 613, static/scss/base/landing.scss */
+.st127 {
+  fill: #2D8CFF; }
+
+/* line 614, static/scss/base/landing.scss */
+.st128 {
+  fill: #F1A300; }
+
+/* line 615, static/scss/base/landing.scss */
+.st129 {
+  fill: #4BA2F2; }
+
+/* line 616, static/scss/base/landing.scss */
+.st130 {
+  fill: #1A5099; }
+
+/* line 617, static/scss/base/landing.scss */
+.st131 {
+  fill: #EE6060; }
+
+/* line 618, static/scss/base/landing.scss */
+.st132 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #F48120; }
+
+/* line 619, static/scss/base/landing.scss */
+.st133 {
+  fill: #222222; }
+
+/* line 620, static/scss/base/landing.scss */
+.st134 {
+  fill: url(#SVGID_63_); }
+
+/* line 621, static/scss/base/landing.scss */
+.st135 {
+  fill: #0077B5; }
+
+/* line 622, static/scss/base/landing.scss */
+.st136 {
+  fill: #FFCC00; }
+
+/* line 623, static/scss/base/landing.scss */
+.st137 {
+  fill: #EB3352; }
+
+/* line 624, static/scss/base/landing.scss */
+.st138 {
+  fill: #F9D265; }
+
+/* line 625, static/scss/base/landing.scss */
+.st139 {
+  fill: #F5B955; }
+
+/* line 626, static/scss/base/landing.scss */
+.st140 {
+  fill: #DD2A7B; }
+
+/* line 627, static/scss/base/landing.scss */
+.st141 {
+  fill: #66E066; }
+
+/* line 628, static/scss/base/landing.scss */
+.st142 {
+  fill: #EB4E00; }
+
+/* line 629, static/scss/base/landing.scss */
+.st143 {
+  fill: #FFC794; }
+
+/* line 630, static/scss/base/landing.scss */
+.st144 {
+  fill: #B5332A; }
+
+/* line 631, static/scss/base/landing.scss */
+.st145 {
+  fill: #4E85EB; }
+
+/* line 632, static/scss/base/landing.scss */
+.st146 {
+  fill: #58A45C; }
+
+/* line 633, static/scss/base/landing.scss */
+.st147 {
+  fill: #F2BC42; }
+
+/* line 634, static/scss/base/landing.scss */
+.st148 {
+  fill: #D85040; }
+
+/* line 635, static/scss/base/landing.scss */
+.st149 {
+  fill: #464EB8; }
+
+/* line 636, static/scss/base/landing.scss */
+.st150 {
+  fill: #7B83EB; }
+
+@media screen and (max-width: 1330px) {
+  /* line 642, static/scss/base/landing.scss */
+  .main .circles {
+    height: 960px; }
+    /* line 646, static/scss/base/landing.scss */
+    .main .circles .big {
+      width: 850px;
+      height: 850px; }
+    /* line 653, static/scss/base/landing.scss */
+    .main .circles .medium {
+      width: 550px;
+      height: 550px; }
+    /* line 660, static/scss/base/landing.scss */
+    .main .circles .small {
+      width: 350px;
+      height: 350px; }
+  /* line 669, static/scss/base/landing.scss */
+  .main .content {
+    height: 1090px; }
+    /* line 675, static/scss/base/landing.scss */
+    .main .content .info .text {
+      top: 170px;
+      left: 100px; }
+      /* line 680, static/scss/base/landing.scss */
+      .main .content .info .text h1 {
+        font-size: 73px; }
+      /* line 688, static/scss/base/landing.scss */
+      .main .content .info .text h2 {
+        font-size: 32px; }
+      /* line 694, static/scss/base/landing.scss */
+      .main .content .info .text button {
+        height: 55px;
+        width: 320px;
+        font-size: 23px; }
+  /* line 711, static/scss/base/landing.scss */
+  .main .img img {
+    bottom: 40px;
+    right: 160px;
+    transform: scale(0.8); }
+  /* line 724, static/scss/base/landing.scss */
+  .bottom-nav {
+    top: -120px; } }
+
+@media screen and (max-width: 850px) {
+  /* line 740, static/scss/base/landing.scss */
+  .main .top-nav .brand {
+    top: 20px;
+    left: 20px; }
+    /* line 745, static/scss/base/landing.scss */
+    .main .top-nav .brand h1 {
+      display: none; }
+  /* line 753, static/scss/base/landing.scss */
+  .main .top-nav .btns {
+    position: absolute;
+    bottom: -10px;
+    right: 10px; }
+    /* line 759, static/scss/base/landing.scss */
+    .main .top-nav .btns #homeBtn, .main .top-nav .btns #logoutBtn, .main .top-nav .btns #loginBtn {
+      width: 30px; }
+    /* line 761, static/scss/base/landing.scss */
+    .main .top-nav .btns .auth-btn {
+      position: relative;
+      height: 30px;
+      justify-content: center;
+      margin-left: 30px; }
+      /* line 771, static/scss/base/landing.scss */
+      .main .top-nav .btns .auth-btn svg {
+        position: absolute; }
+      /* line 777, static/scss/base/landing.scss */
+      .main .top-nav .btns .auth-btn .home {
+        transform: scale(1.3); }
+      /* line 783, static/scss/base/landing.scss */
+      .main .top-nav .btns .auth-btn .logout {
+        margin-top: 3px;
+        transform: scale(1.2); }
+      /* line 791, static/scss/base/landing.scss */
+      .main .top-nav .btns .auth-btn .login {
+        transform: scale(1.3); }
+      /* line 798, static/scss/base/landing.scss */
+      .main .top-nav .btns .auth-btn span {
+        display: none; }
+  /* line 810, static/scss/base/landing.scss */
+  .main .content {
+    height: 1080px; }
+    /* line 814, static/scss/base/landing.scss */
+    .main .content .info {
+      height: 800px; }
+      /* line 818, static/scss/base/landing.scss */
+      .main .content .info .text {
+        top: 100px;
+        left: 20px;
+        width: 100%; }
+        /* line 825, static/scss/base/landing.scss */
+        .main .content .info .text h1 {
+          font-size: 55px; }
+        /* line 831, static/scss/base/landing.scss */
+        .main .content .info .text h2 {
+          font-size: 30px; }
+        /* line 837, static/scss/base/landing.scss */
+        .main .content .info .text button {
+          height: 55px;
+          width: 270px;
+          font-size: 20px; }
+      /* line 848, static/scss/base/landing.scss */
+      .main .content .info .img {
+        width: 100%;
+        display: none; }
+  /* line 862, static/scss/base/landing.scss */
+  .main .img img {
+    bottom: 40px;
+    right: 160px;
+    transform: scale(0.8); }
+  /* line 875, static/scss/base/landing.scss */
+  .bottom-nav {
+    left: -30px;
+    top: 40px; }
+    /* line 886, static/scss/base/landing.scss */
+    .bottom-nav .links ul li a {
+      font-size: 16px; }
+      /* line 890, static/scss/base/landing.scss */
+      .bottom-nav .links ul li a .copyright {
+        width: 190px;
+        margin: 0;
+        font-size: 19px; } }
+
+@media screen and (min-width: 850px) and (max-width: 915px) {
+  /* line 915, static/scss/base/landing.scss */
+  .bottom-nav {
+    top: -140px; } }

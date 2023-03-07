@@ -6,10 +6,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = '1231hj23i1hn23ui1g2uy3g2u7ydfhsofguy9'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.bloknot-ik.ru']
-#ALLOWED_HOSTS = ['192.168.1.154', 'localhost']
+#ALLOWED_HOSTS = ['.bloknot-ik.ru']
+ALLOWED_HOSTS = ['10.59.199.232', 'localhost']
 #ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
@@ -147,3 +147,23 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bloknotikk@gmail.com'
 EMAIL_HOST_PASSWORD = 'lrwnusiruhyxxekv' # localize this
 #DEFkosyakovsn AULT_FROM_EMAIL = 'bloknotikk@gmail.com'
+
+# Error logs
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
