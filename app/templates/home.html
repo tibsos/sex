@@ -1,0 +1,4202 @@
+{% load static %}
+{% load compress %}
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Мой блокнотик</title>
+
+        <link rel="icon" type="image/x-icon" href="{% static 'блокнотик.svg' %}">
+
+        <script src="{% static 'packages/jquery-3.6.1.min.js' %}"></script>
+        <script src="{% static 'packages/htmx.min.js' %}"></script>
+        <script src="{% static 'packages/iconify.min.js' %}"></script>
+
+        {% compress css %}
+
+            <link rel="stylesheet" href="{% static 'scss/app/home.scss' %}" type="text/x-scss">
+
+        {% endcompress %}
+
+    </head>
+    
+    <body>
+
+        <div class="everything">
+
+            {% if not premium %}
+
+                <div class="premium-offer">
+
+                    <div class="wrapper">
+
+                        <div id="closePremiumOfferBtn">×</div>
+
+                        <video loop autoplay muted
+                            id="premiumOfferVid"
+                            src="{% static 'mp4/premium-offer-vid.mp4' %}"></video>
+
+                        <span class="cta-text">Пишите сколько угодно!</span>
+
+                        <button id="upgradeBtn">Улучшить за 47₽/мес</button>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+            {% if premium and friend_offer %}
+
+                {% if first_friend_offer %}
+                    <div class="premium-offer" style="display: flex; opacity: 1;">
+                {% else %}
+                    <div class="premium-offer">
+                {% endif %}
+
+                    <div class="wrapper" style="height: 440px;">
+
+                        <div id="closePremiumOfferBtn">×</div>
+
+                        <img src="{% static 'img/friends_working.avif' %}">
+
+                        <span class="cta-text-friend">Вместе веселее!</span>
+                        <span class="cta-text-invite">Пригласите двух друзей по этой ссылке и они получат премиум <u>бесплатно</u>!</u></span>
+
+                        <div class="invite-link">
+
+                            <input type="text" id="inviteLink" value="bloknot-ik.ru/register/{{ profile.premium_invite_uid }}/" />
+
+                            <button id="copyLinkBtn">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19.011" height="23.764" viewBox="0 0 19.011 23.764">
+                                    <g id="Icon_ionic-ios-copy" data-name="Icon ionic-ios-copy" transform="translate(-4.5 -1.125)">
+                                      <path id="Контур_1" data-name="Контур 1" d="M24.353,6.028h4.456a.3.3,0,0,0,.3-.3h0a1.382,1.382,0,0,0-.5-1.055L24.793,1.5a1.852,1.852,0,0,0-1.02-.366h0a.366.366,0,0,0-.366.366V5.088A.948.948,0,0,0,24.353,6.028Z" transform="translate(-5.595 -0.002)"/>
+                                      <path id="Контур_2" data-name="Контур 2" d="M18.195,5.086V1.125H11.709a1.589,1.589,0,0,0-1.584,1.584V19.344a1.589,1.589,0,0,0,1.584,1.584H23.591a1.589,1.589,0,0,0,1.584-1.584V7.313H20.423A2.231,2.231,0,0,1,18.195,5.086Z" transform="translate(-1.664)"/>
+                                      <path id="Контур_3" data-name="Контур 3" d="M7.074,22.061V5.625h-.99A1.589,1.589,0,0,0,4.5,7.209V24.636A1.589,1.589,0,0,0,6.084,26.22H18.758a1.589,1.589,0,0,0,1.584-1.584v-.99H8.659A1.589,1.589,0,0,1,7.074,22.061Z" transform="translate(0 -1.332)"/>
+                                    </g>
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+            <!-- Profile dropdown -->
+
+            <div class="profile-dropdown">
+
+                <div class="buttons">
+
+                    <a href="#">
+
+                        <div class="btn" id="myAccount">
+
+                            <svg style="left: 15px;" xmlns="http://www.w3.org/2000/svg" width="23.339" height="23.34" viewBox="0 0 23.339 23.34">
+                                <path id="Icon_ionic-ios-person" data-name="Icon ionic-ios-person" d="M27.828,27.251c-.438-1.933-2.936-2.875-3.8-3.179a28.323,28.323,0,0,0-3.167-.608,3.218,3.218,0,0,1-1.465-.675,12.8,12.8,0,0,1-.1-3,9.016,9.016,0,0,0,.693-1.319,17.013,17.013,0,0,0,.511-2.3s.5,0,.675-.875a8.612,8.612,0,0,0,.45-2.036c-.036-.7-.419-.681-.419-.681a10.657,10.657,0,0,0,.413-3.118c.055-2.5-1.9-4.96-5.446-4.96-3.592,0-5.507,2.462-5.452,4.96a11.116,11.116,0,0,0,.407,3.118s-.383-.018-.419.681a8.612,8.612,0,0,0,.45,2.036c.17.875.675.875.675.875a17.013,17.013,0,0,0,.511,2.3,9.016,9.016,0,0,0,.693,1.319,12.8,12.8,0,0,1-.1,3,3.218,3.218,0,0,1-1.465.675,28.323,28.323,0,0,0-3.167.608c-.863.3-3.361,1.246-3.8,3.179a.486.486,0,0,0,.48.59H27.354A.485.485,0,0,0,27.828,27.251Z" transform="translate(-4.501 -4.5)"/>
+                            </svg>
+        
+                            <span>Мой аккаунт</span>
+                        
+                        </div>
+
+                    </a>
+
+                    <a href="{% url 'user:logout' %}">
+
+                        <div class="btn" id="logout">
+
+                            <svg style="fill: red;" xmlns="http://www.w3.org/2000/svg" width="28.618" height="27.77" viewBox="0 0 28.618 27.77">
+                                <path id="Icon_open-account-logout" data-name="Icon open-account-logout" d="M9.606-1.086c-4,.8-3.2,2.4,0,3.2s9.606-4,12.808,0,3.2,12.007,0,16.01-9.606-.8-12.808,0-4,2.4,0,3.2,12.007,5.6,16.01,0,4-16.81,0-22.414S13.608-1.886,9.606-1.086Zm-3.2,6.4c-1.6.4-6.4,2.4-6.4,4.8s4.8,4.4,6.4,4.8,0-3.2,0-3.2,9.606.8,12.808,0,3.2-2.4,0-3.2S6.4,8.52,6.4,8.52,8,4.918,6.4,5.318Z" transform="translate(0 3.764)"/>
+                            </svg>
+        
+                            <span style="color: red;">Выйти</span>
+                        
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="account-preferences">
+
+                <div class="wrapper">
+
+                    <div id="closeAccountPreferences">×</div>
+
+                    <span class="form-title">Мой аккаунт</span>
+
+                    <div class="fields">
+
+                        <!-- Name -->
+
+                        <div id="profileName" class="field">
+
+                            <svg class='field-icon' id="accountName" xmlns="http://www.w3.org/2000/svg" width="23.339" height="23.34" viewBox="0 0 23.339 23.34">
+                                <path id="Icon_ionic-ios-person" data-name="Icon ionic-ios-person" d="M27.828,27.251c-.438-1.933-2.936-2.875-3.8-3.179a28.323,28.323,0,0,0-3.167-.608,3.218,3.218,0,0,1-1.465-.675,12.8,12.8,0,0,1-.1-3,9.016,9.016,0,0,0,.693-1.319,17.013,17.013,0,0,0,.511-2.3s.5,0,.675-.875a8.612,8.612,0,0,0,.45-2.036c-.036-.7-.419-.681-.419-.681a10.657,10.657,0,0,0,.413-3.118c.055-2.5-1.9-4.96-5.446-4.96-3.592,0-5.507,2.462-5.452,4.96a11.116,11.116,0,0,0,.407,3.118s-.383-.018-.419.681a8.612,8.612,0,0,0,.45,2.036c.17.875.675.875.675.875a17.013,17.013,0,0,0,.511,2.3,9.016,9.016,0,0,0,.693,1.319,12.8,12.8,0,0,1-.1,3,3.218,3.218,0,0,1-1.465.675,28.323,28.323,0,0,0-3.167.608c-.863.3-3.361,1.246-3.8,3.179a.486.486,0,0,0,.48.59H27.354A.485.485,0,0,0,27.828,27.251Z" transform="translate(-4.501 -4.5)"/>
+                            </svg>
+
+                            <input 
+                                type="text"
+                                id="profileNameVal"
+                                value="{{ profile.name }}"
+                                placeholder="Имя" />
+
+                            <svg id="nameError" class="error" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class=" " role="img" aria-label="Warning Icon "><title>Warning Icon</title><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0.999756C4.13401 0.999756 1 4.13376 1 7.99976C1 11.8657 4.13401 14.9998 8 14.9998C11.866 14.9998 15 11.8657 15 7.99976C15 4.13376 11.866 0.999756 8 0.999756ZM0 7.99976C0 3.58148 3.58172 -0.000244141 8 -0.000244141C12.4183 -0.000244141 16 3.58148 16 7.99976C16 12.418 12.4183 15.9998 8 15.9998C3.58172 15.9998 0 12.418 0 7.99976ZM7.5 8.99951V3.99999H8.5V8.99951H7.5ZM9 11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11C7 10.4477 7.44772 10 8 10C8.55228 10 9 10.4477 9 11Z" fill="currentColor"></path></svg>
+                            <svg id="nameOK" class="ok" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class=" text-carnation" role="img" aria-label="Complete Tick Icon "><title>Complete Tick Icon</title><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0.99854C4.13401 0.99854 1 4.13254 1 7.99854C1 11.8645 4.13401 14.9985 8 14.9985C11.866 14.9985 15 11.8645 15 7.99854C15 4.13254 11.866 0.99854 8 0.99854ZM0 7.99854C0 3.58026 3.58172 -0.00146484 8 -0.00146484C12.4183 -0.00146484 16 3.58026 16 7.99854C16 12.4168 12.4183 15.9985 8 15.9985C3.58172 15.9985 0 12.4168 0 7.99854Z" fill="green"></path><path d="M7.5 10.4985L7.14645 10.8521L7.92183 10.767L7.5 10.4985ZM4.64645 8.35209L7.14645 10.8521L7.85355 10.145L5.35355 7.64498L4.64645 8.35209ZM7.92183 10.767L11.4218 5.26697L10.5782 4.7301L7.07817 10.2301L7.92183 10.767Z" fill="green"></path></svg>
+
+                        </div>
+
+                        <!-- Email -->
+
+                        <div id="profileEmail" class="field">
+
+                            <svg class='field-icon' id="accountEmail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" viewBox="0 0 35 35">
+                                <defs>
+                                  <clipPath id="clip-Пользовательский_размер_1">
+                                    <rect width="35" height="35"/>
+                                  </clipPath>
+                                </defs>
+                                <g id="Пользовательский_размер_1" data-name="Пользовательский размер – 1" clip-path="url(#clip-Пользовательский_размер_1)">
+                                  <rect width="35" height="35" fill="none"/>
+                                  <g id="Icon_feather-mail" data-name="Icon feather-mail" transform="translate(-0.891 0.157)">
+                                    <path id="Контур_3" data-name="Контур 3" d="M6.078,6H30.7a3.046,3.046,0,0,1,3.078,2.994V26.958A3.046,3.046,0,0,1,30.7,29.952H6.078A3.046,3.046,0,0,1,3,26.958V8.994A3.046,3.046,0,0,1,6.078,6Z" transform="translate(0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                    <path id="Контур_4" data-name="Контур 4" d="M33.782,9,18.391,18.973,3,9" transform="translate(0 -0.151)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                  </g>
+                                </g>
+                            </svg>
+
+                            <input 
+                                type="text"
+                                id="profileEmailVal"
+                                value="{{ user.username }}"
+                                placeholder="Почта" />
+
+                            <svg id="emailError" class="error" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class=" " role="img" aria-label="Warning Icon "><title>Warning Icon</title><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0.999756C4.13401 0.999756 1 4.13376 1 7.99976C1 11.8657 4.13401 14.9998 8 14.9998C11.866 14.9998 15 11.8657 15 7.99976C15 4.13376 11.866 0.999756 8 0.999756ZM0 7.99976C0 3.58148 3.58172 -0.000244141 8 -0.000244141C12.4183 -0.000244141 16 3.58148 16 7.99976C16 12.418 12.4183 15.9998 8 15.9998C3.58172 15.9998 0 12.418 0 7.99976ZM7.5 8.99951V3.99999H8.5V8.99951H7.5ZM9 11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11C7 10.4477 7.44772 10 8 10C8.55228 10 9 10.4477 9 11Z" fill="currentColor"></path></svg>
+                            <svg id="emailOK" class="ok" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class=" text-carnation" role="img" aria-label="Complete Tick Icon "><title>Complete Tick Icon</title><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0.99854C4.13401 0.99854 1 4.13254 1 7.99854C1 11.8645 4.13401 14.9985 8 14.9985C11.866 14.9985 15 11.8645 15 7.99854C15 4.13254 11.866 0.99854 8 0.99854ZM0 7.99854C0 3.58026 3.58172 -0.00146484 8 -0.00146484C12.4183 -0.00146484 16 3.58026 16 7.99854C16 12.4168 12.4183 15.9985 8 15.9985C3.58172 15.9985 0 12.4168 0 7.99854Z" fill="green"></path><path d="M7.5 10.4985L7.14645 10.8521L7.92183 10.767L7.5 10.4985ZM4.64645 8.35209L7.14645 10.8521L7.85355 10.145L5.35355 7.64498L4.64645 8.35209ZM7.92183 10.767L11.4218 5.26697L10.5782 4.7301L7.07817 10.2301L7.92183 10.767Z" fill="green"></path></svg>
+
+                        </div>
+
+                        <!-- Password -->
+
+                        <div id="profilePassword" class="field">
+
+                            <svg class='field-icon' id="accountPassword" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35" viewBox="0 0 35 35">
+                                <defs>
+                                  <clipPath id="clip-Пользовательский_размер_1">
+                                    <rect width="35" height="35"/>
+                                  </clipPath>
+                                </defs>
+                                <g id="Пользовательский_размер_1" data-name="Пользовательский размер – 1" clip-path="url(#clip-Пользовательский_размер_1)">
+                                  <rect width="35" height="35" fill="none"/>
+                                  <path id="Icon_ionic-ios-lock" data-name="Icon ionic-ios-lock" d="M30.072,15.369h-2v-3.89a8,8,0,1,0-15.992-.108v4h-2A3.341,3.341,0,0,0,6.75,18.7V34.693a3.341,3.341,0,0,0,3.332,3.332h19.99A3.341,3.341,0,0,0,33.4,34.693V18.7A3.341,3.341,0,0,0,30.072,15.369ZM21.243,25.764v5.731a1.194,1.194,0,0,1-1.108,1.2,1.167,1.167,0,0,1-1.224-1.166V25.764a2.665,2.665,0,1,1,2.332,0Zm4.5-10.395H14.413v-4a5.664,5.664,0,0,1,11.328,0Z" transform="translate(-2.577 -3.2)"/>
+                                </g>
+                            </svg> 
+
+                            <input 
+                                type="text"
+                                id="profilePasswordVal"
+                                placeholder="Новый пароль" />
+
+                            <svg id="passwordError" class="error" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class=" " role="img" aria-label="Warning Icon "><title>Warning Icon</title><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0.999756C4.13401 0.999756 1 4.13376 1 7.99976C1 11.8657 4.13401 14.9998 8 14.9998C11.866 14.9998 15 11.8657 15 7.99976C15 4.13376 11.866 0.999756 8 0.999756ZM0 7.99976C0 3.58148 3.58172 -0.000244141 8 -0.000244141C12.4183 -0.000244141 16 3.58148 16 7.99976C16 12.418 12.4183 15.9998 8 15.9998C3.58172 15.9998 0 12.418 0 7.99976ZM7.5 8.99951V3.99999H8.5V8.99951H7.5ZM9 11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11C7 10.4477 7.44772 10 8 10C8.55228 10 9 10.4477 9 11Z" fill="currentColor"></path></svg>
+                            <svg id="passwordOK" class="ok" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class=" text-carnation" role="img" aria-label="Complete Tick Icon "><title>Complete Tick Icon</title><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0.99854C4.13401 0.99854 1 4.13254 1 7.99854C1 11.8645 4.13401 14.9985 8 14.9985C11.866 14.9985 15 11.8645 15 7.99854C15 4.13254 11.866 0.99854 8 0.99854ZM0 7.99854C0 3.58026 3.58172 -0.00146484 8 -0.00146484C12.4183 -0.00146484 16 3.58026 16 7.99854C16 12.4168 12.4183 15.9985 8 15.9985C3.58172 15.9985 0 12.4168 0 7.99854Z" fill="green"></path><path d="M7.5 10.4985L7.14645 10.8521L7.92183 10.767L7.5 10.4985ZM4.64645 8.35209L7.14645 10.8521L7.85355 10.145L5.35355 7.64498L4.64645 8.35209ZM7.92183 10.767L11.4218 5.26697L10.5782 4.7301L7.07817 10.2301L7.92183 10.767Z" fill="green"></path></svg>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Forms -->
+            
+            <div class="create-folder">
+
+                <div class="wrapper">
+
+                    <button id="closeNewFolderForm">×</button>
+
+                    <span class="form-title">Новый блокнот</span>
+
+                    <form>
+
+                        <input 
+                            type="text"
+                            name="t"
+                            id="newFolderTitle"
+                            maxlength="50"
+                            placeholder="Заголовок">
+
+                        <button 
+                            type="submit" 
+                            class="create-folder-btn"
+                            hx-post="{% url 'app:create-folder' %}"
+                            hx-target=".folders">Создать</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+            
+            <div class="edit-folder">
+
+                <div class="wrapper">
+
+                    <button id="closeEditFolderForm">×</button>
+
+                    <span class="form-title">Редактировать блокнот</span>
+
+                    <div class="form">
+
+                        <input 
+                            type="text"
+                            id="editFolderTitle"
+                            placeholder="Заголовок">
+
+                        <button 
+                            type="submit" 
+                            class="edit-folder-btn">Сохранить</button>
+
+                    </div>
+
+                    <!-- htmx deletion form -->
+                    <form>
+
+                        <input 
+                            type="text"
+                            name="f"
+                            id="deleteFolderUID"
+                            hidden />
+
+                        <button 
+                            class="delete-folder-btn"
+                            hx-post="{% url 'app:delete-folder' %}"
+                            hx-target=".folders">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                                <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                                <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                                <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                                </g>
+                            </svg>
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- Current note photo carousel -->
+            <div class="photo-carousel">
+                
+                <button id="closePhoto">×</button>
+
+                <button id="previousPhoto">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="-4.5 0 19 19" class="cf-icon-svg"><path d="M8.4 17.269a1.026 1.026 0 0 1-.727-.302l-6.801-6.8a1.03 1.03 0 0 1 0-1.456l6.8-6.8a1.03 1.03 0 0 1 1.456 1.455L3.055 9.439l6.073 6.073A1.03 1.03 0 0 1 8.4 17.27z"/></svg>
+
+                </button>
+                <button id="nextPhoto">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" transform="scale(-1,-1)" width="35px" height="35px" viewBox="-4.5 0 19 19" class="cf-icon-svg"><path d="M8.4 17.269a1.026 1.026 0 0 1-.727-.302l-6.801-6.8a1.03 1.03 0 0 1 0-1.456l6.8-6.8a1.03 1.03 0 0 1 1.456 1.455L3.055 9.439l6.073 6.073A1.03 1.03 0 0 1 8.4 17.27z"/></svg>
+
+                </button>
+            
+            </div>
+
+            <!-- Current note -->
+            <div class="current-note">
+
+                <div class="wrapper" id="currentNoteWrapper">
+
+                    <div class="top">
+                        
+                        <input type="text" placeholder="Заголовок" class="current-note-title">
+
+                        <button type="button" id="closeCurrentNote">×</button>
+                    
+                    </div>
+
+                    <div class="photos" id="photosCurrent">
+
+                        {% include 'components/current-note-photos.html' %}
+
+                    </div>
+
+                    <div class="rte">
+
+                        <div class="rte-wrapper">
+
+                            <button id="boldBtnCurrent" style="padding-top: 4px;"><b>Ж</b></button>
+                            <button id="italicBtnCurrent" style="padding: 2px 3px 0 0;"><i>К</i></button>
+                            <button id="underlineBtnCurrent" style="padding-top: 1px;"><u>С</u></button>
+                            <button id="strikeBtnCurrent" style="padding-top: 4px;"><s>О</s></button>
+                            
+                            <button id="ulBtnCurrent">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23.798" height="18.84" viewBox="0 0 23.798 18.84">
+                                    <g id="Icon_ionic-ios-list" data-name="Icon ionic-ios-list" transform="translate(-4.5 -7.313)">
+                                    <path id="Контур_1" data-name="Контур 1" d="M7.971,17.767a1.735,1.735,0,1,1-1.735-1.735A1.735,1.735,0,0,1,7.971,17.767Z" transform="translate(0 -1.034)"/>
+                                    <path id="Контур_2" data-name="Контур 2" d="M7.971,9.048A1.735,1.735,0,1,1,6.235,7.313,1.735,1.735,0,0,1,7.971,9.048Z"/>
+                                    <path id="Контур_3" data-name="Контур 3" d="M7.971,26.485A1.735,1.735,0,1,1,6.235,24.75a1.735,1.735,0,0,1,1.735,1.735Z" transform="translate(0 -2.068)"/>
+                                    <path id="Контур_4" data-name="Контур 4" d="M28.236,16.875h-14.9a.992.992,0,0,0,0,1.983h14.9a.992.992,0,0,0,0-1.983Z" transform="translate(-0.93 -1.134)"/>
+                                    <path id="Контур_5" data-name="Контур 5" d="M28.236,25.594h-14.9a.992.992,0,0,0,0,1.983h14.9a.992.992,0,0,0,0-1.983Z" transform="translate(-0.93 -2.168)"/>
+                                    <path id="Контур_6" data-name="Контур 6" d="M13.331,10.139h14.9a.992.992,0,0,0,0-1.983h-14.9a.992.992,0,0,0,0,1.983Z" transform="translate(-0.93 -0.1)"/>
+                                    </g>
+                                </svg>
+
+                            </button>
+
+                            <button id="olBtnCurrent">
+
+                                <svg style="padding-top: 6px;" xmlns="http://www.w3.org/2000/svg" width="23.717" height="25.685" viewBox="0 0 23.717 25.685">
+                                    <g id="Icon_ionic-ios-list" data-name="Icon ionic-ios-list" transform="translate(-4.549 -3.733)">
+                                    <path id="Контур_1" data-name="Контур 1" d="M6.235,16.031Z" transform="translate(0 -1.034)"/>
+                                    <path id="Контур_4" data-name="Контур 4" d="M28.236,16.875h-14.9a.992.992,0,0,0,0,1.983h14.9a.992.992,0,0,0,0-1.983Z" transform="translate(-0.93 -1.134)"/>
+                                    <path id="Контур_5" data-name="Контур 5" d="M28.236,25.594h-14.9a.992.992,0,0,0,0,1.983h14.9a.992.992,0,0,0,0-1.983Z" transform="translate(-0.93 -2.168)"/>
+                                    <path id="Контур_6" data-name="Контур 6" d="M13.331,10.139h14.9a.992.992,0,0,0,0-1.983h-14.9a.992.992,0,0,0,0,1.983Z" transform="translate(-0.93 -0.1)"/>
+                                    <text id="_2" data-name="2" transform="translate(4.549 27.417)" font-size="8" font-family="SG"><tspan x="0" y="0">3</tspan></text>
+                                    <text id="_2-2" data-name="2" transform="translate(4.549 11.733)" font-size="8" font-family="SG"><tspan x="0" y="0">1</tspan></text>
+                                    </g>
+                                    <text id="_2-3" data-name="2" transform="translate(0 15.842)" font-size="8" font-family="SG"><tspan x="0" y="0">2</tspan></text>
+                                </svg>
+
+                            </button>
+                            
+                            <button id="photoBtnCurrent">
+
+                                <svg style="padding-left: 1px;" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.93334 6.47005C1.93334 3.96453 3.96446 1.93341 6.46998 1.93341H17.5299C20.0354 1.93341 22.0665 3.96453 22.0665 6.47005V8.31337V17.53C22.0665 20.0355 20.0354 22.0666 17.5299 22.0666L8.3133 22.0666L6.46997 22.0666C3.96446 22.0666 1.93334 20.0355 1.93334 17.53V12.0198C1.93303 12.0067 1.93303 11.9935 1.93334 11.9804V6.47005ZM20.3665 6.47005V7.48245C15.4573 7.70571 12.2527 9.86213 10.2708 12.5638C7.97192 10.7456 5.3558 10.6106 3.63334 10.9059V6.47005C3.63334 4.90342 4.90334 3.63341 6.46998 3.63341H17.5299C19.0965 3.63341 20.3665 4.90342 20.3665 6.47005ZM3.63334 17.53V12.636C4.97128 12.3342 7.33257 12.3323 9.35002 14.0066C8.14528 16.1862 7.61609 18.5212 7.49255 20.3666H6.46997C4.90334 20.3666 3.63334 19.0966 3.63334 17.53ZM11.1527 14.2924C9.88823 16.3243 9.33147 18.5993 9.19679 20.3666H17.5299C19.0965 20.3666 20.3665 19.0966 20.3665 17.53V9.18438C15.5975 9.42387 12.7791 11.679 11.1527 14.2924ZM7.85247 8.31337C8.616 8.31337 9.23496 7.69441 9.23496 6.93088C9.23496 6.16735 8.616 5.54839 7.85247 5.54839C7.08894 5.54839 6.46998 6.16735 6.46998 6.93088C6.46998 7.69441 7.08894 8.31337 7.85247 8.31337Z" fill="#1C1C1C"/>
+                                </svg>
+
+                            </button>
+                            
+                            <button id="folderBtnCurrent">
+
+                                <svg style="padding-left: 1px;" xmlns="http://www.w3.org/2000/svg" width="21.364" height="23.313" viewBox="0 0 21.364 23.313">
+                                    <g id="Сгруппировать_1" data-name="Сгруппировать 1" transform="translate(-68 461.1)">
+                                    <path id="Контур_1" data-name="Контур 1" d="M68-449.349V-437.7h2.444V-461H68Z" transform="translate(0 -0.094)"></path>
+                                    <path id="Контур_2" data-name="Контур 2" d="M137-449.443v11.657l7.121-.017,7.116-.017.438-.148a3.994,3.994,0,0,0,2.489-2.307c.29-.767.29-.642.273-9.4-.023-9.156.017-8.36-.455-9.315a3.938,3.938,0,0,0-2.347-1.938c-.392-.131-.449-.131-3.166-.154L145.7-461.1l-.011,4.354-.017,4.359-1.176-.943c-.648-.517-1.193-.943-1.211-.943s-.563.426-1.211.943l-1.176.943-.017-4.353-.011-4.353H137Z" transform="translate(-65.078 0)"></path>
+                                    </g>
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="current-note-folders-form">
+                        
+                        <div id="closeCurrentNoteFoldersForm">×</div>
+
+                        <input 
+                            type="text"
+                            class="folder-search"
+                            placeholder="Название блокнотика"
+                            maxlength="50">
+
+                        <span class="folder-title"><b>Блокноты заметки</b></span>
+
+                        <div class="folder-list"></div>
+
+                        <form class="create-new-folder-from-search-current">
+
+                            <input 
+                                type="text" 
+                                name="t" 
+                                id="searchFolderTitle" 
+                                hidden />
+
+                            <button
+                                id="createFolderInNote"
+                                hx-post="{% url 'app:create-folder' %}"
+                                hx-target=".folders">Создать</button>
+
+                        </form>
+
+                    </div>
+                    
+                    <!-- New photo form -->
+                    <form 
+                        hx-encoding="multipart/form-data"
+                        hx-post="{% url 'app:upload-photo-to-note' %}"
+                        hx-target="#photosCurrent">
+                    
+                        <input type="text" name="i" class="current-note-uid" hidden />
+                        <input type="file" name="p" id="currentNotePhotoInput" hidden />
+                        <button type="submit" id="currentNotePhotoSubmit" style="display: none;"></button>
+
+                    </form>
+
+                    <div class="content">
+
+                        <div contenteditable="true" 
+                            class="current-note-content"
+                            placeholder="Я помню чудное мгновенье..."></div>
+
+                    </div>
+
+                    <div class="current-note-folders"></div>
+
+                    <div id="currentNoteContents">{% include 'components/current-note.html' %}</div>
+
+                </div>
+                
+            </div>
+
+            <div class="topnav">
+
+                <div class="topnav-wrapper">
+
+                    <div class="toggle-sidenav">
+
+                        <div id="toggleSidenavBtn">
+    
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19.394" height="28.21" viewBox="0 0 19.394 28.21">
+                                <path id="Icon_awesome-lightbulb" data-name="Icon awesome-lightbulb" d="M5.293,25.033a1.764,1.764,0,0,0,.3.975l.942,1.415A1.763,1.763,0,0,0,8,28.21h3.4a1.763,1.763,0,0,0,1.468-.787l.942-1.415a1.762,1.762,0,0,0,.3-.975l0-2.113H5.29l0,2.113ZM0,9.7a9.643,9.643,0,0,0,2.4,6.379,15.834,15.834,0,0,1,2.877,5.039c0,.014.006.043.006.043h8.829c0-.014,0-.028.006-.043a15.834,15.834,0,0,1,2.877-5.039A9.7,9.7,0,1,0,0,9.7ZM9.7,5.289A4.413,4.413,0,0,0,5.289,9.7a.882.882,0,0,1-1.763,0A6.178,6.178,0,0,1,9.7,3.526a.882.882,0,0,1,0,1.763Z" transform="translate(0 0)"></path>
+                            </svg>
+    
+                        </div>
+    
+                    </div>
+    
+                    <div class="search-notes">
+    
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="23.835" height="23.841" viewBox="0 0 23.835 23.841">
+                            <path id="Icon_ionic-ios-search" data-name="Icon ionic-ios-search" d="M4.78,26.609l6.629-6.691a9.447,9.447,0,1,1,1.434,1.452L6.257,28.018a1.02,1.02,0,0,1-1.44.037A1.027,1.027,0,0,1,4.78,26.609ZM18.832,21.45a7.46,7.46,0,1,0-5.276-2.185A7.414,7.414,0,0,0,18.832,21.45Z" transform="translate(-4.5 -4.493)"/>
+                        </svg>
+    
+                        <form>
+    
+                            <!-- Folder query -->
+                            <input 
+                                type="text" 
+                                name="f" 
+                                class="folderSearch"
+                                hidden />
+    
+                            <!-- Note title/content query -->
+                            <input 
+                                type="text"
+                                id="noteSearch" 
+                                name="q" 
+                                placeholder="Искать заметку"
+                                hx-post="{% url 'app:search' %}"
+                                hx-target=".notes"
+                                hx-trigger="input changed delay:0.25s">
+    
+                            <!-- Note section queries -->
+    
+                                <!-- Loved -->
+                            <input 
+                                type="checkbox" 
+                                name="l" 
+                                class="loved-search"
+                                hidden />
+    
+                                <!-- Archived -->
+                            <input 
+                                type="checkbox" 
+                                name="a" 
+                                class="archive-search"
+                                hidden />
+    
+                                <!-- Trash search -->
+                            <input 
+                                type="checkbox" 
+                                name="t" 
+                                class="trash-search"
+                                hidden />
+                                
+                        </form>
+    
+                        <form>
+    
+                            <!-- Folder query -->
+                            <input 
+                                type="text" 
+                                name="f" 
+                                class="folderSearch"
+                                hidden />
+                        
+                            <!-- Note section queries -->
+    
+                                <!-- Loved -->
+                            <input 
+                                type="checkbox" 
+                                name="l" 
+                                class="loved-search"
+                                hidden />
+    
+                                <!-- Archived -->
+                            <input 
+                                type="checkbox" 
+                                name="a" 
+                                class="archive-search"
+                                hidden />
+    
+                                <!-- Trash search -->
+                            <input 
+                                type="checkbox" 
+                                name="t" 
+                                class="trash-search"
+                                hidden />
+    
+                            <button 
+                                hx-post="{% url 'app:cancel-search' %}"
+                                hx-target=".notes"
+                                hx-trigger="click delay:0.5s"
+                                id="cancelSearch">×</button>
+                        
+                        </form>
+    
+                    </div>
+
+                    {% if friend_offer or not premium %}
+
+                        <div class="premium-btn">
+
+                            <svg id="crownSVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="Layer_1" viewBox="0 0 512.001 512.001" xml:space="preserve">
+                                <polygon style="fill:#FEE187;" points="154.503,390.752 122.717,269.008 188.572,305.952 256,200.449 323.428,305.952   389.283,269.008 357.497,390.752 "/>
+                                <path style="fill:#FFC61B;" d="M357.497,402.885H154.503c-5.521,0-10.345-3.726-11.74-9.068l-31.786-121.744  c-1.229-4.708,0.473-9.696,4.324-12.669c3.853-2.974,9.109-3.357,13.351-0.978l55.864,31.34l61.26-95.85  c2.229-3.488,6.083-5.599,10.223-5.599s7.994,2.111,10.223,5.599l61.26,95.85l55.864-31.34c4.243-2.381,9.499-1.996,13.351,0.978  c3.852,2.974,5.553,7.962,4.324,12.669l-31.786,121.744C367.842,399.158,363.017,402.885,357.497,402.885z M163.875,378.619h184.249  l22.212-85.07l-40.972,22.985c-5.605,3.146-12.696,1.371-16.159-4.048L256,222.98l-57.205,89.507  c-3.463,5.419-10.55,7.195-16.159,4.048l-40.972-22.985L163.875,378.619z"/>
+                                <g>
+                                    <circle style="fill:#FEE187;" cx="255.995" cy="110.326" r="37.612"/>
+                                    <circle style="fill:#FEE187;" cx="462.257" cy="189.603" r="37.612"/>
+                                    <circle style="fill:#FEE187;" cx="49.745" cy="189.603" r="37.612"/>
+                                </g>
+                                <g>
+                                    <path style="fill:#FFC61B;" d="M462.255,139.853c-27.429,0-49.745,22.316-49.745,49.745c0,1.121,0.051,2.229,0.124,3.332   l-67.098,34.965l-53.353-83.48c8.398-8.911,13.562-20.903,13.562-34.085c0-27.429-22.316-49.745-49.745-49.745   s-49.745,22.316-49.745,49.745c0,13.183,5.164,25.175,13.562,34.085l-59.334,92.84c-3.61,5.647-1.957,13.149,3.69,16.758   c5.646,3.607,13.149,1.956,16.757-3.69l59.314-92.806c0.167,0.056,0.339,0.103,0.507,0.158c0.323,0.104,0.647,0.205,0.972,0.302   c0.347,0.103,0.695,0.201,1.045,0.297c0.415,0.115,0.831,0.228,1.251,0.332c0.109,0.027,0.22,0.051,0.33,0.076   c3.741,0.901,7.64,1.392,11.654,1.392c4.014,0,7.912-0.49,11.653-1.392c0.11-0.027,0.222-0.05,0.332-0.076   c0.419-0.104,0.835-0.217,1.25-0.332c0.349-0.096,0.698-0.194,1.045-0.297c0.325-0.097,0.649-0.198,0.972-0.302   c0.169-0.055,0.34-0.102,0.507-0.158l59.314,92.806c2.3,3.6,6.211,5.601,10.232,5.601c1.895,0,3.813-0.444,5.598-1.375   l73.41-38.255c8.843,13.845,24.333,23.052,41.944,23.052c27.429,0,49.745-22.316,49.745-49.745S489.685,139.853,462.255,139.853z    M256,84.85c14.049,0,25.479,11.429,25.479,25.479c0,9.659-5.403,18.079-13.344,22.399c-0.001,0-0.002,0.001-0.004,0.001   c-0.643,0.349-1.309,0.662-1.984,0.957c-0.2,0.087-0.403,0.167-0.604,0.249c-0.519,0.211-1.048,0.404-1.583,0.581   c-0.193,0.063-0.383,0.132-0.579,0.192c-0.698,0.211-1.406,0.397-2.127,0.548c-0.164,0.034-0.329,0.057-0.493,0.089   c-0.593,0.113-1.194,0.205-1.801,0.275c-0.217,0.025-0.434,0.05-0.654,0.07c-0.761,0.069-1.529,0.116-2.308,0.116   s-1.546-0.049-2.308-0.116c-0.218-0.019-0.436-0.045-0.654-0.07c-0.607-0.07-1.207-0.163-1.801-0.275   c-0.164-0.032-0.329-0.055-0.493-0.089c-0.721-0.152-1.43-0.337-2.128-0.548c-0.193-0.058-0.383-0.127-0.575-0.19   c-0.537-0.177-1.068-0.371-1.589-0.582c-0.2-0.081-0.4-0.16-0.598-0.246c-9.012-3.93-15.334-12.916-15.334-23.36   C230.521,96.279,241.951,84.85,256,84.85z M462.255,215.078c-14.049,0-25.479-11.429-25.479-25.479   c0-14.05,11.431-25.479,25.479-25.479s25.479,11.429,25.479,25.479C487.734,203.648,476.303,215.078,462.255,215.078z"/>
+                                    <path style="fill:#FFC61B;" d="M427.098,316.289c-6.475-1.691-13.112,2.19-14.805,8.674L385.612,427.15H126.39L75.477,232.157   c14.384-8.73,24.014-24.54,24.014-42.559c0-27.429-22.316-49.745-49.745-49.745S0,162.169,0,189.598s22.316,49.745,49.745,49.745   c0.842,0,1.679-0.022,2.512-0.063l53.02,203.068c1.394,5.341,6.219,9.068,11.74,9.068h277.968c5.521,0,10.345-3.726,11.74-9.068   l29.048-111.255C437.465,324.61,433.581,317.983,427.098,316.289z M24.266,189.598c0-14.05,11.431-25.479,25.479-25.479   s25.479,11.429,25.479,25.479c0,14.05-11.431,25.479-25.479,25.479S24.266,203.648,24.266,189.598z"/>
+                                </g>
+                            </svg>
+
+                        </div>
+
+                    {% endif %}
+    
+                    <div class="mode">
+    
+                        <label class="toggle-mode">
+
+                            {% if profile.dark_mode %}
+                            
+                                <input class='toggle-checkbox' id="modeCB" type='checkbox' checked></input>
+    
+                                <script>
+    
+                                    $('body').addClass('dark');
+    
+                                </script>
+    
+                            {% else %}
+    
+                                <input class='toggle-checkbox' id="modeCB" type='checkbox'></input>
+    
+                            {% endif %}
+
+                            <div class='toggle-slot'>
+                            <div class='sun-icon-wrapper'>
+                                <div class="iconify sun-icon" data-icon="feather-sun" data-inline="false"></div>
+                            </div>
+                            <div class='toggle-button'></div>
+                            <div class='moon-icon-wrapper'>
+                                <div class="iconify moon-icon" data-icon="feather-moon" data-inline="false"></div>
+                            </div>
+                            </div>
+
+                        </label>
+    
+                    </div>
+    
+                    <div class="profile">
+    
+                        <div class="initials">
+    
+                            <span>{{ profile.initials }}</span>
+    
+                        </div>
+    
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="sidenav">
+
+                <div 
+                    class="page active"
+                    id="homeSection"
+                    hx-get="{% url 'app:home' %}"
+                    hx-target=".notes"
+                    hx-trigger="click delay:0.5s">
+
+                    <div class="icon">
+
+                        <svg class="home" xmlns="http://www.w3.org/2000/svg" width="29.174" height="25.726" viewBox="0 0 29.174 25.726">
+                            <path id="Icon_material-home" data-name="Icon material-home" d="M14.192,28.373c1.755-2.106-1.4-6.319,0-8.426a3.286,3.286,0,0,1,5.617,0c1.4,2.106-1.755,6.319,0,8.426s5.266,2.809,7.022,0,0-11.234,0-11.234,6.67,3.16,4.213,0S24.023,4.5,17,4.5,5.416,13.979,2.958,17.139s4.213,0,4.213,0-1.755,8.426,0,11.234S12.437,30.48,14.192,28.373Z" transform="translate(-2.414 -4.5)"/>
+                        </svg>
+
+                    </div>
+
+                    <span class="page-title">Дом</span>
+
+                </div>
+
+                <div 
+                    class="page" 
+                    id="lovedSection"
+                    hx-get="{% url 'app:loved' %}"
+                    hx-target=".notes"
+                    hx-trigger="click delay:0.5s">
+
+                    <div class="icon">
+
+                        <svg style="fill: #e31b23; padding-top: 2px;" xmlns="http://www.w3.org/2000/svg" width="24.806" height="21.933" viewBox="0 0 24.806 21.933">
+                            <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M22.4,3.747a6.576,6.576,0,0,0-9.04.666l-.954.994-.954-.994a6.576,6.576,0,0,0-9.04-.666,7.08,7.08,0,0,0-.48,10.178L11.3,23.707a1.508,1.508,0,0,0,2.195,0l9.375-9.781A7.076,7.076,0,0,0,22.4,3.747Z" transform="translate(0.001 -2.248)"/>
+                        </svg>
+
+                    </div>
+
+                    <span class="page-title" style="color: #e31b23;">Любимое</span>
+
+                </div>
+
+                <div class="page" id="newFolderInit">
+
+                    <div class="icon">
+
+                        <span>+</span>
+
+                    </div>
+
+                    <span class="page-title">Новый блокнот</span>
+
+                </div>
+
+                <div class="folders">{% include 'components/folders.html' %}</div>
+
+                <div 
+                    class="page"
+                    id="archiveSection"
+                    hx-get="{% url 'app:archive' %}"
+                    hx-target=".notes"
+                    hx-trigger="click delay:0.5s">
+
+                    <div class="icon">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25.015" height="22.657" viewBox="0 0 25.015 22.657">
+                            <g id="Icon_ionic-ios-archive" data-name="Icon ionic-ios-archive" transform="translate(-3.375 -4.5)">
+                            <path id="Контур_1" data-name="Контур 1" d="M28.149,7.761H3.616a.238.238,0,0,1-.241-.233V6.363A1.892,1.892,0,0,1,5.3,4.5H26.465A1.892,1.892,0,0,1,28.39,6.363V7.528A.238.238,0,0,1,28.149,7.761Z"/>
+                            <path id="Контур_2" data-name="Контур 2" d="M27.169,10.266H4.982a.476.476,0,0,0-.482.466V25.988a1.9,1.9,0,0,0,1.929,1.863H25.722a1.9,1.9,0,0,0,1.929-1.863V10.731A.476.476,0,0,0,27.169,10.266ZM19.09,18.534h-6a.856.856,0,0,1-.862-.716.826.826,0,0,1,.838-.914h6a.856.856,0,0,1,.862.716A.829.829,0,0,1,19.09,18.534Z" transform="translate(-0.193 -0.694)"/>
+                            </g>
+                        </svg>
+
+                    </div>
+
+                    <span class="page-title">Архив</span>
+
+                </div>
+
+                <div 
+                    class="page"
+                    id="trashSection"
+                    hx-get="{% url 'app:trash' %}"
+                    hx-target=".notes"
+                    hx-trigger="click delay:0.5s">
+
+                    <div class="icon">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                            <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                            <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                            <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                            </g>
+                        </svg>
+
+                    </div>
+
+                    <span class="page-title">Корзина</span>
+
+                </div>
+
+            </div>
+            
+            <!-- New note form -->
+            <div class="new-note">
+
+                <div class="wrapper">
+
+                    <div class="top">
+
+                        <div class="filters">
+
+                            <div id="newNoteLove">
+
+                                <svg style="padding-top: 2px;" xmlns="http://www.w3.org/2000/svg" width="24.806" height="21.933" viewBox="0 0 24.806 21.933">
+                                    <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M22.4,3.747a6.576,6.576,0,0,0-9.04.666l-.954.994-.954-.994a6.576,6.576,0,0,0-9.04-.666,7.08,7.08,0,0,0-.48,10.178L11.3,23.707a1.508,1.508,0,0,0,2.195,0l9.375-9.781A7.076,7.076,0,0,0,22.4,3.747Z" transform="translate(0.001 -2.248)"/>
+                                </svg>
+
+                            </div>
+
+                            <div id="newNotePin">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23.858" height="23.858" viewBox="0 0 23.858 23.858">
+                                    <path id="Icon_simple-pinboard" data-name="Icon simple-pinboard" d="M10.585,14.5l4.482,4.587-.716-4.038,6.1-7.522,3.408.182L16.323,0V2.936L9.152,9.542l-4.486-1.1L9.326,13.4,0,23.858,10.585,14.5Z"/>
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+                        <input 
+                            type="text" 
+                            class="new-note-title"
+                            placeholder="Я помню чудное мгновенье...">
+
+                        <div id="closeNewNote">×</div>  
+
+                    </div>
+
+                    <div class="new-note-rte">
+
+                        <div class="rte-wrapper">
+
+                            <button id="boldBtnNew" style="padding-top: 4px;"><b>Ж</b></button>
+                            <button id="italicBtnNew" style="padding: 3px 3px 0 0;"><i>К</i></button>
+                            <button id="underlineBtnNew" style="padding-top: 3px;"><u>С</u></button>
+                            <button id="strikeBtnNew" style="padding: 4px 0 0 1px;"><s>О</s></button>
+                            
+                            <button id="ulBtnNew" style="padding-top: 2px;">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23.798" height="18.84" viewBox="0 0 23.798 18.84">
+                                    <g id="Icon_ionic-ios-list" data-name="Icon ionic-ios-list" transform="translate(-4.5 -7.313)">
+                                    <path id="Контур_1" data-name="Контур 1" d="M7.971,17.767a1.735,1.735,0,1,1-1.735-1.735A1.735,1.735,0,0,1,7.971,17.767Z" transform="translate(0 -1.034)"/>
+                                    <path id="Контур_2" data-name="Контур 2" d="M7.971,9.048A1.735,1.735,0,1,1,6.235,7.313,1.735,1.735,0,0,1,7.971,9.048Z"/>
+                                    <path id="Контур_3" data-name="Контур 3" d="M7.971,26.485A1.735,1.735,0,1,1,6.235,24.75a1.735,1.735,0,0,1,1.735,1.735Z" transform="translate(0 -2.068)"/>
+                                    <path id="Контур_4" data-name="Контур 4" d="M28.236,16.875h-14.9a.992.992,0,0,0,0,1.983h14.9a.992.992,0,0,0,0-1.983Z" transform="translate(-0.93 -1.134)"/>
+                                    <path id="Контур_5" data-name="Контур 5" d="M28.236,25.594h-14.9a.992.992,0,0,0,0,1.983h14.9a.992.992,0,0,0,0-1.983Z" transform="translate(-0.93 -2.168)"/>
+                                    <path id="Контур_6" data-name="Контур 6" d="M13.331,10.139h14.9a.992.992,0,0,0,0-1.983h-14.9a.992.992,0,0,0,0,1.983Z" transform="translate(-0.93 -0.1)"/>
+                                    </g>
+                                </svg>
+
+                            </button>
+
+                            <button id="olBtnNew"  style="padding-top: 2px;">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23.717" height="25.685" viewBox="0 0 23.717 25.685">
+                                    <g id="Icon_ionic-ios-list" data-name="Icon ionic-ios-list" transform="translate(-4.549 -3.733)">
+                                    <path id="Контур_1" data-name="Контур 1" d="M6.235,16.031Z" transform="translate(0 -1.034)"/>
+                                    <path id="Контур_4" data-name="Контур 4" d="M28.236,16.875h-14.9a.992.992,0,0,0,0,1.983h14.9a.992.992,0,0,0,0-1.983Z" transform="translate(-0.93 -1.134)"/>
+                                    <path id="Контур_5" data-name="Контур 5" d="M28.236,25.594h-14.9a.992.992,0,0,0,0,1.983h14.9a.992.992,0,0,0,0-1.983Z" transform="translate(-0.93 -2.168)"/>
+                                    <path id="Контур_6" data-name="Контур 6" d="M13.331,10.139h14.9a.992.992,0,0,0,0-1.983h-14.9a.992.992,0,0,0,0,1.983Z" transform="translate(-0.93 -0.1)"/>
+                                    <text id="_2" data-name="2" transform="translate(4.549 27.417)" font-size="8" font-family="SG"><tspan x="0" y="0">3</tspan></text>
+                                    <text id="_2-2" data-name="2" transform="translate(4.549 11.733)" font-size="8" font-family="SG"><tspan x="0" y="0">1</tspan></text>
+                                    </g>
+                                    <text id="_2-3" data-name="2" transform="translate(0 15.842)" font-size="8" font-family="SG"><tspan x="0" y="0">2</tspan></text>
+                                </svg>
+
+                            </button>
+                            
+                            <button id="folderBtnNew">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21.364" height="23.313" viewBox="0 0 21.364 23.313">
+                                    <g id="Сгруппировать_1" data-name="Сгруппировать 1" transform="translate(-68 461.1)">
+                                    <path id="Контур_1" data-name="Контур 1" d="M68-449.349V-437.7h2.444V-461H68Z" transform="translate(0 -0.094)"></path>
+                                    <path id="Контур_2" data-name="Контур 2" d="M137-449.443v11.657l7.121-.017,7.116-.017.438-.148a3.994,3.994,0,0,0,2.489-2.307c.29-.767.29-.642.273-9.4-.023-9.156.017-8.36-.455-9.315a3.938,3.938,0,0,0-2.347-1.938c-.392-.131-.449-.131-3.166-.154L145.7-461.1l-.011,4.354-.017,4.359-1.176-.943c-.648-.517-1.193-.943-1.211-.943s-.563.426-1.211.943l-1.176.943-.017-4.353-.011-4.353H137Z" transform="translate(-65.078 0)"></path>
+                                    </g>
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div 
+                        contenteditable="true" 
+                        id="newNoteContentCE"
+                        placeholder="Я помню чудное мгновенье..."></div>
+
+                    <form id="newNoteData">
+
+                        <!-- Sections -->
+
+                        <input 
+                            type="text" 
+                            name="f" 
+                            id="currentFolder" />
+
+                        <input 
+                            type="checkbox" 
+                            name="ls" 
+                            id="lovedSection" />
+
+                        <input 
+                            type="checkbox" 
+                            name="as" 
+                            class="archivedSection" />
+
+                            <!-- Content -->
+                        <input 
+                            type="text" 
+                            name='t' 
+                            id="newNoteTitle" />
+                    
+                        <input 
+                            type="text" 
+                            name='c' 
+                            id="newNoteContent" />
+
+                            <!-- Bloknotiki -->
+                        <input 
+                            type="text"
+                            name="b"
+                            id="newNoteFolders" />
+
+                            <!-- Filters -->
+                        <input 
+                            type="checkbox" 
+                            name="l" 
+                            id="newNoteLoved" />
+        
+                        <input 
+                            type="checkbox" 
+                            name="p" 
+                            id="newNotePinned" />
+
+                        <button 
+                            class="create-note-btn"
+                            hx-post="{% url 'app:create-note' %}"
+                            hx-target=".notes">Создать</button>
+        
+                    </form>
+
+                    <div class="new-note-folders-form">
+
+                        <div id="closeNewNoteFoldersForm">×</div>
+
+                        <input 
+                            type="text"
+                            id="newNoteFolderUIDS"
+                            hidden />
+
+                        <input 
+                            type="text"
+                            class="new-note-folder-search"
+                            placeholder="Название блокнота"
+                            maxlength="50">
+
+                        <span class="folder-title"><b>Блокноты заметки</b></span>
+
+                        <div class="new-note-folder-list"></div>
+
+                        <form class="create-new-folder-from-search">
+
+                            <input 
+                                type="text" 
+                                name="t" 
+                                id="searchFolderTitleNew" 
+                                hidden />
+
+                            <button
+                                id="createFolderInNoteNew"
+                                hx-post="{% url 'app:create-folder' %}"
+                                hx-target=".folders">Создать</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Notes -->
+            <div class="notes">
+
+                {% include 'components/notes.html' %}
+
+            </div>
+
+        </div>
+
+    </body>
+
+    <style>
+
+        @font-face {
+
+            font-family: Comfortaa;
+            src: url("{% static 'fonts/Comfortaa.ttf' %}");
+
+        }
+
+        @font-face {
+
+            font-family: SG;
+            src: url("{% static 'fonts/ShowcardGothic.otf' %}");
+        
+        }
+
+    </style>
+
+    <!-- universal -->
+    <script>
+
+        document.body.addEventListener('htmx:configRequest', (event) => {
+
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+
+        });
+
+        function delay(callback, ms) {
+
+            var timer = 0;
+
+            return function() {
+
+                var context = this, args = arguments;
+                clearTimeout(timer);
+                
+                timer = setTimeout(function () {
+
+                    callback.apply(context, args);
+
+                }, ms || 0);
+
+            };
+            
+        };
+
+        function validateEmail(e) {
+
+            var re = /\S+@\S+\.\S+/;
+            return re.test(e);
+
+        }
+
+        function hasNumber(myString) {
+
+            return /\d/.test(myString);
+        
+        }
+
+    </script>
+
+    <!-- Premium restrictions -->
+
+    {% if max_notes %}
+
+        <script>
+
+            $('.new-note-title').attr('id', 'newFolderNotAllowed');
+
+        </script>
+
+    {% endif %}
+
+    {% if max_notepads %}
+
+        <script>
+
+            $('#newFolderInit').addClass('notAllowed');
+
+        </script>
+
+    {% endif %}
+
+    <!-- Friend premium -->
+    <script>
+
+        $('#copyLinkBtn').click(function() {
+
+            $('#inviteLink').select();
+            document.execCommand('copy');
+            document.getSelection().removeAllRanges();
+
+            $('.invite-link').animate({
+
+                'opacity': 0,
+
+            }, 500);
+
+            setTimeout(function() {
+
+                $('.invite-link').html('');
+                $('.invite-link').html(`
+                
+                    <span class='finish-invite'>Ссылка скопирована! <br> Отправьте ее своим друзьям 😌</span>
+
+                `);
+
+                $('.invite-link').animate({
+
+                    'opacity': 1,
+
+                }, 500);
+
+            }, 500);
+
+        })
+
+    </script>
+
+    <!-- Mode -->
+    <script>
+
+        $('#modeCB').change(function() {
+
+            $('body').toggleClass('dark')
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'user:toggle-mode' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+    <!-- Profile -->
+    <script>
+
+        /* Dropdown */
+
+        profileDropdownOpen = false;
+        
+        $('.profile').click(function() {
+
+            $('.initials').toggleClass('active');
+
+            if (profileDropdownOpen) {
+
+                $('.profile-dropdown').animate({'opacity': 0}, 250);
+
+                setTimeout(function() {
+
+                    $('.profile-dropdown').hide();
+
+                }, 250);
+
+                profileDropdownOpen = false;
+
+            } else {
+
+                $('.profile-dropdown').show();
+                $('.profile-dropdown').animate({'opacity': 1}, 250);
+
+                profileDropdownOpen = true;
+
+            }
+
+        });
+
+        /* Button & dropdown animation */
+
+        $('#myAccount, #logout').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('.btn').removeClass('active');
+
+            }, 250);
+
+                /* Hide profile dropdown */
+            $('.initials').removeClass('active');
+
+            $('.profile-dropdown').animate({'opacity': 0}, 250);
+
+            setTimeout(function() {
+
+                $('.profile-dropdown').hide();
+
+            }, 250);
+
+            profileDropdownOpen = false;
+
+        });
+
+        /* Account preferences */
+
+        accountFormOpen = false;
+
+            /* Form render */
+        $('#myAccount').click(function() {
+
+            accountFormOpen = true;
+
+            $('.account-preferences').css('display', 'flex');
+            $('.account-preferences').animate({
+
+                'opacity': 1,
+
+            }, 250);
+
+            oldName = $('#profileNameVal').val();
+            oldEmail = $('#profileEmailVal').val();
+
+        });
+
+            /* Close form */
+        $('#closeAccountPreferences').click(function() {
+
+            accountFormOpen = false;
+
+            $('#closeAccountPreferences').addClass('active');
+
+            $('.account-preferences').animate({
+
+                'opacity': 0,
+
+            }, 250);
+
+            setTimeout(function() {
+
+                $('#closeAccountPreferences').removeClass('active');
+
+                $('.account-preferences').hide();
+
+                $('#emailError').hide();
+                $('#nameError').hide();
+                $('#passwordError').hide();
+                $('#profilePasswordVal').val('');
+
+            }, 250);
+
+        });
+
+            /* Field logic */
+
+        /* Name */
+        document.getElementById('profileNameVal').addEventListener('input', function() {
+
+            $('#nameError').hide();
+            $('#nameOK').hide();
+
+        });
+
+        document.getElementById('profileNameVal').addEventListener('input', delay(function() {
+
+            if (!$('#profileNameVal').val()) {
+
+                $('#nameError').show();
+
+            } else {
+
+                $('#nameOK').show();
+
+                setTimeout(function() {
+
+                    $('#nameOK').hide();
+
+                }, 1500);
+
+                newName = $('#profileNameVal').val();
+
+                if (newName != oldName) {
+
+                    $.ajax({
+
+                        type: 'POST',
+
+                        url: "{% url 'user:cn' %}",
+
+                        data: {
+
+                            'csrfmiddlewaretoken': "{{ csrf_token }}",
+                            'n': newName,
+
+                        }
+
+                    });
+
+                }
+
+            }
+            
+        }, 750));
+
+        /* Email */
+        document.getElementById('profileEmailVal').addEventListener('input', function() {
+
+            $('#emailError').hide();
+            $('#emailOK').hide();
+
+        });
+
+        document.getElementById('profileEmailVal').addEventListener('input', delay(function() {
+
+            newEmail = $('#profileEmailVal').val();
+
+            if (!validateEmail(newEmail)) {
+
+                $('#emailError').show();
+
+            } else {
+
+                $('#emailOK').show();
+
+                setTimeout(function() {
+
+                    $('#emailOK').hide();
+
+                }, 1500);
+
+                if (newEmail != oldEmail) {
+
+                    $.ajax({
+
+                        type: 'POST',
+
+                        url: "{% url 'user:cu' %}",
+
+                        data: {
+
+                            'csrfmiddlewaretoken': "{{ csrf_token }}",
+                            'e': newEmail,
+
+                        }
+
+                    });
+
+                }
+
+            }
+            
+        }, 750));
+
+        /* Password */
+
+        document.getElementById('profilePasswordVal').addEventListener('input', function() {
+
+            $('#passwordError').hide();
+            $('#passwordOK').hide();
+
+        });
+
+        document.getElementById('profilePasswordVal').addEventListener('input', delay(function() {
+
+            newPassword = $('#profilePasswordVal').val();
+
+            if (newPassword.length < 7 || !hasNumber(newPassword)) {
+
+                $('#passwordError').show();
+
+            } else {
+                
+                $('#passwordOK').show();
+
+                setTimeout(function() {
+
+                    $('#passwordOK').hide();
+
+                }, 1500);
+
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: "{% url 'user:cp' %}",
+
+                    data: {
+
+                        'csrfmiddlewaretoken': "{{ csrf_token }}",
+                        'p': newPassword,
+
+                    }
+
+                });
+
+            }
+            
+        }, 750));
+
+    </script>
+    
+    <!-- Sidenav -->
+    <script>
+
+        sidenavOpen = false;
+
+        $('.sidenav').mouseenter(function() {
+
+            if (!sidenavOpen) {toggleSidenav();}
+
+            $('.sidenav').css('overflow-y', 'auto');
+            
+        });
+
+        $('.sidenav').mouseleave(function() {
+
+            if (!sidenavOpen) {toggleSidenav();}
+
+            $('.sidenav').css('overflow-y', 'hidden');
+
+        });
+
+        function toggleSidenav() {
+
+            if ($('.sidenav').hasClass('open')) {
+
+                $('.sidenav').removeClass('open');
+
+                $('.page-title').hide();
+                $('.page-title').css('opacity', 0);
+
+                $('.edit-folder-btn-init').hide();
+                $('.edit-folder-btn-init').css('opacity', 0);
+                
+            } else {
+
+                $('.sidenav').addClass('open');
+
+                $('.page-title').show();
+                $('.page-title').animate({'opacity': 1}, 750);
+
+                setTimeout(function() {
+
+                    $('.edit-folder-btn-init').css('display', 'flex');
+
+                    $('.edit-folder-btn-init').animate({
+
+                        'opacity': 1,
+
+                    }, 250);
+
+                }, 500);
+
+            }
+
+        }
+
+        $('#toggleSidenavBtn').click(function() {
+
+            $(this).toggleClass('active');
+
+            toggleSidenav();
+            
+            sidenavOpen = !sidenavOpen;
+
+        });
+
+        $('body').on('click', '#homeSection, #lovedSection, #folderSection, #archiveSection, #trashSection', function(e) {
+        
+            $('.page').removeClass('active');
+            $(this).addClass('active');
+
+            $('.notes').animate({'opacity': 0}, 500);
+
+            setTimeout(function() {
+
+                $('.notes').animate({'opacity': 1}, 500);
+
+            });
+
+        });
+
+        $('body').on('click', '#newFolderInit', function() {
+
+            $('#newFolderInit').addClass('active');
+
+            setTimeout(function() {
+
+                $('#newFolderInit').removeClass('active');
+
+            }, 250);
+
+        });
+
+            /* In case max folders */
+
+        $('#newFolderNotAllowed').click(function() {
+
+            console.log('f');
+
+            /* Premium popup */
+
+        });
+
+        /* Edit folder */
+
+        editFolderFormShown = false;
+
+        $('body').on('click', '.edit-folder-btn-init', function() {
+
+            editFolderFormShown = true;
+
+            editFolderBtn = $(this);
+
+            editFolderBtn.addClass('active');
+
+            setTimeout(function() {
+
+                editFolderBtn.removeClass('active');
+
+            }, 250);
+ 
+            editingFolderUID = $(this).siblings('#folderUID').val();
+            previousTitle = $(this).siblings('.page-title').children('span').text();
+
+            $('#editFolderTitle').val(previousTitle);
+            $('#deleteFolderUID').val(editingFolderUID);
+
+            $('.edit-folder').css('display', 'flex');
+            $('.edit-folder').animate({'opacity': 1}, 250);
+
+        });
+
+            /* Folder title checks (emptiness) & (uniqueness) */
+
+        document.getElementById('editFolderTitle').addEventListener('input', function() {
+        
+            if ($(this).val().trim().length === 0) {
+
+                $('.edit-folder-btn').prop('disabled', true);
+
+            } else {
+
+                newTitle = $(this).val();
+
+                titleUnique = true;
+
+                $('.folders').children('.page').each(function() {
+
+                    title = $(this).children('.page-title').children('span').text();
+                        
+                    if (title == newTitle) {
+
+                        titleUnique = false;
+
+                    }
+
+                });
+                
+                if (titleUnique) {
+
+                    $('.edit-folder-btn').prop('disabled', false);
+
+                } else {
+
+                    $('.edit-folder-btn').prop('disabled', true);
+
+                }        
+
+            }
+
+        }, false);
+
+            /* Close form */
+        $('#closeEditFolderForm, .edit-folder-btn, .delete-folder-btn').click(function() { 
+
+            editFolderFormShown = false;
+
+            $('.edit-folder-btn-init').removeClass('active');
+
+            $('.edit-folder').animate({'opacity': 0}, 250);
+
+            setTimeout(function() {
+
+                $('.edit-folder').css('display', 'none');
+
+            }, 250);
+
+        });
+
+        $('#closeEditFolderForm').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('#closeEditFolderForm').removeClass('active');
+
+            }, 250);
+
+        });
+
+        $('.edit-folder-btn-init').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('.edit-folder-btn-init').removeClass('active');
+
+            }, 250);
+
+        });
+
+        $('.delete-folder-btn').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('.delete-folder-btn').removeClass('active');
+
+            }, 250);
+
+        });
+        
+            /* Redirect to home section if folder has been deleted */
+        $('.delete-folder-btn').click(function() {
+
+            document.getElementById('homeSection').click();
+
+        });
+
+            /* Update folder title */
+        $('.edit-folder-btn').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('.edit-folder-btn').removeClass('active');
+
+            }, 250)
+
+            $('.folders').children('.page').each(function() {
+
+                if ($(this).children('#folderUID').val() == editingFolderUID) {
+
+                    $(this).children('.page-title').children('span').text($('#editFolderTitle').val());
+
+                }
+
+            });
+
+            $('.note-section-title').text($('#editFolderTitle').val());
+
+            /* Submit ajax request only if the title has changed */
+
+            if ($('#editFolderTitle').val() != previousTitle) {
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: "{% url 'app:edit-folder' %}",
+
+                    data: {
+
+                        'csrfmiddlewaretoken': "{{ csrf_token }}",
+                        'u': editingFolderUID,
+                        't': $('#editFolderTitle').val(),
+
+                    }
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+    <!-- Pop-ups -->
+
+    <script>
+
+        /* Premium */
+
+        premiumPopUpOpen = false;
+
+        $('.premium-btn').click(function() {
+
+            premiumPopUpOpen = true;
+
+            $('.premium-offer').css('display', 'flex');
+            $('.premium-offer').animate({
+
+                'opacity': 1,
+
+            }, 500);
+
+        });
+
+        $('#closePremiumOfferBtn').click(function() {
+
+            premiumPopUpOpen = false;
+
+            $(this).addClass('active');
+
+            $('.premium-offer').animate({
+
+                'opacity': 0,
+
+            }, 250);
+
+            setTimeout(function() {
+
+                $('.premium-offer').hide();
+
+                $('#closePremiumOfferBtn').removeClass('active');
+
+            }, 250);
+
+        });
+
+    </script>
+
+    <!-- Search notes -->
+    <script>
+
+        /* Change placeholder depending on device width */
+
+        if ($(window).width() <= 775) {
+
+            $('#noteSearch').attr('placeholder', 'Искать');
+
+        } else {
+
+            $('#noteSearch').attr('placeholder', 'Искать заметку');
+
+        }
+
+        $(window).resize(function() {
+
+            if ($(window).width() <= 775) {
+
+                $('#noteSearch').attr('placeholder', 'Искать');
+
+            } else {
+
+                $('#noteSearch').attr('placeholder', 'Искать заметку');
+
+            }
+
+        });
+
+        document.getElementById('noteSearch').addEventListener('input', function() {
+
+            $('#cancelSearch').show();
+            $('#cancelSearch').animate({'opacity': 1}, 250);
+
+        }, false);
+
+        $('body').on('click', '#cancelSearch', function() {
+
+            $('#noteSearch').val('');
+            $(this).animate({'opacity': 0}, 250);
+
+            setTimeout(function() {
+
+                $('#cancelSearch').hide();
+
+            }, 250)   
+
+        });
+
+    </script>
+
+    <!-- Folders -->
+    <script>
+
+        /* Creation */
+
+        folderFormShown = false;
+
+            /* Form show */
+
+        $('#newFolderInit').click(function() {
+
+            if ($(this).hasClass('notAllowed')) {
+
+                premiumPopUpOpen = true;
+
+                $('.premium-offer').css('display', 'flex');
+                $('.premium-offer').animate({
+
+                    'opacity': 1,
+
+                }, 500);
+
+            } else {
+
+                folderFormShown = true;
+
+                $('#newFolderTitle').val('');
+                $('.create-folder-btn').prop('disabled', true);
+
+                $('.create-folder').css('display', 'flex');
+                $('.create-folder').animate({'opacity': 1}, 250);
+
+            }
+
+        });
+
+            /* Form hide */
+
+        $('#closeNewFolderForm, .create-folder-btn').click(function() {
+
+            folderFormShown = false;
+
+            $('.create-folder').animate({'opacity': 0}, 250);
+
+            setTimeout(function() {
+
+                $('.create-folder').css('display', 'none');
+
+            }, 250);
+
+        });
+
+        $('#closeNewFolderForm').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('#closeNewFolderForm').removeClass('active');
+
+            }, 250);
+
+        });
+
+        $('.create-folder-btn').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('.create-folder-btn').removeClass('active');
+
+            }, 250);
+
+        });
+
+        $('#closeNewFolderForm').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('#closeNewFolderForm').removeClass('active');
+
+            }, 250);
+
+        });
+
+            /* Folder title checks (emptiness) & (uniqueness) */
+
+        document.getElementById('newFolderTitle').addEventListener('input', function() {
+            
+            if ($(this).val().trim().length === 0) {
+
+                $('.create-folder-btn').prop('disabled', true);
+
+            } else {
+
+                newTitle = $(this).val();
+
+                titleUnique = true;
+
+                $('.folders').children('.page').each(function() {
+
+                    title = $(this).children('.page-title').children('span').text();
+                        
+                    if (title == newTitle) {
+
+                        titleUnique = false;
+
+                    }
+
+                });
+                
+                if (titleUnique) {
+
+                    $('.create-folder-btn').prop('disabled', false);
+
+                } else {
+
+                    $('.create-folder-btn').prop('disabled', true);
+
+                }        
+
+            }
+
+        }, false);
+
+    </script>
+
+    <!-- New note -->
+    <script>
+        
+        /* Extension & Condensation */
+
+        newNoteOpen = false;
+
+        $('.new-note-title').focus(function() {
+
+            if ($(this).attr('id')) {
+
+                premiumPopUpOpen = true;
+
+                $('.premium-offer').css('display', 'flex');
+                $('.premium-offer').animate({
+
+                    'opacity': 1,
+
+                }, 500);
+
+            } else {
+
+                newNoteFolders = [];
+                $('#newNoteFolders').val('');
+
+                if ($('#currentFolder').val()) {
+
+                    currentFolderUID = $('#currentFolder').val();
+
+                    newNoteFolders.push(currentFolderUID);
+                    $('#newNoteFolders').val(newNoteFolders.join(' '));
+
+                }
+
+                if (!newNoteOpen) {
+
+                    newNoteOpen = true;
+
+                    $('.new-note').addClass('open');
+                    setTimeout(function() {
+
+                        $('.new-note-rte, #newNoteContentCE, .new-note-folders, .create-note-btn').animate({'opacity': 1}, 750);
+
+                    }, 750);
+
+                    $('.new-note-title').attr('placeholder', 'Заголовок');
+                    $('#newNoteContentCE').focus();
+
+                }
+
+            }
+
+        });
+
+        function clearNewNoteStyle() {
+
+            $('#boldBtnNew').removeClass('active');
+            $('#italicBtnNew').removeClass('active');
+            $('#underlineBtnNew').removeClass('active');
+            $('#strikeBtnNew').removeClass('active');
+            $('#ulBtnNew').removeClass('active');
+            $('#olBtnNew').removeClass('active');
+
+        }
+
+        $('#closeNewNote, .create-note-btn').click(function() {
+                  
+            $('.new-note-rte, #newNoteContentCE, .new-note-folders, .create-note-btn').animate({'opacity': 0}, 250);
+            
+            setTimeout(function() {
+                
+                $('.new-note').removeClass('open');
+                newNoteOpen = false;   
+                
+            }, 250);
+            
+            $('.new-note-title').attr('placeholder', 'Я помню чудное мгновенье...');
+
+            clearNewNoteStyle();
+
+            /* Close folder form */
+            $('#folderBtnNew').removeClass('active');
+
+            $('.new-note-folders-form').animate({'opacity': 0}, 250);
+
+            setTimeout(function() {
+
+                $('.new-note-folders-form').hide();
+                
+            }, 250);
+
+            newFolderFormSearchOpen = false;
+
+        });
+
+        $('#closeNewNote').click(function() {
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('#closeNewNote').removeClass('active');
+
+            }, 250);
+
+        })
+
+        $('.create-note-btn').click(function() {
+
+            $(this).addClass('active');
+            setTimeout(function() {
+
+                $('.create-note-btn').removeClass('active');
+
+            }, 250);
+
+            /* After the notes are swapped into the DOM, clear all the new note form fields */
+            
+            document.body.addEventListener('htmx:afterSwap', function(evt) {
+
+                if (evt.detail.target === document.getElementsByClassName('notes')[0]) {
+
+                    $('#newNoteContentCE').html('');
+                    $('.new-note-title, #newNoteTitle, #newNoteContent').val('');
+
+                }
+    
+            });
+
+            clearNewNoteStyle();
+
+        });
+
+        /* Filters */
+
+            /* UI */
+        $('#newNoteLove, #newNotePin').click(function() {
+
+            $(this).toggleClass('active');
+
+        });
+
+            /* Love */
+        $('#newNoteLove').click(function() {
+
+            $('#newNoteLoved').prop('checked', !$('#newNoteLoved').prop('checked'));
+
+        });
+
+            /* Pin */
+        $('#newNotePinned').click(function() {
+
+            $('#newNotePinned').prop('checked', !$('#newNotePinned').prop('checked'));
+
+        });
+
+        /* RTE */
+        
+        /* formatting check function */
+
+        function newStyleCheck() {
+
+            if (document.queryCommandState('bold')) {$('#boldBtnNew').addClass('active');} else {$('#boldBtnNew').removeClass('active');}
+            if (document.queryCommandState('italic')) {$('#italicBtnNew').addClass('active');} else {$('#italicBtnNew').removeClass('active');}
+            if (document.queryCommandState('underline')) {$('#underlineBtnNew').addClass('active');} else {$('#underlineBtnNew').removeClass('active');}
+            if (document.queryCommandState('strikeThrough')) {$('#strikeBtnNew').addClass('active');} else {$('#strikeBtnNew').removeClass('active');}
+            
+            if (document.queryCommandState('insertUnorderedList')) {$('#ulBtnNew').addClass('active');} else {$('#ulBtnNew').removeClass('active');}
+            if (document.queryCommandState('insertOrderedList')) {$('#olBtnNew').addClass('active');} else {$('#olBtnNew').removeClass('active');}
+
+        }
+
+        /* Remove forbidden style if text has been pasted */
+
+        document.getElementById('newNoteContentCE').addEventListener('paste', function(e) {
+
+            e.preventDefault();
+            var text = e.clipboardData.getData("text/plain");
+            document.execCommand("insertHTML", false, text);
+
+        });
+
+        /* formatting check events */
+
+        $('#newNoteContentCE').keyup(function() {
+
+            newStyleCheck();
+
+        });
+
+        $('#newNoteContentCE').click(function() {
+
+            newStyleCheck();
+
+        });
+
+        /* formatting */
+
+        $('#boldBtnNew').click(function() {
+
+            $('#newNoteContentCE').focus();
+            document.execCommand('bold');
+            $('#newNoteContentCE').focus();
+
+            newStyleCheck();
+
+        });
+
+        $('#italicBtnNew').click(function() {
+
+            $('#newNoteContentCE').focus();
+            document.execCommand('italic');
+            $('#newNoteContentCE').focus();
+
+            newStyleCheck();
+
+        });
+
+        $('#underlineBtnNew').click(function() {
+            
+            $('#newNoteContentCE').focus();
+            document.execCommand('underline');
+            $('#newNoteContentCE').focus();
+
+            newStyleCheck();
+
+        });
+
+        $('#strikeBtnNew').click(function() {
+            
+            $('#newNoteContentCE').focus();
+            document.execCommand('strikeThrough');
+            $('#newNoteContentCE').focus();
+
+            newStyleCheck();
+
+        });
+
+        $('#ulBtnNew').click(function() {
+
+            $('#newNoteContentCE').focus();
+            document.execCommand('insertUnorderedList');
+            $('#newNoteContentCE').focus();
+
+            newStyleCheck();
+
+        });
+
+        $('#olBtnNew').click(function() {
+
+            $('#newNoteContentCE').focus();
+            document.execCommand('insertOrderedList');
+            $('#newNoteContentCE').focus();
+            
+            newStyleCheck();
+
+        });
+
+        /* Folders */
+
+        newFolderFormSearchOpen = false;
+
+            /* Open/close */
+        $('#folderBtnNew').click(function() {
+
+            folderSearchInitNew();
+
+            if (newFolderFormSearchOpen) {
+
+                $(this).removeClass('active');
+
+                $('.new-note-folders-form').animate({'opacity': 0}, 250);
+                setTimeout(function() {
+
+                    $('.new-note-folders-form').hide();
+                    
+                }, 250);
+
+                $('.new-note-folder-search').val('');
+                $('.new-note-folder-list').hide();
+                $('.create-new-folder-from-search').hide();
+
+                newFolderFormSearchOpen = false;
+                    
+            } else {
+
+                $(this).addClass('active');
+
+                $('.new-note-folders-form').show();
+                $('.new-note-folders-form').animate({'opacity': 1}, 750);
+
+                newFolderFormSearchOpen = true;
+
+            }
+
+        });
+
+            /* Close via btn */
+
+        $('#closeNewNoteFoldersForm').click(function() {
+
+            $('#folderBtnNew').removeClass('active');
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('#closeNewNoteFoldersForm').removeClass('active');
+
+            }, 250);
+
+            $('.new-note-folders-form').animate({'opacity': 0}, 250);
+            setTimeout(function() {
+
+                $('.new-note-folders-form').hide();
+                
+            }, 250);
+
+            $('.new-note-folder-search').val('');
+            $('.new-note-folder-list').hide();
+            $('.create-new-folder-from-search').hide();
+
+            newFolderFormSearchOpen = false;
+
+        });
+
+            /* Search */
+        function folderSearchInitNew() {
+
+            $('.new-note-folder-list').html('');
+            $('.new-note-folder-list').show();
+
+            $('.folders').children('.page').each(function() {
+
+                uid = $(this).children('#folderUID').val();
+                title = $(this).children('.page-title').children('span').text();
+                    
+                if (!newNoteFolders.includes(uid) && uid != '') {
+                                                                
+                    $('.new-note-folder-list').append(
+
+                        `
+
+                            <div id='newNoteFolder'>
+
+                                <input type='text' value='` + uid + `'/>
+                                <span class='title'>` + title + `</span>
+
+                            </div>
+
+                        `
+
+                    );
+
+                } else if (newNoteFolders.includes(uid)) {
+
+                    $('.new-note-folder-list').prepend(
+
+                        `
+
+                            <div id='newNoteFolder' class='inNote'>
+
+                                <input type='text' value='` + uid + `'/>
+                                <span class='title'>` + title + ` </span>
+
+                            </div>
+
+                        `
+
+                    );
+
+                }
+
+            });
+
+            if ($('.new-note-folder-list').children('#newNoteFolder').length == 0) {
+                
+                $('.new-note-folder-list').hide();
+                
+            } else if ($('.new-note-folder-list').children('#newNoteFolder').length == 1) {
+                    
+                $('#newNoteFolder:last-child').css('margin', 0);
+                $('#createFolderInNoteNew').css('top', 70);
+                    
+            } else {
+                
+                $('#newNoteFolder').css('marginBottom', 15);
+                $('#newNoteFolder:last-child').css('margin', 0);
+                $('#createFolderInNoteNew').css('top', 70);
+
+            }
+
+        }
+
+            /* Search field */
+
+        $('.new-note-folder-search').on('input', function() {
+
+            folderExists = false;
+
+            $('#searchFolderTitleNew').val($(this).val()); /* Communication with hidden form input for folder creation */
+
+            $('.new-note-folder-list').html('');
+            $('.new-note-folder-list').show();
+
+            if ($(this).val().trim().length === 0) {
+
+                $('.create-new-folder-from-search').hide();
+
+                folderSearchInitNew();
+
+            } else {
+
+                query = $(this).val();
+
+                $('.folders').children('.page').each(function() {
+
+                    uid = $(this).children('#folderUID').val();
+                    title = $(this).children('.page-title').children('span').text().toString();
+
+                    if (title === query) { /* Folder exists */
+
+                        folderExists = true;
+
+                    }
+
+                    if (~title.indexOf(query)) {
+
+                        if (~uid.indexOf($('#newNoteFolders').val())) {
+
+                            $('.new-note-folder-list').prepend(
+
+                                `
+
+                                    <div id='newNoteFolder' class='inNote'>
+
+                                        <input type='text' value='` + uid + `' hidden />
+                                        <span>` + title + ` </span>
+
+                                    </div>
+
+                                `
+
+                            );
+
+                        } else {
+
+                            $('.new-note-folder-list').prepend(
+
+                                `
+
+                                    <div id='newNoteFolder'>
+
+                                        <input type='text' value='` + uid + `' hidden />
+                                        <span>` + title + ` </span>
+
+                                    </div>
+
+                                `
+
+                            );
+
+                        }
+
+                    }
+
+                });
+
+                if (folderExists) {
+
+                    $('.create-new-folder-from-search').hide();
+                
+                } else {
+
+                    $('#createFolderInNoteNew').text("Создать '" + query + "'");
+                    $('.create-new-folder-from-search').show();
+
+                }
+
+                if ($('.new-note-folder-list').children('#newNoteFolder').length == 0) {
+                
+                    $('.new-note-folder-list').hide();
+                    $('#createFolderInNoteNew').css('top', 40);
+                    
+                } else if ($('.new-note-folder-list').children('#newNoteFolder').length == 1) {
+                    
+                    $('#newNoteFolder:last-child').css('margin', 0);
+                    $('#createFolderInNoteNew').css('top', 70);
+                    
+                } else {
+                    
+                    $('#newNoteFolder').css('marginBottom', 15);
+                    $('#newNoteFolder:last-child').css('margin', 0);
+                    $('#createFolderInNoteNew').css('top', 70);
+
+                }
+
+            }
+
+        });
+
+        /* Add/remove folders */
+
+        $('body').on('click', '#newNoteFolder', function() {
+
+            noteUID = $('.current-note-uid').val();
+
+            uid = $(this).children('input').val();
+            folderSearchTitle = $(this).children('span').text();
+
+            if (!$(this).hasClass('inNote')) {
+
+                $(this).addClass('inNote');
+
+                $('.current-note-folders').show();
+
+                $('.current-note-folders').append(
+
+                    `
+
+                        <div class='folder'>
+
+                            <input
+                                type='text'
+                                value='` + uid + `'
+                                hidden />
+
+                            <span>` + folderSearchTitle + `</span>
+                            <button id='removeFolder'>×</button
+
+                        </div>
+
+                    `
+
+                );
+
+                newNoteFolders.push(uid);
+                $('#newNoteFolders').val(newNoteFolders.join(' '));
+
+                /* AF2F */
+
+            } else {
+
+                $(this).removeClass('inNote');
+
+                $('.new-note-folders-form').children('.folder').each(function() {
+
+                    if (uid == $(this).children('input').val()){$(this).remove()};
+
+                });
+
+                newNoteFolders.pop(uid);
+                $('#newNoteFolderUIDS').val(newNoteFolders.join(' '));
+
+                $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                    if ($(this).children('.note-actions').children('#noteUID').val() == $('.current-note-uid').val()) {
+
+                        $(this).children('.folders').children('.folder').each(function() {
+                            
+                            if ($(this).children('.folder-title').text() == folderSearchTitle) {
+
+                                $(this).remove();
+
+                            }
+
+                        });
+
+                        if ($(this).children('.folders').children('.folder').length === 0) {
+
+                            $(this).children('.folders').remove();
+
+                        }
+
+                    }
+
+                });
+
+            }
+
+        });
+
+        /* Create folder from search (new note) */
+
+            /* Creating folder from folder search (current note) */
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+
+            if (evt.detail.target == document.getElementsByClassName('folders')[0] && newNoteOpen) {
+
+                title = $('#searchFolderTitleNew').val();
+
+                $('.folders').children('.page').each(function() {
+
+                    if ($(this).children('.page-title').children('span').text() === title) {
+                        
+                        uid = $(this).children('#folderUID').val();
+
+                        newNoteFolders.push(uid);
+                        $('#newNoteFolders').val(newNoteFolders.join(' '));
+
+                    }
+
+                });
+
+                $('.create-new-folder-from-search').hide();
+                $('.new-note-folder-search').val('');
+                $('.new-note-folder-search').focus();
+
+                $('.new-note-folder-list').show();
+
+                folderSearchInitNew();
+
+            }
+    
+        });
+
+        /* CE & input communication */
+
+            /* Title */
+        document.getElementsByClassName('new-note-title')[0].addEventListener('input', function() {
+
+            $('#newNoteTitle').val($('.new-note-title').val());
+
+        }, false);
+
+            /* Content */
+        document.getElementById('newNoteContentCE').addEventListener('input', function() {
+
+            $('#newNoteContent').val($('#newNoteContentCE').html());
+
+        }, false);        
+
+    </script>
+
+    <!-- Current note -->
+    <script>
+
+        noteOpen = false;
+
+        /* Before window is closed */
+
+        window.onbeforeunload = function() {
+
+            if (noteChanged) {
+
+                return 'Не уходите! Ваша заметка сохраняется c:';
+
+            }
+
+        }
+
+        window.onunload = function() {
+
+            if (noteChanged) {
+
+                return 'Не уходите! Ваша заметка сохраняется.';
+
+            }
+
+        }
+
+        /* On note load */
+
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+
+            if (evt.detail.target === document.getElementById('currentNoteContents')) {
+
+                /* Paste data from GET request */
+
+                    /* Text */
+                $('.current-note-uid').val($('#currentNoteUID').val());
+                $('.current-note-title').val($('#currentNoteTitle').val());
+                $('.current-note-content').html($('#currentNoteContent').val());
+
+
+                    /* Photos */
+                if ($('#currentNotePhotos').children().length > 0) {
+
+                    $('#photosCurrent').css('display', 'block');
+
+                    $('#currentNotePhotos').children('.photo').each(function() {
+
+                        $('#photosCurrent').append($(this));
+
+                    });
+
+                }
+
+                    /* Folders  */
+                noteFolders = [];
+                
+                if ($('#currentNoteFolders').children('.folder').length === 0) {
+
+                    $('.current-note-folders').hide();
+
+                } else {
+
+                    $('.current-note-folders').show();
+
+                    $('#currentNoteFolders').children('.folder').each(function() {
+
+                        noteFolders.push($(this).children('input').val());
+                        $(this).appendTo('.current-note-folders');
+
+                    });
+
+                }
+
+                $('body').css('overflow', 'hidden');
+                
+                    /* Render the note */
+                $('#currentNoteContents').hide();
+
+                $('.current-note').css('display', 'flex');
+                $('.current-note').animate({'opacity': 1}, 500);
+
+                noteOpen = true;
+                photoOpen = false;
+
+            }
+    
+        });
+
+        /* Autosave */
+
+        var delay = (function(){
+            var timer = 0;
+            return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+            /* Title */
+        document.getElementsByClassName('current-note-title')[0].addEventListener('input', function() {
+
+            title = $('.current-note-title').val();
+            noteUID = $('.current-note-uid').val();
+
+            noteChanged = true;
+
+            delay(function() {
+
+                if (noteOpen) {
+
+                    $.ajax({
+
+                        type: 'POST',
+
+                        url: "{% url 'app:update-title' %}",
+
+                        data: {
+
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                            't': title,
+                            'u': noteUID,
+
+                        }
+
+                    });
+
+                    noteChanged = false;
+
+                }
+
+            }, 2000);
+
+            $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                if ($(this).children('.note-actions').children('#noteUID').val() == noteUID) {
+
+                    $(this).children('.text').children('.title').text(title);
+
+                }
+
+            });
+
+        }, false);
+
+            /* Content */
+
+        document.getElementsByClassName('current-note-content')[0].addEventListener('input', function() {
+
+            content = $('.current-note-content').html();
+            noteUID = $('.current-note-uid').val();
+
+            noteChanged = true;
+
+            delay(function() {
+
+                if (noteOpen) {
+
+                    $.ajax({
+
+                        type: 'POST',
+
+                        url: "{% url 'app:update-content' %}",
+
+                        data: {
+
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                            'c': content,
+                            'u': noteUID,
+
+                        }
+
+                    });
+
+                    noteChanged = false;
+
+                }
+
+            }, 2000);
+
+            $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                if ($(this).children('.note-actions').children('#noteUID').val() == noteUID) {
+
+                    $(this).children('.text').children('.content').html(content);
+
+                }
+
+            });
+
+        }, false);
+
+        /* Photos */
+
+            /* Trash icon on hover */
+
+        $('body').on('mouseover', '.photo', function() {
+
+            $(this).children('#removePhoto').animate({'opacity': 1}, 250);
+
+        });
+        
+        $('body').on('mouseleave', '.photo', function() {
+
+            $(this).children('#removePhoto').animate({'opacity': 0}, 250);
+
+        });
+
+            /* Display photos div on upload */
+
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+
+            if (evt.detail.target === document.getElementById('photosCurrent')) {
+
+                $('#photosCurrent').show();
+
+            }
+    
+        });
+
+            /* Full reso on click */
+
+        $('body').on('click', '.photo', function(e) {
+
+            if ($(e.target).is('img')) {
+
+                openedPhoto = $(this).children('img').clone();
+                previousPhotos = $(this).prevAll();
+                nextPhotos = $(this).nextAll();
+
+                if (previousPhotos.length > 0) {$('#previousPhoto').show();}
+                if (nextPhotos.length > 0) {$('#nextPhoto').show();}
+                
+                previousPhotos.each(function() {
+                    
+                    photo = $(this).children('img').clone();
+                    photo.css('display', 'none');
+                    photo.appendTo('.photo-carousel');
+                    
+                });
+                
+                openedPhoto.attr('id', 'currentPhoto');
+                openedPhoto.appendTo('.photo-carousel');
+
+                nextPhotos.each(function() {
+
+                    photo = $(this).children('img').clone();
+                    photo.css('display', 'none');
+                    photo.appendTo('.photo-carousel');
+
+                });
+
+                $('.photo-carousel').css('display', 'flex');
+                $('.photo-carousel').animate({'opacity': 1}, 250);
+
+                photoOpen = true;
+                
+            }
+
+        });
+
+            /* Next & Previous photos logic */
+        $('body').on('click', '#nextPhoto', function() {
+
+            nextPhoto = $('#currentPhoto').next();
+
+            nextPhoto.css('display', 'block');
+            $('#currentPhoto').hide();
+
+            $('#currentPhoto').attr('id', '');
+            nextPhoto.attr('id', 'currentPhoto');
+
+            $('#previousPhoto').show();
+
+            if (nextPhoto.nextAll().length === 0) {$('#nextPhoto').hide();}
+
+        });
+
+        $('body').on('click', '#previousPhoto', function() {
+
+            previousPhoto = $('#currentPhoto').prev();
+
+            previousPhoto.css('display', 'block');
+            $('#currentPhoto').hide();
+
+            $('#currentPhoto').attr('id', '');
+            previousPhoto.attr('id', 'currentPhoto');
+
+            $('#nextPhoto').show();
+
+            if (previousPhoto.prevUntil('button').length === 0) {$('#previousPhoto').hide();}
+
+        });
+
+            /* Close full reso on btn click/esc */
+
+        function closePhotoCarousel() {
+
+            $('.photo-carousel').animate({'opacity': 0}, 250);
+            
+            setTimeout(function() {
+
+                $('#nextPhoto').hide();
+                $('#previousPhoto').hide();
+
+                $('.photo-carousel').hide();
+                $('.photo-carousel').children('img').each(function(){$(this).remove();})
+
+            }, 250);
+
+            photoOpen = false;
+
+        }
+
+        $('body').on('click', '#closePhoto', function() {
+
+            closePhotoCarousel();
+
+        });
+
+            /* Delete */
+
+        $('body').on('click', '#removePhoto', function() {
+
+            photoToRemove = $(this).parent();
+
+            photoToRemove.animate({opacity: 0}, 500);
+
+            setTimeout(function() {
+
+                photoToRemove.remove();
+
+                if ($('#photosCurrent').children().length === 0) {
+
+                    $('#photosCurrent').hide();
+
+                }
+
+            }, 500);
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'app:delete-photo' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    
+                    'n': $('.current-note-uid').val(),
+                    'p': $(this).siblings('input').val(),
+
+                },
+
+            });
+
+        });
+
+        /* Remove folders */
+
+        $('body').on('mouseover', '.folder', function() {
+
+            $(this).children('#removeFolder').animate({'opacity': 1}, 250);
+
+        });
+
+        $('body').on('mouseleave', '.folder', function() {
+
+            $(this).children('#removeFolder').animate({'opacity': 0}, 250);
+
+        });
+
+        $('body').on('click', '#removeFolder', function() {
+
+            $(this).addClass('active');
+
+            uid = $(this).siblings('#folderUID').val();
+            folderTitle = $(this).siblings('span').text();
+
+            noteFolders.pop(uid);
+            folderSearchInit();
+
+            folder = $(this).parent();
+            folder.animate({'opacity': 0}, 250);
+
+            setTimeout(function() {
+                
+                folder.remove();
+
+                if ($('.current-note-folders').children('.folder').length === 0) {
+
+                    $('.current-note-folders').hide();
+
+                }
+            
+            }, 250);
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'app:remove-folder' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                    'f': $(this).siblings('#folderUID').val(),
+                    'n': $('.current-note-uid').val(),
+
+                }
+
+            });
+
+            $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                if ($(this).children('.note-actions').children('#noteUID').val() == $('.current-note-uid').val()) {
+
+                    $(this).children('.folders').children('.folder').each(function() {
+                        
+                        if ($(this).children('.folder-title').text() == folderTitle) {
+
+                            $(this).remove();
+
+                        }
+
+                    });
+
+                    if ($(this).children('.folders').children('.folder').length === 0) {
+
+                        $(this).children('.folders').remove();
+
+                    }
+
+                }
+
+            });
+
+        });
+
+        /* Note folders search */
+
+            /* init */
+        folderSearchOpen = false;
+        noteFolders = [];
+
+        function folderSearchInit() {
+
+            $('.folder-list').html('');
+
+            $('.folders').children('.page').each(function() {
+
+                uid = $(this).children('#folderUID').val();
+                title = $(this).children('.page-title').children('span').text();
+                    
+                if (!noteFolders.includes(uid) && uid != '') {
+                                                                
+                    $('.folder-list').append(
+
+                        `
+
+                            <div id='noteFolder'>
+
+                                <input type='text' value='` + uid + `'/>
+                                <span class='title'>` + title + `</span>
+
+                            </div>
+
+                        `
+
+                    );
+
+                } else if (noteFolders.includes(uid)) {
+
+                    $('.folder-list').prepend(
+
+                        `
+
+                            <div id='noteFolder' class='inNote'>
+
+                                <input type='text' value='` + uid + `'/>
+                                <span class='title'>` + title + ` </span>
+
+                            </div>
+
+                        `
+
+                    );
+
+                }
+
+            });
+
+            if ($('.folder-list').children('#noteFolder').length == 0) {
+                
+                $('.folder-list').hide();
+                
+            } else if ($('.folder-list').children('#noteFolder').length == 1) {
+                    
+                $('#noteFolder:last-child').css('margin', 0);
+                $('#createFolderInNoteNew').css('top', 70);
+                    
+            } else {
+                
+                $('#noteFolder').css('marginBottom', 15);
+                $('#noteFolder:last-child').css('margin', 0);
+                $('#createFolderInNoteNew').css('top', 70);
+
+            }
+
+        }
+
+        $('body').on('click', '#noteFolder', function() {
+
+            noteUID = $('.current-note-uid').val();
+
+            folderUID = $(this).children('input').val();
+            folderTitle = $(this).children('span').text();
+
+            if (!$(this).hasClass('inNote')) {
+
+                $(this).addClass('inNote');
+
+                $('.current-note-folders').show();
+
+                $('.current-note-folders').append(
+
+                    `
+
+                        <div class='folder'>
+
+                            <input
+                                type='text'
+                                value='` + folderUID + `'
+                                hidden />
+
+                            <span>` + folderTitle + `</span>
+                            <button id='removeFolder'>×</button
+
+                        </div>
+
+                    `
+
+                );
+
+                noteFolders.push(folderUID);
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: "{% url 'app:add-folder' %}",
+
+                    data: {
+
+                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                        'f': folderUID,
+                        'n': $('.current-note-uid').val(),
+
+                    }
+                    
+                });
+
+                /* Add folder to note in note list */
+                $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                    if ($(this).children('.note-actions').children('#noteUID').val() == noteUID) {
+
+                        if ($(this).children('.folders').length === 0) {
+
+                            $(this).append(
+
+                                `
+                                    <div 
+                                        class='folders'
+                                        hx-get="/get-note/` + noteUID + `/"
+                                        hx-target="#currentNoteContents"></div>
+
+                                `
+
+                            )
+
+                        }
+
+                        $(this).children('.folders').append(
+
+                            `
+                                <div class='folder'>
+                                    <span class='folder-title'>` + folderTitle + `</span>
+                                </div>
+                            `
+
+                        )
+
+                    }
+
+                });
+
+            } else {
+
+                $(this).removeClass('inNote');
+
+                $('.current-note-folders').children('.folder').each(function() {
+
+                    if (folderUID == $(this).children('input').val()){$(this).remove();}
+
+                });
+
+                noteFolders.pop(folderUID);
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: "{% url 'app:remove-folder' %}",
+
+                    data: {
+
+                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                        'f': folderUID,
+                        'n': $('.current-note-uid').val(),
+
+                    }
+                    
+                });
+
+                if ($('.current-note-folders').children('.folder').length === 0) {
+
+                    $('.current-note-folders').hide();
+
+                }
+
+                /* Remove folder from note in note list */
+                $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                    if ($(this).children('.note-actions').children('#noteUID').val() == $('.current-note-uid').val()) {
+
+                        $(this).children('.folders').children('.folder').each(function() {
+                            
+                            if ($(this).children('.folder-title').text() == folderTitle) {
+
+                                $(this).remove();
+
+                            }
+
+                        });
+
+                        if ($(this).children('.folders').children('.folder').length === 0) {
+
+                            $(this).children('.folders').remove();
+
+                        }
+
+                    }
+
+                });
+
+                /* Remove note from note list if the folder removed is the current folder */
+                if (clickedFolderTitle == $('.note-section-title').text()) {
+
+                    currentNoteUID = $('.current-note-uid').val();
+
+                    $('.notes').children('.wrapper').children('.note-section').each('.note').each(function() {
+
+                        noteInstanceUID = $(this).children('.note-actions').children('#noteUID').val();
+
+                        if (currentNoteUID == noteInstanceUID) {
+
+                            $(this).remove();
+
+                        }
+
+                    })
+
+                }
+
+            }
+
+        });
+
+            /* Form render */
+
+        $('#folderBtnCurrent').click(function() {
+
+            if (!folderSearchOpen) {
+
+                $('.current-note-folders-form').css('display', 'block');
+                $('.current-note-folders-form').animate({'opacity': 1}, 250);
+
+                folderSearchInit();
+
+                folderSearchOpen = true;
+
+                $(this).addClass('active');
+
+            } else {
+
+                closeFolderSearch();
+
+                $(this).removeClass('active');
+                
+            }
+
+        });
+
+        $('#closeCurrentNoteFoldersForm').click(function() {
+
+            closeFolderSearch();
+
+            $(this).addClass('active');
+
+            setTimeout(function() {
+
+                $('#closeCurrentNoteFoldersForm').removeClass('active');
+
+            }, 250);
+
+        });
+
+            /* Form remove */
+
+        function closeFolderSearch() {
+
+            $('.current-note-folders-form').animate({'opacity': 0}, 250);
+
+            setTimeout(function() {
+                
+                $('.current-note-folders-form').css('display', 'none');
+
+                $('.folder-search').val('');
+                $('#searchFolderTitle').val('');
+                $('.create-new-folder-from-search').hide();
+                $('.folder-list').html('');
+
+
+            }, 250);
+
+            folderSearchOpen = false;
+
+            $('#folderBtnCurrent').removeClass('active');
+
+        }
+
+            /* Search */
+
+        $('.folder-search').on('input', function() {
+
+            folderExists = false;
+
+            $('#searchFolderTitle').val($(this).val());
+
+            $('.folder-list').html('');
+
+            $('.folder-list').show();
+
+            if ($(this).val().trim().length === 0) {
+
+                $('.create-new-folder-from-search-current').hide();
+
+                folderSearchInit();
+
+            } else {
+
+                query = $(this).val();
+
+                $('.folders').children('.page').each(function() {
+
+                    uid = $(this).children('#folderUID').val();
+                    title = $(this).children('.page-title').children('span').text().toString();
+
+                    if (title === query) { /* Folder exists */
+
+                        folderExists = true;
+
+                    }
+
+                    if (~title.indexOf(query)) {
+
+                        if (noteFolders.includes(uid)) {
+
+                            $('.folder-list').prepend(
+
+                                `
+
+                                    <div id='noteFolder' class='inNote'>
+
+                                        <input type='text' value='` + uid + `' hidden />
+                                        <span>` + title + ` </span>
+
+                                    </div>
+
+                                `
+
+                            );
+
+                        } else {
+
+                            $('.folder-list').prepend(
+
+                                `
+
+                                    <div id='noteFolder'>
+
+                                        <input type='text' value='` + uid + `' hidden />
+                                        <span>` + title + ` </span>
+
+                                    </div>
+
+                                `
+
+                            );
+
+                        }
+
+                    }
+
+                });
+
+                if (folderExists) {
+
+                    $('.create-new-folder-from-search-current').hide();
+                
+                } else {
+
+                    $('#createFolderInNote').text("Создать '" + query + "'");
+                    $('.create-new-folder-from-search-current').show();
+
+                }
+
+                if ($('.folder-list').children('#noteFolder').length == 0) {
+                    
+                    $('.folder-list').hide();
+                
+                } else if ($('.folder-list').children('#noteFolder').length == 1) {
+
+                    $('#noteFolder').css('margin', 0);
+
+                } else {
+
+                    $('#noteFolder').css('marginBottom', 15);
+                    $('#noteFolder:last-child').css('margin', 0);
+                    $('#createFolderInNoteNew').css('top', 70);
+
+                }
+
+            }
+
+        });
+
+            /* Sidenav folder opacity if open */
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+
+            if (evt.detail.target == document.getElementsByClassName('folders')[0]) {
+
+                if ($('.sidenav').hasClass('open')) {
+
+                    $('.page-title').css('opacity', 1);
+
+                }
+
+            }
+
+        })
+
+            /* Creating folder from folder search (current note) */
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+
+            if (evt.detail.target == document.getElementsByClassName('folders')[0] && noteOpen) {
+
+                title = $('#searchFolderTitle').val();
+
+                $('.folders').children('.page').each(function() {
+
+                    if ($(this).children('.page-title').children('span').text() === title) {
+                        
+                        uid = $(this).children('#folderUID').val();
+
+                        $('.current-note-folders').append(
+
+                            `
+
+                                <div class='folder'>
+
+                                    <input
+                                        type='text'
+                                        value='` + uid + `'
+                                        hidden />
+
+                                    <span>` + title + `</span>
+                                    <button id='removeFolder'>×</button
+
+                                </div>
+
+                            `
+
+                        );
+
+                        $.ajax({
+
+                            type: 'POST',
+
+                            url: "{% url 'app:add-folder' %}",
+
+                            data: {
+
+                                'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                                'f': uid,
+                                'n': $('.current-note-uid').val(),
+
+                            }
+                            
+                        });
+
+                        noteFolders.push(uid);
+
+                    }
+
+                });
+
+                $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                    if ($(this).children('.note-actions').children('#noteUID').val() == $('.current-note-uid').val()) {
+
+                        if ($(this).children('.folders').length > 0) {
+
+                            $(this).children('.folders').append(
+
+                                `
+                                    <div class='folder'>
+                                        
+                                        <span class='folder-title'>` + title + `</span>
+
+                                    </div>
+
+                                `
+
+                            );
+
+                        } else {
+
+                            $(this).append(`<div class='folders'></div>`);
+
+                            $(this).children('.folders').append(
+
+                                `
+                                    <div class='folder'>
+                                        
+                                        <span class='folder-title'>` + title + `</span>
+
+                                    </div>
+
+                                `
+
+                            );
+
+                        }
+
+                    }
+
+                });
+
+                $('.create-new-folder-from-search-current').hide();
+                $('.folder-search').val('');
+                $('.folder-search').focus();
+
+                $('.current-note-folders').show();
+
+                $('.folder-list').show();
+
+                folderSearchInit();
+
+            }
+    
+        });
+
+        /* Close note */
+
+        function closeNote() {
+
+            $('.current-note').animate({'opacity': 0}, 250);
+            closeFolderSearch();
+
+            $('#boldBtnCurrent').removeClass('active');
+            $('#italicBtnCurrent').removeClass('active');
+            $('#underlineBtnCurrent').removeClass('active');
+            $('#strikeBtnCurrent').removeClass('active');
+            $('#ulBtnCurrent').removeClass('active');
+            $('#olBtnCurrent').removeClass('active');
+
+            /* Autosave */
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'app:update-contents' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+
+                    'u': $('.current-note-uid').val(),
+                    't': $('.current-note-title').val(),
+                    'c': $('.current-note-content').html(),
+
+                }
+
+            });
+
+            noteChanged = false;
+
+            noteUID = $('.current-note-uid').val();
+
+            /* Empty condition */
+
+            if (!$('.current-note-title').val() && !$('.current-note-content').html()) {
+
+                $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                    if ($(this).children('.note-actions').children('#noteUID').val() == noteUID) {
+
+                        $(this).children('.empty').show();
+
+                    }
+
+                });
+
+            } else {
+
+                $('.notes').children('.wrapper').children('.note-section').children('.note').each(function() {
+
+                    if ($(this).children('.note-actions').children('#noteUID').val() == noteUID) {
+
+                        $(this).children('.empty').hide();
+
+                    }
+
+                });
+
+            }
+
+            setTimeout(function() {
+
+                $('.current-note').css('display', 'none');
+
+                $('.current-note-title').val('');
+                $('.current-note-content').html('');
+
+                $('#photosCurrent').html('');
+                $('#photosCurrent').hide();
+
+                $('.current-note-folders').html('');
+            
+            }, 250);
+
+            noteOpen = false;
+
+            $('body').css('overflow-y', 'auto');
+
+        }
+
+        $('#closeCurrentNote').click(function() {
+
+            $(this).addClass('active');
+            setTimeout(function() {$('#closeCurrentNote').removeClass('active')}, 250);
+
+            closeNote();
+
+        });
+
+    </script>
+
+    <!-- Close forms when ESC has been clicked -->
+    <script>
+
+        $('body').click(function(e) {
+
+            if (noteOpen && $(e.target).is('.current-note')) {
+
+                closeNote();
+
+            }
+
+        });
+
+        $('body').keyup(function(e) {
+
+            if (e.keyCode === 27) {
+
+                if (window.opener && window.opener !== window) { /* We're in a pop-up */
+
+                    console.log('p');
+
+                } else {
+
+                    if (folderFormShown) {
+
+                        folderFormShown = false;
+
+                        $('.create-folder').animate({'opacity': 0}, 250);
+
+                        setTimeout(function() {
+            
+                            $('.create-folder').css('display', 'none');
+            
+                        }, 250);
+
+                    } else if (accountFormOpen) {
+
+                        $('.account-preferences').animate({
+
+                            'opacity': 0,
+
+                        }, 250);
+
+                        setTimeout(function() {
+
+                            $('#emailError').hide();
+                            $('#nameError').hide();
+                            $('#passwordError').hide();
+                            $('#profilePasswordVal').val('');
+
+                            $('#closeAccountPreferences').removeClass('active');
+
+                            $('.account-preferences').hide();
+
+                        }, 250);
+
+                    } else if (premiumPopUpOpen) {
+
+                        premiumPopUpOpen = false;
+
+                        $('.premium-offer').animate({
+
+                            'opacity': 0,
+
+                        }, 250);
+
+                        setTimeout(function() {
+
+                            $('.premium-offer').hide();
+
+                        }, 250);
+
+                    } else if (editFolderFormShown) {
+
+                        editFolderFormShown = false;
+
+                        $('.edit-folder-btn').removeClass('active');
+
+                        $('.edit-folder').animate({'opacity': 0}, 250);
+
+                        setTimeout(function() {
+
+                            $('.edit-folder').css('display', 'none');
+
+                        }, 250);
+
+                    } else if (noteOpen && !photoOpen && !folderSearchOpen) {
+
+                        closeNote();
+
+                    } else if (folderSearchOpen && !photoOpen) {
+
+                        closeFolderSearch();
+
+                    } else {
+
+                        closePhotoCarousel();
+                        photoOpen = false;
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+    <!-- Notes -->
+    <script>
+
+        $('body').on('click', '#cancelSearch', function() {
+
+            $('.notes').animate({'opacity': 0}, 500);
+            setTimeout(function() {
+
+                $('.notes').animate({'opacity': 1}, 500);
+
+            });
+
+        });
+
+        /* Note actions @hover */
+
+        $('body').on('mouseover', '.note', function() {
+
+            $(this).children('.note-actions').animate({'opacity': 1}, 250);
+            $(this).children('.folders').css('overflow', 'auto');
+
+        });
+
+        $('body').on('mouseleave', '.note', function() {
+
+            $(this).children('.note-actions').animate({'opacity': 0}, 250);
+            $(this).children('.folders').css('overflow', 'hidden');
+
+        });
+
+        /* Note actions functionality */
+
+        $('body').on('click', '#loveNote, #pinNote, #archiveNote, #deleteNote', function() {
+
+            $(this).toggleClass('active');
+
+        });
+
+            /* Love */
+
+        $('body').on('click', '#loveNote', function() {
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'app:love-note' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'n': $(this).siblings('#noteUID').val(),
+
+                },
+
+            });
+
+        });
+
+            /* Pin */
+
+        $('body').on('click', '#pinNote', function() {
+
+            /* Verify that we're not in the trash */
+
+            if (!($('.note-section-title').text() == 'Корзина')) {
+
+                note = $(this).parent().parent();
+
+                if ($(this).hasClass('active')) { /* pin */
+
+                    if ($('#pinnedNotes').length) {
+
+                        note.insertAfter($('#pinnedNotes').children('.section-title'));
+
+                    } else {
+
+                        $(`<div class="note-section" id="pinnedNotes"><span class="section-title">Закрепленные заметки</span></div>`).insertAfter($('.note-section-title'))
+
+                        note.insertAfter($('#pinnedNotes').children('.section-title'));
+                        
+                        if ($('#otherNotes').children('.note').length === 0) {
+
+                            $('#otherNotes').remove();
+                        
+                        }
+
+                    }
+
+                    if ($('#otherNotes').children('.note').length === 0) {
+
+                        $('#otherNotes').remove();
+
+                    }
+
+                    if ($('#otherNotes').children('.note').length > 0 && $('#otherNotes').children('.section-title').length === 0) {
+
+                        $('#otherNotes').prepend(`<span class='section-title'>Другие заметки</span>`);
+
+                    }
+
+                } else { /* unpin */
+
+                    if ($('#otherNotes').length) {
+
+                        note.insertAfter($('#otherNotes').children('.section-title'));
+
+                        if ($('#pinnedNotes').children('.note').length === 0) {
+                            
+                            $('#otherNotes').children('.section-title').remove();
+                        
+                        }
+
+                    } else {
+
+                        if ($('#pinnedNotes').children('.note').length === 1) {
+
+                            $('.notes').children('.wrapper').append(
+
+                                `
+
+                                    <div class="note-section" id="otherNotes"></div>
+
+                                `
+
+                            );
+
+                            note.appendTo('#otherNotes');
+
+                        } else {
+
+                            $('.notes').children('.wrapper').append(
+
+                                `
+
+                                    <div class="note-section" id="otherNotes">
+
+                                        <span class="section-title">Другие заметки</span>
+
+                                    </div>
+
+                                `
+
+                            );
+
+                            note.insertAfter($('#otherNotes').children('.section-title'));
+
+                        }
+
+                    }
+
+                    if ($('#pinnedNotes').children('.note').length === 0) {
+
+                        $('#pinnedNotes').remove();
+
+                    }
+                
+                }
+
+            }
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'app:pin-note' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'n': $(this).siblings('#noteUID').val(),
+
+                },
+
+            });
+
+        });
+
+            /* Removing note section logic function */
+
+        function pinLogic(pinned) {
+
+            pinnedEmpty = false;
+            otherEmpty = false;
+
+            if (pinned) {
+
+                if ($('#pinnedNotes').children('.note').length === 1) {
+
+                    $('#pinnedNotes').animate({'opacity': 0}, 250);
+                    pinnedEmpty = true;
+
+                }
+
+            } else {
+
+                if ($('#otherNotes').children('.note').length === 1) {
+
+                    $('#otherNotes').animate({'opacity': 0}, 250);
+                    otherEmpty = true;
+
+                }
+
+            }
+
+        }
+
+            /* Archive */
+
+        $('body').on('click', '#archiveNote', function() {
+
+            /* Verify that the note is not in trash */
+
+            if (!($('.note-section-title').text() == 'Корзина')) {
+
+                note = $(this).parent().parent();
+                pinned = $(this).siblings('#pinNote').hasClass('active');
+
+                note.animate({'opacity': 0}, 250);
+                
+                pinLogic(pinned);
+
+                setTimeout(function() {
+                    
+                    note.remove();
+
+                    if (pinnedEmpty && !otherEmpty) {
+
+                        $('#pinnedNotes').remove();
+
+                    } else if (!pinnedEmpty && otherEmpty) {
+
+                        $('#otherNotes').remove();
+
+                    }
+                
+                }, 250);
+
+            }
+            
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'app:archive-note' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'n': $(this).siblings('#noteUID').val(),
+
+                },
+
+            });
+
+        });
+
+            /* Delete */
+
+        $('body').on('click', '#deleteNote', function() {
+
+            note = $(this).parent().parent();
+            pinned = $(this).siblings('#pinNote').hasClass('active');
+            
+            pinLogic(pinned);
+
+            setTimeout(function() {
+                
+                note.remove();
+
+                if (pinnedEmpty && !otherEmpty) {
+
+                    $('#pinnedNotes').remove();
+
+                } else if (!pinnedEmpty && otherEmpty) {
+
+                    $('#otherNotes').remove();
+
+                }
+            
+            }, 250);
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'app:delete-note' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'n': $(this).siblings('#noteUID').val(),
+
+                },
+
+            });
+
+            /* If the trash is empty, change the info */
+
+            $('#emptyTrashBtn').remove();
+            $('.empty-trash').children('.info').text('Корзина пуста!');
+
+        });
+
+        /* Empty note */
+
+        $('.note').each(function() {
+
+            title = $(this).children('.text').children('.title').text();
+            content = $(this).children('.text').children('.content').html();
+
+            uid = $(this).children('.note-actions').children('#noteUID').val();
+
+            if (title === '' && content == '') {
+
+                $(this).children('.empty').show();
+
+            }
+                    
+        });
+
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+
+            if (evt.detail.target === document.getElementsByClassName('notes')[0]) {
+
+                $('.note').each(function() {
+
+                    text = $(this).children('.text');
+
+                    title = text.children('.title').text();
+                    content = text.children('.content').html();
+
+                    uid = $(this).children('.note-actions').children('#noteUID').val();
+
+                    if (title === '' && content == '') {
+
+                        $(this).children('.empty').show();
+
+                    }
+
+                });
+
+            }
+    
+        });
+
+    </script>
+
+    <!-- RTE -->
+    <script>
+
+        /* formatting check function */
+        function styleCheck() {
+
+            if (document.queryCommandState('bold')) {$('#boldBtnCurrent').addClass('active');} else {$('#boldBtnCurrent').removeClass('active');}
+            if (document.queryCommandState('italic')) {$('#italicBtnCurrent').addClass('active');} else {$('#italicBtnCurrent').removeClass('active');}
+            if (document.queryCommandState('underline')) {$('#underlineBtnCurrent').addClass('active');} else {$('#underlineBtnCurrent').removeClass('active');}
+            if (document.queryCommandState('strikeThrough')) {$('#strikeBtnCurrent').addClass('active');} else {$('#strikeBtnCurrent').removeClass('active');}
+            
+            if (document.queryCommandState('insertUnorderedList')) {$('#ulBtnCurrent').addClass('active');} else {$('#ulBtnCurrent').removeClass('active');}
+            if (document.queryCommandState('insertOrderedList')) {$('#olBtnCurrent').addClass('active');} else {$('#olBtnCurrent').removeClass('active');}
+
+        }
+
+        /* formatting check events */
+        $('.current-note-content').keyup(function() {
+
+            styleCheck();
+
+        });
+
+        $('.current-note-content').click(function() {
+
+            styleCheck();
+
+        });
+
+        /* formatting */
+        $('#boldBtnCurrent').click(function() {
+
+            $('.current-note-content').focus();
+            document.execCommand('bold');
+            $('.current-note-content').focus();
+
+            styleCheck();
+
+        });
+
+        $('#italicBtnCurrent').click(function() {
+
+            $('.current-note-content').focus();
+            document.execCommand('italic');
+            $('.current-note-content').focus();
+
+            styleCheck();
+
+        });
+
+        $('#underlineBtnCurrent').click(function() {
+            
+            $('.current-note-content').focus();
+            document.execCommand('underline');
+            $('.current-note-content').focus();
+
+            styleCheck();
+
+        });
+
+        $('#strikeBtnCurrent').click(function() {
+            
+            $('.current-note-content').focus();
+            document.execCommand('strikeThrough');
+            $('.current-note-content').focus();
+
+            styleCheck();
+
+        });
+
+        $('#ulBtnCurrent').click(function() {
+
+            $('.current-note-content').focus();
+            document.execCommand('insertUnorderedList');
+            $('.current-note-content').focus();
+
+            styleCheck();
+
+        });
+
+        $('#olBtnCurrent').click(function() {
+
+            $('.current-note-content').focus();
+            document.execCommand('insertOrderedList');
+            $('.current-note-content').focus();
+            
+            styleCheck();
+
+        });
+
+        /* photo upload */
+        $('#photoBtnCurrent').click(function() {
+
+            $(this).addClass('active');
+            setTimeout(function() {$('#photoBtnCurrent').removeClass('active')}, 200);
+
+            $('#currentNotePhotoInput').click();
+
+        });
+
+        $('#currentNotePhotoInput').on('change', function() {
+
+            $('#currentNotePhotoSubmit').click();
+
+        });
+
+        /* Remove style from pasted text */
+        document.getElementsByClassName('current-note-content')[0].addEventListener('paste', function(e) {
+
+            e.preventDefault();
+            var text = e.clipboardData. getData("text/plain");
+            document.execCommand("insertHTML", false, text);
+
+        });
+
+    </script>
+
+    <!-- Trash -->
+
+    <script>
+
+        $('body').on('click', '#emptyTrashBtn', function() {
+
+            $(this).addClass('active');
+
+            $('.empty-trash').animate({
+
+                'opacity': 0,
+
+            }, 250);
+
+            $('.note-section').children('.note').each(function() {
+                    
+                $(this).animate({
+
+                    'opacity': 0,
+
+                }, 250);
+
+            });
+
+            setTimeout(function() {
+
+                $('.note-section').children('.note').each(function() {
+                    
+                    $(this).remove();
+
+                });
+                
+                $('#emptyTrashBtn').remove();
+                
+                $('.empty-trash').children('.info').text('Корзина пуста!');
+                $('.empty-trash').animate({
+
+                    'opacity': 1,
+
+                }, 250);
+
+            }, 250)
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: "{% url 'app:empty-trash' %}",
+
+                data: {
+
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</html>

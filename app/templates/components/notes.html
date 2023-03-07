@@ -1,0 +1,731 @@
+<div class="wrapper">
+
+    {% if home %}
+    
+        <span class="note-section-title">Дом</span>
+
+        <script>
+
+            $('.new-note').show();
+
+            $('#newNoteLove').removeClass('active');
+            $('#newNoteLoved').prop('checked', false);
+
+            $('.folderSearch').val('');
+            $('#currentFolder').val('');
+            
+            $('#lovedSection').prop('checked', false);
+            loved = document.getElementsByClassName('loved-search');
+            loved[0].checked = false;
+            loved[1].checked = false;
+
+            $('#archivedSection').prop('checked', false);
+            archive = document.getElementsByClassName('archive-search');
+            archive[0].checked = false;
+            archive[1].checked = false;
+
+            trash = document.getElementsByClassName('trash-search');
+            trash[0].checked = false;
+            trash[1].checked = false;
+
+        </script>
+
+    {% elif loved %}
+    
+        <span class="note-section-title">Любимое</span>
+
+        <script>
+
+            $('.new-note').show();
+
+            $('#newNoteLove').addClass('active');
+            $('#newNoteLoved').prop('checked', true);
+
+            $('.folderSearch').val('');
+            $('#currentFolder').val('');
+
+            $('#lovedSection').prop('checked', true);
+            loved = document.getElementsByClassName('loved-search');
+            loved[0].checked = true;
+            loved[1].checked = true;
+
+            $('#archivedSection').prop('checked', false);
+            archive = document.getElementsByClassName('archive-search');
+            archive[0].checked = false;
+            archive[1].checked = false;
+
+            trash = document.getElementsByClassName('trash-search');
+            trash[0].checked = false;
+            trash[1].checked = false;
+
+        </script>
+
+    {% elif folder %}
+
+        <span class="note-section-title">{{ folder.title }}</span>
+
+        <script>
+
+            $('.new-note').show();
+            $('#newNoteLove').removeClass('active');
+            $('#newNoteLoved').prop('checked', false);
+
+            $('.folderSearch').val('{{ folder.uid }}');
+            $('#currentFolder').val('{{ folder.uid }}');
+            
+            $('#lovedSection').prop('checked', false);
+            loved = document.getElementsByClassName('loved-search');
+            loved[0].checked = false;
+            loved[1].checked = false;
+
+            $('#archivedSection').prop('checked', false);
+            archive = document.getElementsByClassName('archive-search');
+            archive[0].checked = false;
+            archive[1].checked = false;
+
+            trash = document.getElementsByClassName('trash-search');
+            trash[0].checked = false;
+            trash[1].checked = false;
+
+        </script>
+
+    {% elif archive %}
+
+        <span class="note-section-title">Архив</span>
+
+        <script>
+
+            $('.new-note').show();
+            $('#newNoteLove').removeClass('active');
+            $('#newNoteLoved').prop('checked', false);
+
+            $('.folderSearch').val('');
+            $('#currentFolder').val('');
+            
+            $('#lovedSection').prop('checked', false);
+            loved = document.getElementsByClassName('loved-search');
+            loved[0].checked = false;
+            loved[1].checked = false;
+
+            $('#archivedSection').prop('checked', true);
+            archive = document.getElementsByClassName('archive-search');
+            archive[0].checked = true;
+            archive[1].checked = true;
+
+            trash = document.getElementsByClassName('trash-search');
+            trash[0].checked = false;
+            trash[1].checked = false;
+
+        </script>
+
+    {% else %} <!-- Trash -->
+ 
+        <span class="note-section-title">Корзина</span>
+
+        {% if not search %}
+
+            <div class="note-section">
+
+                    {% if deleted_notes %}
+
+                    <div class="empty-trash">
+
+                        <span class="info">Заметки в корзине самоудаляются через неделю после того, как вы их удалили</span>
+
+                        <button id="emptyTrashBtn">Очистить корзину</button>
+
+                    </div>
+
+                        {% for note in deleted_notes %}
+
+                            <div class="note">
+
+                                <div class="note-actions">
+
+                                    <input 
+                                        type="text"
+                                        value="{{ note.uid }}"
+                                        id="noteUID"
+                                        hidden />
+
+                                    <div id="deleteNote" class="active">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                                            <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                                            <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                                            <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                                            </g>
+                                        </svg>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="text">
+
+                                    <span class="title">{{ note.title }}</span>
+                                    <span class="content">{{ note.content | safe }}</span>
+
+                                </div>
+
+                                {% if note.folders.all %}
+
+                                    <div class="folders">
+
+                                        {% for folder in note.folders.all %}
+
+                                            <div class="folder"><span class="folder-title">{{ folder.title }}</span></div>
+
+                                        {% endfor %}
+
+                                    </div>
+
+                                {% endif %}
+
+                                <span class="empty">Пустая заметка</span>
+
+                            </div>
+
+                        {% endfor %}
+            
+                    {% else %}
+
+                        <div class="empty-trash">
+
+                            <span class="info">Корзина пуста!</span>
+
+                        </div>
+                    
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+        <script>
+
+            $('.new-note').hide();
+            $('#newNoteLove').removeClass('active');
+            $('#newNoteLoved').prop('checked', false);
+
+            $('#folderSearch').val('');
+            $('#currentFolder').val('');
+            
+            $('#lovedSection').prop('checked', false);
+            loved = document.getElementsByClassName('loved-search');
+            loved[0].checked = false;
+            loved[1].checked = false;
+
+            $('#archivedSection').prop('checked', true);
+            archive = document.getElementsByClassName('archive-search');
+            archive[0].checked = false;
+            archive[1].checked = false;
+
+            trash = document.getElementsByClassName('trash-search');
+            trash[0].checked = true;
+            trash[1].checked = true;
+
+        </script>
+
+    {% endif %}
+
+    {% if search %}
+
+        {% if found_notes %}
+
+        <div class="note-section" id="foundNotes">
+
+            {% for note in found_notes %}
+
+                <div 
+                    class="note"
+                    hx-trigger="click target:.note"
+                    hx-get="{% url 'app:get-note' note.uid %}"
+                    hx-target="#currentNoteContents">
+
+                    <div class="note-actions">
+
+                        <input 
+                            type="text"
+                            value="{{ note.uid }}"
+                            id="noteUID"
+                            hidden />
+
+                        {% if note.loved %}
+
+                            <div id="loveNote" class="active">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24.806" height="21.933" viewBox="0 0 24.806 21.933">
+                                    <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M22.4,3.747a6.576,6.576,0,0,0-9.04.666l-.954.994-.954-.994a6.576,6.576,0,0,0-9.04-.666,7.08,7.08,0,0,0-.48,10.178L11.3,23.707a1.508,1.508,0,0,0,2.195,0l9.375-9.781A7.076,7.076,0,0,0,22.4,3.747Z" transform="translate(0.001 -2.248)"/>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="loveNote">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24.806" height="21.933" viewBox="0 0 24.806 21.933">
+                                    <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M22.4,3.747a6.576,6.576,0,0,0-9.04.666l-.954.994-.954-.994a6.576,6.576,0,0,0-9.04-.666,7.08,7.08,0,0,0-.48,10.178L11.3,23.707a1.508,1.508,0,0,0,2.195,0l9.375-9.781A7.076,7.076,0,0,0,22.4,3.747Z" transform="translate(0.001 -2.248)"/>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                        {% if note.pinned %}
+
+                            <div id="pinNote" class="active">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23.858" height="23.858" viewBox="0 0 23.858 23.858">
+                                    <path id="Icon_simple-pinboard" data-name="Icon simple-pinboard" d="M10.585,14.5l4.482,4.587-.716-4.038,6.1-7.522,3.408.182L16.323,0V2.936L9.152,9.542l-4.486-1.1L9.326,13.4,0,23.858,10.585,14.5Z"/>
+                                </svg>
+                            
+                            </div>
+
+                        {% else %}
+
+                            <div id="pinNote">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23.858" height="23.858" viewBox="0 0 23.858 23.858">
+                                    <path id="Icon_simple-pinboard" data-name="Icon simple-pinboard" d="M10.585,14.5l4.482,4.587-.716-4.038,6.1-7.522,3.408.182L16.323,0V2.936L9.152,9.542l-4.486-1.1L9.326,13.4,0,23.858,10.585,14.5Z"/>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                        {% if note.archived %}
+
+                            <div id="archiveNote" class="active">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25.015" height="22.657" viewBox="0 0 25.015 22.657">
+                                    <g id="Icon_ionic-ios-archive" data-name="Icon ionic-ios-archive" transform="translate(-3.375 -4.5)">
+                                      <path id="Контур_1" data-name="Контур 1" d="M28.149,7.761H3.616a.238.238,0,0,1-.241-.233V6.363A1.892,1.892,0,0,1,5.3,4.5H26.465A1.892,1.892,0,0,1,28.39,6.363V7.528A.238.238,0,0,1,28.149,7.761Z"/>
+                                      <path id="Контур_2" data-name="Контур 2" d="M27.169,10.266H4.982a.476.476,0,0,0-.482.466V25.988a1.9,1.9,0,0,0,1.929,1.863H25.722a1.9,1.9,0,0,0,1.929-1.863V10.731A.476.476,0,0,0,27.169,10.266ZM19.09,18.534h-6a.856.856,0,0,1-.862-.716.826.826,0,0,1,.838-.914h6a.856.856,0,0,1,.862.716A.829.829,0,0,1,19.09,18.534Z" transform="translate(-0.193 -0.694)"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="archiveNote">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25.015" height="22.657" viewBox="0 0 25.015 22.657">
+                                    <g id="Icon_ionic-ios-archive" data-name="Icon ionic-ios-archive" transform="translate(-3.375 -4.5)">
+                                      <path id="Контур_1" data-name="Контур 1" d="M28.149,7.761H3.616a.238.238,0,0,1-.241-.233V6.363A1.892,1.892,0,0,1,5.3,4.5H26.465A1.892,1.892,0,0,1,28.39,6.363V7.528A.238.238,0,0,1,28.149,7.761Z"/>
+                                      <path id="Контур_2" data-name="Контур 2" d="M27.169,10.266H4.982a.476.476,0,0,0-.482.466V25.988a1.9,1.9,0,0,0,1.929,1.863H25.722a1.9,1.9,0,0,0,1.929-1.863V10.731A.476.476,0,0,0,27.169,10.266ZM19.09,18.534h-6a.856.856,0,0,1-.862-.716.826.826,0,0,1,.838-.914h6a.856.856,0,0,1,.862.716A.829.829,0,0,1,19.09,18.534Z" transform="translate(-0.193 -0.694)"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                        {% if note.deleted %}
+
+                            <div id="deleteNote" class="active">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                                    <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                                      <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                                      <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="deleteNote">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                                    <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                                      <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                                      <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div 
+                        class="text"
+                        hx-get="{% url 'app:get-note' note.uid %}"
+                        hx-target="#currentNoteContents">
+
+                        <span class="title">{{ note.title }}</span>
+                        <span class="content">{{ note.content | safe }}</span>
+
+                    </div>
+
+                    {% if note.folders.all %}
+
+                        <div 
+                            class="folders"
+                            hx-get="{% url 'app:get-note' note.uid %}"
+                            hx-target="#currentNoteContents">
+
+                            {% for folder in note.folders.all %}
+
+                                <div class="folder"><span class="folder-title">{{ folder.title }}</span></div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                    <span 
+                        class="empty"
+                        hx-get="{% url 'app:get-note' note.uid %}"
+                        hx-target="#currentNoteContents">Пустая заметка</span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+            <span class="failed-search">Ничего не найдено</span>
+
+        {% endif %}
+
+        <script>
+
+            $('.new-note').hide();
+
+        </script>
+
+    {% endif %}
+
+    {% if pinned_notes %}
+
+        <div class="note-section" id="pinnedNotes">
+
+            <span class="section-title">Закрепленные заметки</span>
+
+            {% for note in pinned_notes %}
+
+                <div 
+                    class="note"
+                    hx-trigger="click target:.note"
+                    hx-get="{% url 'app:get-note' note.uid %}"
+                    hx-target="#currentNoteContents">
+
+                    <div class="note-actions">
+
+                        <input 
+                            type="text"
+                            value="{{ note.uid }}"
+                            id="noteUID"
+                            hidden />
+
+                        {% if note.loved %}
+
+                            <div id="loveNote" class="active">
+
+                                <svg style="padding-top: 2px;" xmlns="http://www.w3.org/2000/svg" width="24.806" height="21.933" viewBox="0 0 24.806 21.933">
+                                    <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M22.4,3.747a6.576,6.576,0,0,0-9.04.666l-.954.994-.954-.994a6.576,6.576,0,0,0-9.04-.666,7.08,7.08,0,0,0-.48,10.178L11.3,23.707a1.508,1.508,0,0,0,2.195,0l9.375-9.781A7.076,7.076,0,0,0,22.4,3.747Z" transform="translate(0.001 -2.248)"/>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="loveNote">
+
+                                <svg style="padding-top: 2px;" xmlns="http://www.w3.org/2000/svg" width="24.806" height="21.933" viewBox="0 0 24.806 21.933">
+                                    <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M22.4,3.747a6.576,6.576,0,0,0-9.04.666l-.954.994-.954-.994a6.576,6.576,0,0,0-9.04-.666,7.08,7.08,0,0,0-.48,10.178L11.3,23.707a1.508,1.508,0,0,0,2.195,0l9.375-9.781A7.076,7.076,0,0,0,22.4,3.747Z" transform="translate(0.001 -2.248)"/>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                        <div id="pinNote" class="active">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23.858" height="23.858" viewBox="0 0 23.858 23.858">
+                                <path id="Icon_simple-pinboard" data-name="Icon simple-pinboard" d="M10.585,14.5l4.482,4.587-.716-4.038,6.1-7.522,3.408.182L16.323,0V2.936L9.152,9.542l-4.486-1.1L9.326,13.4,0,23.858,10.585,14.5Z"/>
+                            </svg>
+
+                        </div>
+
+                        {% if note.archived %}
+
+                            <div id="archiveNote" class="active">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25.015" height="22.657" viewBox="0 0 25.015 22.657">
+                                    <g id="Icon_ionic-ios-archive" data-name="Icon ionic-ios-archive" transform="translate(-3.375 -4.5)">
+                                      <path id="Контур_1" data-name="Контур 1" d="M28.149,7.761H3.616a.238.238,0,0,1-.241-.233V6.363A1.892,1.892,0,0,1,5.3,4.5H26.465A1.892,1.892,0,0,1,28.39,6.363V7.528A.238.238,0,0,1,28.149,7.761Z"/>
+                                      <path id="Контур_2" data-name="Контур 2" d="M27.169,10.266H4.982a.476.476,0,0,0-.482.466V25.988a1.9,1.9,0,0,0,1.929,1.863H25.722a1.9,1.9,0,0,0,1.929-1.863V10.731A.476.476,0,0,0,27.169,10.266ZM19.09,18.534h-6a.856.856,0,0,1-.862-.716.826.826,0,0,1,.838-.914h6a.856.856,0,0,1,.862.716A.829.829,0,0,1,19.09,18.534Z" transform="translate(-0.193 -0.694)"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="archiveNote">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25.015" height="22.657" viewBox="0 0 25.015 22.657">
+                                    <g id="Icon_ionic-ios-archive" data-name="Icon ionic-ios-archive" transform="translate(-3.375 -4.5)">
+                                      <path id="Контур_1" data-name="Контур 1" d="M28.149,7.761H3.616a.238.238,0,0,1-.241-.233V6.363A1.892,1.892,0,0,1,5.3,4.5H26.465A1.892,1.892,0,0,1,28.39,6.363V7.528A.238.238,0,0,1,28.149,7.761Z"/>
+                                      <path id="Контур_2" data-name="Контур 2" d="M27.169,10.266H4.982a.476.476,0,0,0-.482.466V25.988a1.9,1.9,0,0,0,1.929,1.863H25.722a1.9,1.9,0,0,0,1.929-1.863V10.731A.476.476,0,0,0,27.169,10.266ZM19.09,18.534h-6a.856.856,0,0,1-.862-.716.826.826,0,0,1,.838-.914h6a.856.856,0,0,1,.862.716A.829.829,0,0,1,19.09,18.534Z" transform="translate(-0.193 -0.694)"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                        {% if note.deleted %}
+
+                            <div id="deleteNote" class="active">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                                    <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                                      <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                                      <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="deleteNote">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                                    <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                                      <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                                      <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div 
+                        class="text"
+                        hx-get="{% url 'app:get-note' note.uid %}"
+                        hx-target="#currentNoteContents">
+
+                        <span class="title">{{ note.title }}</span>
+                        <span class="content">{{ note.content | safe }}</span>
+
+                    </div>
+
+                    {% if note.folders.all %}
+
+                        <div 
+                            class="folders"
+                            hx-get="{% url 'app:get-note' note.uid %}"
+                            hx-target="#currentNoteContents">
+
+                            {% for folder in note.folders.all %}
+
+                                <div class="folder"><span class="folder-title">{{ folder.title }}</span></div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                    <span 
+                        class="empty"
+                        hx-get="{% url 'app:get-note' note.uid %}"
+                        hx-target="#currentNoteContents">Пустая заметка</span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+    {% if other_notes %}
+
+        <div class="note-section" id="otherNotes">
+
+            {% if pinned_notes %}
+
+                <span class="section-title" id="otherNotes">Другие заметки</span>
+
+            {% endif %}
+
+            {% for note in other_notes %}
+
+                <div 
+                    class="note"
+                    hx-trigger="click target:.note"
+                    hx-get="{% url 'app:get-note' note.uid %}"
+                    hx-target="#currentNoteContents">
+
+                    <div class="note-actions">
+
+                        <input 
+                            type="text"
+                            value="{{ note.uid }}"
+                            id="noteUID"
+                            hidden />
+
+                        {% if note.loved %}
+
+                            <div id="loveNote" class="active">
+
+                                <svg style="padding-top: 2px;" xmlns="http://www.w3.org/2000/svg" width="24.806" height="21.933" viewBox="0 0 24.806 21.933">
+                                    <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M22.4,3.747a6.576,6.576,0,0,0-9.04.666l-.954.994-.954-.994a6.576,6.576,0,0,0-9.04-.666,7.08,7.08,0,0,0-.48,10.178L11.3,23.707a1.508,1.508,0,0,0,2.195,0l9.375-9.781A7.076,7.076,0,0,0,22.4,3.747Z" transform="translate(0.001 -2.248)"/>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="loveNote">
+
+                                <svg style="padding-top: 2px;" xmlns="http://www.w3.org/2000/svg" width="24.806" height="21.933" viewBox="0 0 24.806 21.933">
+                                    <path id="Icon_awesome-heart" data-name="Icon awesome-heart" d="M22.4,3.747a6.576,6.576,0,0,0-9.04.666l-.954.994-.954-.994a6.576,6.576,0,0,0-9.04-.666,7.08,7.08,0,0,0-.48,10.178L11.3,23.707a1.508,1.508,0,0,0,2.195,0l9.375-9.781A7.076,7.076,0,0,0,22.4,3.747Z" transform="translate(0.001 -2.248)"/>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                        <div id="pinNote">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23.858" height="23.858" viewBox="0 0 23.858 23.858">
+                                <path id="Icon_simple-pinboard" data-name="Icon simple-pinboard" d="M10.585,14.5l4.482,4.587-.716-4.038,6.1-7.522,3.408.182L16.323,0V2.936L9.152,9.542l-4.486-1.1L9.326,13.4,0,23.858,10.585,14.5Z"/>
+                            </svg>
+
+                        </div>
+
+                        {% if note.archived %}
+
+                            <div id="archiveNote" class="active">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25.015" height="22.657" viewBox="0 0 25.015 22.657">
+                                    <g id="Icon_ionic-ios-archive" data-name="Icon ionic-ios-archive" transform="translate(-3.375 -4.5)">
+                                      <path id="Контур_1" data-name="Контур 1" d="M28.149,7.761H3.616a.238.238,0,0,1-.241-.233V6.363A1.892,1.892,0,0,1,5.3,4.5H26.465A1.892,1.892,0,0,1,28.39,6.363V7.528A.238.238,0,0,1,28.149,7.761Z"/>
+                                      <path id="Контур_2" data-name="Контур 2" d="M27.169,10.266H4.982a.476.476,0,0,0-.482.466V25.988a1.9,1.9,0,0,0,1.929,1.863H25.722a1.9,1.9,0,0,0,1.929-1.863V10.731A.476.476,0,0,0,27.169,10.266ZM19.09,18.534h-6a.856.856,0,0,1-.862-.716.826.826,0,0,1,.838-.914h6a.856.856,0,0,1,.862.716A.829.829,0,0,1,19.09,18.534Z" transform="translate(-0.193 -0.694)"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="archiveNote">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25.015" height="22.657" viewBox="0 0 25.015 22.657">
+                                    <g id="Icon_ionic-ios-archive" data-name="Icon ionic-ios-archive" transform="translate(-3.375 -4.5)">
+                                      <path id="Контур_1" data-name="Контур 1" d="M28.149,7.761H3.616a.238.238,0,0,1-.241-.233V6.363A1.892,1.892,0,0,1,5.3,4.5H26.465A1.892,1.892,0,0,1,28.39,6.363V7.528A.238.238,0,0,1,28.149,7.761Z"/>
+                                      <path id="Контур_2" data-name="Контур 2" d="M27.169,10.266H4.982a.476.476,0,0,0-.482.466V25.988a1.9,1.9,0,0,0,1.929,1.863H25.722a1.9,1.9,0,0,0,1.929-1.863V10.731A.476.476,0,0,0,27.169,10.266ZM19.09,18.534h-6a.856.856,0,0,1-.862-.716.826.826,0,0,1,.838-.914h6a.856.856,0,0,1,.862.716A.829.829,0,0,1,19.09,18.534Z" transform="translate(-0.193 -0.694)"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                        {% if note.deleted %}
+
+                            <div id="deleteNote" class="active">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                                    <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                                      <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                                      <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% else %}
+
+                            <div id="deleteNote">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                                    <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                                      <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                                      <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div 
+                        class="text"
+                        hx-get="{% url 'app:get-note' note.uid %}"
+                        hx-target="#currentNoteContents">
+
+                        <span class="title">{{ note.title }}</span>
+                        <span class="content">{{ note.content | safe }}</span>
+
+                    </div>
+
+                    {% if note.folders.all %}
+
+                        <div  
+                            class="folders"
+                            hx-get="{% url 'app:get-note' note.uid %}"
+                            hx-target="#currentNoteContents">
+
+                            {% for folder in note.folders.all %}
+
+                                <div class="folder"><span class="folder-title">{{ folder.title }}</span></div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                    <span 
+                        class="empty"
+                        hx-get="{% url 'app:get-note' note.uid %}"
+                        hx-target="#currentNoteContents">Пустая заметка</span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+
+    $('.note').each(function(){
+
+        title = $(this).children('.text').children('.title').text();
+        content = $(this).children('.text').children('.content').html();
+
+        if (!title && !content) {
+
+            $(this).children('.empty').show();
+
+        }
+
+    })
+
+</script>

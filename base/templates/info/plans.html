@@ -1,0 +1,104 @@
+{% load static %}
+{% load compress %}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>
+            
+            Тарифы | Блокнотик
+
+        </title>
+
+        {% compress css %}
+
+            <link rel="stylesheet" href="{% static 'scss/base/plans.scss' %}" type="text/x-scss">
+
+        {% endcompress %}
+
+    </head>
+
+    <body>
+        
+        <div class="main">
+
+
+            <div class="plans">
+
+                <div class="plan">
+
+                    <div class="header">
+
+                        <h1>Бесплатный 0₽</h1>
+    
+                        <span></span>
+    
+                    </div>
+    
+                    <div class="features">
+    
+                        <ul>
+    
+                            <li>1 папка</li>
+                            <li>3 заметки</li>
+    
+                        </ul>
+    
+                    </div>
+
+                </div>
+
+                <div class="plan">
+
+                    <div class="header">
+
+                        <h1>Премиум 47₽/мес</h1>
+    
+                        <span></span>
+    
+                    </div>
+    
+                    <div class="features">
+    
+                        <ul>
+    
+                            <li>Бесконечно папок</li>
+                            <li>Бесконечно заметок</li>
+    
+                        </ul>
+    
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+
+    <style>
+
+        @font-face {
+
+            font-family: Comfortaa;
+            src: url("{% static 'fonts/Comfortaa.ttf' %}");
+        
+        }
+
+        body {
+
+            font-family: Comfortaa;
+
+        }
+
+    </style>
+
+</html>

@@ -1,0 +1,57 @@
+
+<input type="text" id="currentNoteUID" value="{{ note.uid }}"  hidden/>
+<input type="text" id="currentNoteTitle" value="{{ note.title }}"  hidden/>
+<input type="text" id="currentNoteContent" value="{{ note.content | safe }}" hidden />
+
+{% if note.folders %}
+
+    <div id="currentNoteFolders">
+
+        {% for folder in note.folders.all %}
+
+            <div class="folder">
+
+                <input 
+                    type="text"
+                    id="folderUID"
+                    value="{{ folder.uid }}" 
+                    hidden />
+
+                <span>{{ folder.title }}</span>
+
+                <button id="removeFolder">×</button>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endif %}
+
+{% if note.photos %}
+
+    <div id="currentNotePhotos">
+
+        {% for photo in note.photos.all %}
+
+            <div class="photo">
+                <input type="text" value="{{ photo.uid }}" hidden />
+                <button id="removePhoto">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18.008" height="24.68" viewBox="0 0 18.008 24.68">
+                        <g id="Icon_ionic-ios-trash" data-name="Icon ionic-ios-trash" transform="translate(-8.297 -4.5)">
+                          <path id="Контур_3" data-name="Контур 3" d="M9.359,9l1.525,20.44a1.981,1.981,0,0,0,1.894,2.06h9.114a1.981,1.981,0,0,0,1.894-2.06L25.292,9ZM13.34,27.633,12.907,11.25h1.2l.446,16.383Zm4.544,0H16.721V11.25h1.164Zm3.381,0h-1.2L20.5,11.25h1.2Z" transform="translate(0 -2.32)"/>
+                          <path id="Контур_4" data-name="Контур 4" d="M24.347,6.469H22L20.283,4.852a1.269,1.269,0,0,0-.861-.352H15.193a1.288,1.288,0,0,0-.874.352L12.6,6.469H10.254A1.733,1.733,0,0,0,8.3,8.3H26.3A1.733,1.733,0,0,0,24.347,6.469Z"/>
+                        </g>
+                    </svg>
+
+                </button>
+                <img src="{{ photo.file.url }}">
+            </div>
+    
+        {% endfor %}
+
+    </div>
+
+{% endif %}

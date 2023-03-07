@@ -1,0 +1,314 @@
+{% load static %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="блокнотик, блокнот онлайн, онлайн тетрадь, заметки онлайн, блокнот онлайн бесплатно, текстовик, программа для заметок, совместные заметки, голосовой блокнот онлайн, онлайн блокнот для записей">
+
+        <meta property="og:url" content="https://bloknot-ik.ru" />
+        <meta property="og:title" content="Блокнотик" />
+        <meta property="og:description" content="Устали от скучных и неудобных блокнотов? Выход есть! Блокнотик - современный онлайн блокнот, работать в котором - райское удовольствие." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="" />
+
+        <link rel="icon" type="image/x-icon" href="{% static 'блокнотик.svg' %}">
+
+        {% compress css %}
+
+            <link rel="stylesheet" href="{% static 'scss/base/landing.scss' %}" type="text/x-scss">
+
+        {% endcompress %}
+
+        <script src="{% static 'packages/jquery-3.6.1.min.js' %}"></script>
+
+    </head>
+
+    <body>
+        
+        <div class="main">
+
+            <div class="circles">
+
+                <div class="big"></div>
+                <div class="medium"></div>
+                <div class="small"></div>
+
+            </div>
+
+            <div class="content">
+
+                <div class="top-nav">
+
+                    <div class="brand">
+
+                        <a href="/">
+                    
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19.394" height="28.21" viewBox="0 0 19.394 28.21">
+                                <path id="Icon_awesome-lightbulb" data-name="Icon awesome-lightbulb" d="M5.293,25.033a1.764,1.764,0,0,0,.3.975l.942,1.415A1.763,1.763,0,0,0,8,28.21h3.4a1.763,1.763,0,0,0,1.468-.787l.942-1.415a1.762,1.762,0,0,0,.3-.975l0-2.113H5.29l0,2.113ZM0,9.7a9.643,9.643,0,0,0,2.4,6.379,15.834,15.834,0,0,1,2.877,5.039c0,.014.006.043.006.043h8.829c0-.014,0-.028.006-.043a15.834,15.834,0,0,1,2.877-5.039A9.7,9.7,0,1,0,0,9.7ZM9.7,5.289A4.413,4.413,0,0,0,5.289,9.7a.882.882,0,0,1-1.763,0A6.178,6.178,0,0,1,9.7,3.526a.882.882,0,0,1,0,1.763Z" transform="translate(0 0)"/>
+                            </svg>
+                        
+                            <h1>Блокнотик</h1>
+                    
+                        </a>
+                    
+                    </div>
+                    
+                    <div class="btns">
+                    
+                        {% if u %}
+                    
+                            <a href="{% url 'app:app' %}">
+                    
+                                <div class="auth-btn" id="homeBtn">
+                    
+                                    <svg class="home" xmlns="http://www.w3.org/2000/svg" width="29.174" height="25.726" viewBox="0 0 29.174 25.726">
+                                        <path id="Icon_material-home" data-name="Icon material-home" d="M14.192,28.373c1.755-2.106-1.4-6.319,0-8.426a3.286,3.286,0,0,1,5.617,0c1.4,2.106-1.755,6.319,0,8.426s5.266,2.809,7.022,0,0-11.234,0-11.234,6.67,3.16,4.213,0S24.023,4.5,17,4.5,5.416,13.979,2.958,17.139s4.213,0,4.213,0-1.755,8.426,0,11.234S12.437,30.48,14.192,28.373Z" transform="translate(-2.414 -4.5)"/>
+                                    </svg>
+                    
+                                    <span>Дом</span>
+                    
+                                </div>
+                    
+                            </a>
+                    
+                            <a href="{% url 'user:logout' %}">
+                    
+                                <div class="auth-btn" id="logoutBtn">
+                    
+                                    <svg class="logout" xmlns="http://www.w3.org/2000/svg" width="28.618" height="27.77" viewBox="0 0 28.618 27.77">
+                                        <path id="Icon_open-account-logout" data-name="Icon open-account-logout" d="M9.606-1.086c-4,.8-3.2,2.4,0,3.2s9.606-4,12.808,0,3.2,12.007,0,16.01-9.606-.8-12.808,0-4,2.4,0,3.2,12.007,5.6,16.01,0,4-16.81,0-22.414S13.608-1.886,9.606-1.086Zm-3.2,6.4c-1.6.4-6.4,2.4-6.4,4.8s4.8,4.4,6.4,4.8,0-3.2,0-3.2,9.606.8,12.808,0,3.2-2.4,0-3.2S6.4,8.52,6.4,8.52,8,4.918,6.4,5.318Z" transform="translate(0 3.764)"/>
+                                    </svg>
+                    
+                                    <span>Выйти</span>
+                                
+                                </div>
+                    
+                            </a>
+                    
+                        {% else %}
+                    
+                            <a href="{% url 'user:login' %}">
+                    
+                                <div class="auth-btn" id="loginBtn">
+                    
+                                    <svg class="login" xmlns="http://www.w3.org/2000/svg" width="29.684" height="26.574" viewBox="0 0 29.684 26.574">
+                                        <path id="Icon_open-account-login" data-name="Icon open-account-login" d="M8.115-.324c-3.83.766-3.064,2.3,0,3.064s9.192-3.83,12.256,0,3.064,11.49,0,15.321-9.192-.766-12.256,0-3.83,2.3,0,3.064,11.49,5.362,15.321,0,3.83-16.087,0-21.449S11.946-1.09,8.115-.324ZM11.18,5.8c-1.532-.383,0,3.064,0,3.064s-9.192-.766-12.256,0-3.064,2.3,0,3.064,12.256,0,12.256,0-1.532,3.447,0,3.064,8.1-2.193,8.1-4.491S12.712,6.187,11.18,5.8Z" transform="translate(3.375 2.887)"/>
+                                    </svg>
+                    
+                                    <span>Войти</span>
+                    
+                                </div>
+                    
+                            </a>
+                    
+                        {% endif %}
+                    
+                    </div>                    
+                    
+                </div>
+
+                <div class="info">
+
+                    <div class="text">
+                    
+                        <h1>Не теряйте голову!</h1>
+                        <h2>Создайте онлайн блокнот</h2>
+
+                        <a href="register/" id="regLink">
+
+                            <button id='regBtn'>Создать блокнот</button>
+
+                        </a>
+
+                    </div>
+
+                    <div class="img">
+
+                        <img src="{% static 'img/онлайн_блокнот_заметки.png' %}" alt="Онлайн блокнот, запись онлайн заметок" loading="lazy">
+
+                    </div>
+
+                </div>
+
+                <div class="bottom-nav">
+                    
+                    <div class="links">
+                    
+                       <ul>
+
+                            <li>
+                        
+                                <a href="https://ru.wikipedia.org/wiki/Блокнот">
+                    
+                                    <h4 class='copyright'>©<i>Блокнотик 2022</i></h4>
+                    
+                                </a>
+                    
+                            </li>
+                    
+                           <li>
+                    
+                               <a href="{% url 'base:t' %}" class="link" target="_blank">
+                    
+                                   Информация
+                    
+                               </a>
+                    
+                           </li>
+                       
+                           <li>
+                    
+                               <a href="{% url 'base:pl' %}" class="link" target="_blank">
+                    
+                                   Тарифы
+                    
+                               </a>
+                    
+                           </li>
+                    
+                           <li>
+                    
+                               <a href="{% url 'base:c' %}" class="link" target="_blank">
+                    
+                                   Обратная связь
+                    
+                               </a>
+                    
+                           </li>
+                    
+                       </ul>
+                    
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+
+    <style>
+
+        @font-face {
+            font-family: Comfortaa;
+            src: url("{% static 'fonts/Comfortaa.ttf' %}");
+        }
+
+        body {
+
+            font-family: Comfortaa;
+
+        }
+
+    </style>
+
+    <script>
+
+        /* Btn logic */
+        $('.auth-btn, #regBtn').click(function() {
+
+            btn = $(this);
+
+            btn.addClass('in');
+
+            setTimeout(function() {
+
+                btn.removeClass('in');
+
+            }, 250);
+
+        });
+
+        /* Circle animation */
+
+        function randomColor(){
+
+            return "#" + ((Math.random() * 16777215) | 0).toString(16);
+
+        }
+
+        function randomNumFromInterval(min, max) {
+
+            return Math.random() * (max - min) + min;
+
+        }
+
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        const animateCircle = async (scale) => {
+
+            if (scale == 'big') {
+
+                $('.big').css('background-color', randomColor());
+
+                scale = randomNumFromInterval(1, 1.3);
+                $('.big').css('transform', 'scale(' + scale + ')');
+
+                await delay(3000);
+
+                $('.big').css('background-color', randomColor());
+
+                scale = randomNumFromInterval(0.7, 1);
+                $('.big').css('transform', 'scale(' + scale + ')');
+
+
+            } else if (scale == 'medium') {
+
+                $('.medium').css('background-color', randomColor());
+
+                scale = randomNumFromInterval(1, 1.6);
+                $('.medium').css('transform', 'scale(' + scale + ')');
+
+                await delay(1500);
+
+                $('.medium').css('background-color', randomColor());
+
+                scale = randomNumFromInterval(0.6, 1);
+                $('.medium').css('transform', 'scale(' + scale + ')');
+
+            } else {
+
+                $('.small').css('background-color', randomColor());
+
+                scale = randomNumFromInterval(1, 1.9);
+                $('.small').css('transform', 'scale(' + scale + ')');
+
+                await delay(1000);
+
+                $('.small').css('background-color', randomColor());
+
+                scale = randomNumFromInterval(0.1, 1);
+                $('.small').css('transform', 'scale(' + scale + ')');
+
+            }
+
+        }
+
+        setInterval(function() {
+
+            animateCircle('big');
+
+        }, 6000);
+
+        setInterval(function() {
+
+            animateCircle('medium');
+
+        }, 3000);
+
+        setInterval(function() {
+
+            animateCircle('small');
+
+        }, 2000);
+
+    </script>
+
+</html>
