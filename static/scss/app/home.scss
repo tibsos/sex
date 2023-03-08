@@ -411,6 +411,13 @@ svg {
 
         }
 
+        .premium-btn.in {
+
+            box-shadow: inset 3px 3px 8px #d8cec4,
+                inset -3px -3px 8px #fffffa;
+
+        }
+
         .mode {
 
             position: absolute;
@@ -2412,21 +2419,8 @@ svg {
 
         #emptyTrashBtn.active {
 
-            width: 300px;
-            height: 50px;
-
-            display: block;
-
-            margin-top: 20px;
-
-            text-align: center;
-    
-            font-size: 19px;
-
-            border-radius: 100px;
-
-            box-shadow: inset 4px 4px 8px #0e1011,
-                inset -4px -4px 8px #1c1e1f;
+            box-shadow: inset 3px 3px 8px #d8cec4,
+                inset -3px -3px 8px #fffffa;
 
         }
 
@@ -2863,13 +2857,6 @@ body.dark {
 
     }
 
-    .sidenav.open {
-
-        box-shadow: 4px 4px 8px #0e1011,
-            -4px -4px 8px transparent;
-
-    }
-
     .sidenav::-webkit-scrollbar-thumb {
 
         background: $dark-text;
@@ -3269,6 +3256,17 @@ body.dark {
 
             }
 
+        }
+
+    }
+
+    .empty-trash {
+
+        #emptyTrashBtn.active {
+
+            box-shadow: inset 4px 4px 8px #0e1011,
+                inset -4px -4px 8px #1c1e1f;
+    
         }
 
     }

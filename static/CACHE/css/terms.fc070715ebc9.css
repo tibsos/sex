@@ -1,0 +1,172 @@
+/* line 3, static/scss/base/terms.scss */
+body {
+  margin: 0;
+  overflow-x: hidden; }
+
+/* line 11, static/scss/base/terms.scss */
+#homeBtn {
+  width: 100px; }
+
+/* line 12, static/scss/base/terms.scss */
+#logoutBtn {
+  width: 120px; }
+
+/* line 13, static/scss/base/terms.scss */
+#loginBtn {
+  width: 120px; }
+
+/* line 15, static/scss/base/terms.scss */
+.top-nav {
+  position: relative;
+  top: 20px;
+  width: 100%;
+  height: 50px;
+  z-index: 10; }
+  /* line 25, static/scss/base/terms.scss */
+  .top-nav .brand {
+    position: relative;
+    left: 30px;
+    cursor: pointer; }
+    /* line 32, static/scss/base/terms.scss */
+    .top-nav .brand a {
+      text-decoration: none;
+      color: #1E2330; }
+    /* line 40, static/scss/base/terms.scss */
+    .top-nav .brand svg {
+      position: relative;
+      left: 15px;
+      transform: scale(1.8);
+      fill: #1E2330;
+      float: left; }
+    /* line 52, static/scss/base/terms.scss */
+    .top-nav .brand h1 {
+      position: relative;
+      left: 40px;
+      font-size: 40px; }
+  /* line 65, static/scss/base/terms.scss */
+  .top-nav .btns {
+    position: absolute;
+    bottom: -3px;
+    right: 50px;
+    height: 60px;
+    display: inline-block; }
+    /* line 75, static/scss/base/terms.scss */
+    .top-nav .btns .auth-btn.in {
+      box-shadow: inset 1px 1px 4px #b9b9b7, inset -1px -1px 4px #ffffff; }
+    /* line 82, static/scss/base/terms.scss */
+    .top-nav .btns div {
+      position: relative;
+      height: 20px;
+      padding: 20px;
+      margin-left: 40px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 1px 1px 4px #b9b9b7, -1px -1px 4px #ffffff;
+      float: left; }
+      /* line 104, static/scss/base/terms.scss */
+      .top-nav .btns div svg {
+        position: absolute;
+        left: 20px;
+        fill: #1E2330; }
+      /* line 113, static/scss/base/terms.scss */
+      .top-nav .btns div .home {
+        transform: scale(1.3); }
+      /* line 119, static/scss/base/terms.scss */
+      .top-nav .btns div .logout {
+        margin-top: 3px;
+        transform: scale(1.2); }
+      /* line 127, static/scss/base/terms.scss */
+      .top-nav .btns div .login {
+        transform: scale(1.3); }
+      /* line 134, static/scss/base/terms.scss */
+      .top-nav .btns div span {
+        position: relative;
+        left: 45px;
+        top: 3px;
+        font-size: 20px; }
+    /* line 146, static/scss/base/terms.scss */
+    .top-nav .btns div.in {
+      box-shadow: inset 1px 1px 4px #b9b9b7, inset -1px -1px 4px #ffffff; }
+    /* line 153, static/scss/base/terms.scss */
+    .top-nav .btns a {
+      text-decoration: none;
+      color: #1E2330;
+      cursor: pointer; }
+
+/* line 165, static/scss/base/terms.scss */
+.main {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Need space below this div */ }
+  /* line 175, static/scss/base/terms.scss */
+  .main .sidenav {
+    position: fixed;
+    top: 160px;
+    left: 50px;
+    width: calc(30% - 50px);
+    float: left; }
+    /* line 185, static/scss/base/terms.scss */
+    .main .sidenav a {
+      text-decoration: none;
+      color: initial;
+      width: 450px; }
+      /* line 191, static/scss/base/terms.scss */
+      .main .sidenav a div {
+        width: 450px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 100px;
+        box-shadow: 1px 1px 4px #b9b9b7, -1px -1px 4px #ffffff; }
+        /* line 206, static/scss/base/terms.scss */
+        .main .sidenav a div h1 {
+          font-weight: normal;
+          font-size: 23px;
+          margin-left: 20px; }
+      /* line 217, static/scss/base/terms.scss */
+      .main .sidenav a div.active {
+        box-shadow: inset 1px 1px 4px #b9b9b7, inset -1px -1px 4px #ffffff; }
+  /* line 230, static/scss/base/terms.scss */
+  .main .info {
+    position: relative;
+    top: 80px;
+    right: 30px;
+    width: calc(70% - 70px);
+    float: right;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 4px #b9b9b7, -1px -1px 4px #ffffff; }
+    /* line 247, static/scss/base/terms.scss */
+    .main .info ol {
+      counter-reset: item; }
+    /* line 253, static/scss/base/terms.scss */
+    .main .info ol > li {
+      display: block;
+      margin: 15px 0 15px 0;
+      font-size: 21px;
+      font-weight: bold; }
+    /* line 264, static/scss/base/terms.scss */
+    .main .info ol > li:before {
+      content: counters(item, ".") ". ";
+      counter-increment: item; }
+    /* line 271, static/scss/base/terms.scss */
+    .main .info ol > li > ol > li {
+      font-size: 16px;
+      font-weight: normal; }
+    /* line 278, static/scss/base/terms.scss */
+    .main .info ul > li {
+      margin: 10px 0 10px 0; }
+    /* line 286, static/scss/base/terms.scss */
+    .main .info table td, .main .info table th {
+      border: 1px solid #ddd;
+      padding: 8px;
+      border-radius: 10px; }
+    /* line 295, static/scss/base/terms.scss */
+    .main .info table th {
+      font-size: 20px; }

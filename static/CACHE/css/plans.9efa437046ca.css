@@ -1,0 +1,12 @@
+/* line 1, static/scss/base/plans.scss */
+.plans {
+  position: relative;
+  top: 100px; }
+  /* line 6, static/scss/base/plans.scss */
+  .plans .plan {
+    width: 400px;
+    height: 300px;
+    float: left;
+    padding: 20px;
+    margin-right: 100px;
+    border: 1px solid green; }

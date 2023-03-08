@@ -3,6 +3,11 @@ from django.shortcuts import render, HttpResponse
 from .models import Info, Message
 from analytics.models import Funnel
 
+def test(request):
+
+    return render(request, 'test.html')
+
+
 def l(request):
 
     if request.user.is_authenticated:
@@ -30,11 +35,11 @@ def c(request):
     
     if request.user.is_authenticated:
         
-        return render(request, 'contact.html', {'n': request.user.profile.name, 'u': request.user})
+        return render(request, 'contact.html', {'n': request.user.profile.name, 'u': True})
     
     else:
         
-        return render(request, 'contact.html', {'u': request.user})
+        return render(request, 'contact.html', {'u': False})
     
 # contact submit
 def cs(request):

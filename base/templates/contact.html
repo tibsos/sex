@@ -243,6 +243,20 @@
 
     <script>
 
+        $('.auth-btn').click(function() {
+
+            btn = $(this);
+
+            btn.addClass('in');
+
+            setTimeout(function() {
+
+                btn.removeClass('in');
+
+            }, 250);
+
+        });
+
         document.getElementById('message').addEventListener('input', function() {
 
             if ($('#message').val()) {
@@ -332,8 +346,6 @@
 
                 }, 500);
 
-                
-        
                 $.ajax({
         
                     type: 'POST',
@@ -387,6 +399,24 @@
                     }
     
                 });
+
+                $('.form').animate({
+
+                    'opacity': 0,
+
+                }, 500);
+
+                setTimeout(function() {
+
+                    $('.form').hide();
+                    $('.message-submitted').show();
+                    $('.message-submitted').animate({
+
+                        'opacity': 1,
+    
+                    }, 500);
+
+                }, 500);
     
             });
 

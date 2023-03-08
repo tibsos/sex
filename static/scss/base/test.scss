@@ -1,0 +1,357 @@
+* {
+  --content-bg: black;
+  --border: 5px;
+  --gradient: linear-gradient(to right, orange, red);
+  --hover-gradient: linear-gradient(to right, red, purple);
+  --radius: 12px;
+
+  font-family: sans-serif;
+  color: white;
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  margin: 2rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section {
+  display: flex;
+  gap: 50px;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+/* Option 1 */
+/* Use the padding as a 'border' */
+.card.normal {
+  border-radius: var(--radius);
+  padding: var(--border);
+  background-clip: content-box, border-box;
+  background-image: linear-gradient(var(--content-bg), var(--content-bg)),
+    var(--gradient);
+}
+
+.normal.card:hover {
+  background-image: linear-gradient(var(--content-bg), var(--content-bg)),
+    var(--hover-gradient);
+}
+
+/* Option 2 */
+/* Use the :before pseudo element */
+.card.rounded {
+  position: relative;
+  background: var(--content-bg);
+  background-clip: padding-box;
+  border: solid var(--border) transparent;
+  border-radius: var(--radius);
+}
+
+.card.rounded:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: calc(var(--border) * -1);
+  border-radius: inherit;
+  background: var(--gradient);
+}
+
+.card.rounded:hover::before {
+  background: var(--hover-gradient);
+  animation: .4s pseudo-fade ease;
+}
+
+@keyframes pseudo-fade {
+  0% {
+    opacity: 1;
+    background: var(--gradient);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    background: var(--hover-gradient);
+  }
+}
+
+/* Draw animation border */
+/* From Wes Bos' GitHub */
+/* https://github.com/wesbos/hot-tips/blob/main/warp-card.html */
+.card-snake {
+  --color1: orange;
+  --color2: red;
+  --inline: 10px;
+  --block: 0;
+  --duration: 150ms;
+  --padding: 4px;
+  --border: 1px;
+
+  width: 200px;
+  height: 200px;
+  font-size: 1.25rem;
+  box-shadow: inset 0 0 0 var(--border) rgb(255 255 255 / 16%);
+  padding: var(--padding);
+  border-radius: calc(var(--radius) + var(--padding)); /* "inner" radius + distance/border "snake" width */
+  overflow: hidden;
+  display: grid;
+  margin-bottom: var(--gap);
+  cursor: pointer;
+}
+
+.card-snake .inner {
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 2;
+  padding: 20px;
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tail {
+  transition: all var(--duration);
+  width: var(--inline);
+  height: var(--block);
+  background: var(--color1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.tail.top {
+  background-image: linear-gradient(to right, var(--color1), var(--color2));
+  height: var(--inline);
+  width: var(--block);
+  transition-delay: calc(var(--duration) * 2);
+}
+
+.tail.right {
+  right: 0;
+  left: unset;
+  background: var(--color2);
+  transition-delay: var(--duration);
+}
+
+.tail.bottom {
+  height: var(--inline);
+  width: var(--block);
+  bottom: 0;
+  right: 0;
+  left: unset;
+  top: unset;
+  background-image: linear-gradient(to right, var(--color1), var(--color2));
+  transition-delay: 0ms;
+}
+
+.tail.left {
+  bottom: 0;
+  top: unset;
+  transition-delay: calc(var(--duration) * 3);
+}
+
+.draw:where(.start, :hover) .tail.top {
+  transition-delay: var(--duration);
+}
+.draw:where(.start, :hover) .tail.right {
+  transition-delay: calc(var(--duration) * 2);
+}
+.draw:where(.start, :hover) .tail.bottom {
+  transition-delay: calc(var(--duration) * 3);
+}
+.draw:where(.start, :hover) .tail.left {
+  transition-delay: 0ms;
+}
+
+.draw {
+  position: relative;
+}
+
+.draw.start .tail {
+  --block: 0;
+}
+.draw:hover .tail {
+  --block: 100%;
+}
+
+/* Animated border gradient */
+/* adapted bridge.codes site */
+.card.animated {
+  position: relative;
+  padding: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.card.animated .content {
+  width: 100%;
+  height: 100%;
+  background: var(--content-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  border-radius: calc(var(--radius) - var(--border));
+}
+
+.card.animated .animated-gradient {
+  position: absolute;
+  transform: scale(2);
+  z-index: -1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.card.animated .animated-gradient:before {
+  background: linear-gradient(
+    253.54deg,
+    #40aff7,
+    #4cb5f280 17.71%,
+    #4d88c5 34.37%,
+    #69a2cf4d 51.04%,
+    #70a1d199 68.23%,
+    #74aad34d 84.9%,
+    #789ed500 91.67%,
+    #3f6993bf
+  );
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  aspect-ratio: 1;
+  animation: 3s linear spin infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(-50%) rotate(0);
+  }
+  100% {
+    transform: translateY(-50%) rotate(1turn);
+  }
+}
+
+/* @property is NOT supported by all browsers, but it lets us transition CSS variables */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/@property */
+@property --color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: red;
+}
+
+/* Adapted from https://twitter.com/aleksliving/status/1620874863690014721?s=20 */
+.card.radial {
+  overflow: visible;
+  background: rgb(255 255 255 / 8%); /* border color */
+  position: relative;
+  border-radius: var(--radius);
+}
+
+.radial .border {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+  position: absolute;
+  z-index: 0;
+  background: radial-gradient(50% 50% at 50% 50%, var(--color), transparent);
+  background-position: 50% -50%;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  animation: 4s linear radial-rainbow infinite;
+}
+
+.radial .border.glow {
+  filter: blur(18px);
+}
+
+.radial .border.fill {
+  /*  make slightly smaller than parent container for a border effect  */
+  --size: calc(100% - var(--border));
+  width: var(--size);
+  height: var(--size);
+  
+  /* outer card radius - border width */
+  border-radius: calc(
+    var(--radius) - calc(var(--border) / 2)
+  ); 
+  
+  z-index: 1;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@keyframes radial-rainbow {
+  0%,
+  100% {
+    --color: red;
+    background-position: 50% -50%;
+  }
+  12.5% {
+    --color: orange;
+    background-position: 150% -50%;
+  }
+  25% {
+    --color: yellow;
+    background-position: 150% 50%;
+  }
+  37.5% {
+    --color: green;
+    background-position: 150% 150%;
+  }
+  50% {
+    --color: blue;
+    background-position: 50% 150%;
+  }
+  62.5% {
+    --color: indigo;
+    background-position: -50% 150%;
+  }
+  75% {
+    --color: purple;
+    background-position: -50% 50%;
+  }
+  87.5% {
+    --color: violet;
+    background-position: -50% -50%;
+  }
+}
+
+.single .border {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    var(--single-color),
+    transparent
+  );
+  background-position: 50% -50%;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}

@@ -7,6 +7,7 @@ app_name = 'base'
 urlpatterns = [
 
     path('', l, name = 'l'),
+    path('test/', test, name = 'l'),
 
     path('plans/', plans, name = 'pl'),
 

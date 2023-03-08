@@ -1,0 +1,1770 @@
+/* line 12, static/scss/app/home.scss */
+body {
+  width: 100%;
+  height: 100%;
+  background: #f6eadf;
+  color: #1E2330;
+  font-family: Comfortaa;
+  overflow: hidden;
+  overflow-y: auto;
+  transition: background 1s ease-in-out; }
+
+/* Scrollbar */
+/* line 32, static/scss/app/home.scss */
+::-webkit-scrollbar {
+  width: 10px; }
+
+/* line 39, static/scss/app/home.scss */
+::-webkit-scrollbar-track {
+  border-radius: 10px; }
+
+/* line 45, static/scss/app/home.scss */
+::-webkit-scrollbar-thumb {
+  background: #1E2330;
+  border-radius: 50px; }
+
+/* Defaults */
+/* line 54, static/scss/app/home.scss */
+input {
+  font-size: 19px;
+  font-family: Comfortaa;
+  border: none;
+  border-radius: 100px;
+  color: #1E2330;
+  background: #f6eadf;
+  box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa;
+  transition: all 0.75s ease-in-out; }
+
+/* line 72, static/scss/app/home.scss */
+input::placeholder {
+  color: #6e7267; }
+
+/* line 78, static/scss/app/home.scss */
+input:focus {
+  outline: none; }
+
+/* line 84, static/scss/app/home.scss */
+button {
+  border: none;
+  border-radius: 100px;
+  background: #f6eadf;
+  color: #1E2330;
+  font-family: Comfortaa;
+  box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+  cursor: pointer;
+  transition: background 1s ease-in-out;
+  transition: box-shadow 1s ease-in-out; }
+
+/* line 104, static/scss/app/home.scss */
+button:focus {
+  outline: none; }
+
+/* line 106, static/scss/app/home.scss */
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed; }
+
+/* line 114, static/scss/app/home.scss */
+svg {
+  fill: #1E2330;
+  transition: fill 1s ease-in-out; }
+
+/* line 122, static/scss/app/home.scss */
+[contenteditable]:focus {
+  outline: none; }
+
+/* line 128, static/scss/app/home.scss */
+[contenteditable]:empty:before {
+  content: attr(placeholder);
+  color: #6e7267; }
+
+/* line 135, static/scss/app/home.scss */
+.wrapper {
+  background: #f6eadf;
+  transition: all 1s ease-in-out; }
+
+/* Profile */
+/* line 145, static/scss/app/home.scss */
+.profile-dropdown {
+  position: fixed;
+  right: 20px;
+  top: 110px;
+  height: 170px;
+  width: 200px;
+  display: none;
+  opacity: 0;
+  border-radius: 30px;
+  background: #f6eadf;
+  box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+  z-index: 8;
+  transition: all 1s ease-in-out; }
+  /* line 168, static/scss/app/home.scss */
+  .profile-dropdown .buttons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px; }
+    /* line 179, static/scss/app/home.scss */
+    .profile-dropdown .buttons a {
+      text-decoration: none;
+      color: inherit; }
+      /* line 184, static/scss/app/home.scss */
+      .profile-dropdown .buttons a .btn {
+        width: 160px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 50px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        cursor: pointer;
+        transition: all 1s ease-in-out; }
+        /* line 204, static/scss/app/home.scss */
+        .profile-dropdown .buttons a .btn svg {
+          padding-left: 5px;
+          float: left; }
+        /* line 212, static/scss/app/home.scss */
+        .profile-dropdown .buttons a .btn span {
+          padding: 3px 0 0 10px; }
+      /* line 220, static/scss/app/home.scss */
+      .profile-dropdown .buttons a .btn.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+      /* line 229, static/scss/app/home.scss */
+      .profile-dropdown .buttons a #logout svg {
+        padding-top: 2px; }
+
+/* Top navbar */
+/* line 248, static/scss/app/home.scss */
+.topnav {
+  position: fixed;
+  top: 0px;
+  left: 1.5%;
+  width: 97%;
+  background: #f6eadf;
+  z-index: 9;
+  transition: all 1s ease-in-out; }
+  /* line 263, static/scss/app/home.scss */
+  .topnav .topnav-wrapper {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    height: 70px;
+    background: #f6eadf;
+    border-radius: 100px;
+    box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+    transition: all 1s ease-in-out; }
+    /* line 282, static/scss/app/home.scss */
+    .topnav .topnav-wrapper .toggle-sidenav {
+      position: relative;
+      top: 0;
+      left: 10px;
+      height: 70px;
+      width: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      float: left; }
+      /* line 297, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .toggle-sidenav #toggleSidenavBtn {
+        width: 55px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        cursor: pointer;
+        transition: all 1s ease-in-out; }
+      /* line 317, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .toggle-sidenav #toggleSidenavBtn.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+    /* line 326, static/scss/app/home.scss */
+    .topnav .topnav-wrapper .search-notes {
+      position: relative;
+      left: 50px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      float: left; }
+      /* line 338, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .search-notes .search-icon {
+        position: absolute;
+        left: 19px;
+        padding-top: 2px;
+        float: left; }
+      /* line 349, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .search-notes #noteSearch {
+        width: 250px;
+        height: 45px;
+        padding: 5px 60px 0 55px; }
+      /* line 358, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .search-notes #cancelSearch {
+        position: relative;
+        right: 45px;
+        width: 50px;
+        height: 50px;
+        float: right;
+        padding-top: 4px;
+        border-radius: 100px;
+        font-size: 35px;
+        display: none;
+        opacity: 0; }
+    /* line 381, static/scss/app/home.scss */
+    .topnav .topnav-wrapper .premium-btn {
+      position: relative;
+      top: 7.5px;
+      left: 70px;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: left;
+      border-radius: 50px;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+      cursor: pointer;
+      transition: box-shadow 1s ease-in-out; }
+      /* line 405, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .premium-btn #crownSVG {
+        width: 40px;
+        height: 40px; }
+    /* line 414, static/scss/app/home.scss */
+    .topnav .topnav-wrapper .premium-btn.in {
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+    /* line 421, static/scss/app/home.scss */
+    .topnav .topnav-wrapper .mode {
+      position: absolute;
+      bottom: -1px;
+      right: 130px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: left; }
+      /* line 435, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .mode .toggle-mode {
+        position: absolute;
+        cursor: pointer;
+        transform: scale(0.2); }
+    /* line 446, static/scss/app/home.scss */
+    .topnav .topnav-wrapper .profile {
+      position: absolute;
+      right: 10px;
+      height: 70px;
+      width: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      float: left;
+      cursor: pointer; }
+      /* line 462, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .profile .initials {
+        width: 55px;
+        height: 53px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 2px;
+        border-radius: 50px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        font-weight: bold;
+        font-size: 18px;
+        transition: all 1s ease-in-out; }
+      /* line 485, static/scss/app/home.scss */
+      .topnav .topnav-wrapper .profile .initials.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+
+/* line 498, static/scss/app/home.scss */
+.sidenav {
+  position: fixed;
+  top: 90px;
+  left: 0;
+  padding: 30px 0 0 1.5%;
+  width: 80px;
+  height: calc(100% - 120px);
+  background: #f6eadf;
+  overflow: hidden;
+  transition: width 0.75s ease-in-out;
+  z-index: 6;
+  transition: all 1s ease-in-out; }
+  /* line 520, static/scss/app/home.scss */
+  .sidenav .page {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    margin: 10px;
+    margin-bottom: 20px;
+    background: #f6eadf;
+    border-radius: 30px;
+    box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+    cursor: pointer;
+    transition: all 1s ease-in-out; }
+    /* line 541, static/scss/app/home.scss */
+    .sidenav .page .icon {
+      width: 55px;
+      height: 55px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      float: left; }
+      /* line 552, static/scss/app/home.scss */
+      .sidenav .page .icon span {
+        font-weight: bold;
+        font-size: 45px;
+        padding: 8px 1px 0 0; }
+    /* line 563, static/scss/app/home.scss */
+    .sidenav .page .page-title {
+      position: relative;
+      height: 60px;
+      width: 210px;
+      display: flex;
+      align-items: center;
+      padding-top: 1.5px;
+      opacity: 0;
+      font-size: 19px;
+      transition: opacity 0.75s ease-in-out; }
+    /* line 583, static/scss/app/home.scss */
+    .sidenav .page span {
+      position: relative;
+      bottom: 2px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
+    /* line 594, static/scss/app/home.scss */
+    .sidenav .page .edit-folder-btn-init {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      width: 45px;
+      height: 45px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      border-radius: 30px;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+      cursor: pointer;
+      transition: opacity 0.75s ease-in-out; }
+      /* line 618, static/scss/app/home.scss */
+      .sidenav .page .edit-folder-btn-init svg {
+        transform: scale(0.9); }
+    /* line 626, static/scss/app/home.scss */
+    .sidenav .page .edit-folder-btn-init.active {
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+  /* line 635, static/scss/app/home.scss */
+  .sidenav .page.active {
+    box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+
+/* line 644, static/scss/app/home.scss */
+.sidenav.open {
+  width: 350px; }
+  /* line 648, static/scss/app/home.scss */
+  .sidenav.open .page {
+    width: 320px; }
+
+/* App */
+/* line 658, static/scss/app/home.scss */
+.premium-offer, .account-preferences, .create-folder, .current-note, .edit-folder, .photo-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10; }
+
+/* line 680, static/scss/app/home.scss */
+.premium-offer .wrapper {
+  position: relative;
+  width: 300px;
+  height: 350px;
+  padding: 20px;
+  border-radius: 20px;
+  background: #f6eadf; }
+  /* line 693, static/scss/app/home.scss */
+  .premium-offer .wrapper #closePremiumOfferBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+    border-radius: 50px;
+    box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 3; }
+  /* line 721, static/scss/app/home.scss */
+  .premium-offer .wrapper #closePremiumOfferBtn.active {
+    box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+  /* line 728, static/scss/app/home.scss */
+  .premium-offer .wrapper img {
+    position: relative;
+    bottom: 85px;
+    right: 295px;
+    transform: scale(0.4); }
+  /* line 738, static/scss/app/home.scss */
+  .premium-offer .wrapper .cta-text-friend {
+    position: relative;
+    left: 49px;
+    bottom: 200px;
+    font-size: 22px;
+    font-weight: bold; }
+  /* line 749, static/scss/app/home.scss */
+  .premium-offer .wrapper .cta-text-invite {
+    position: relative;
+    bottom: 180px; }
+  /* line 756, static/scss/app/home.scss */
+  .premium-offer .wrapper .cta-text {
+    position: relative;
+    top: 260px;
+    left: 15px;
+    display: block;
+    font-size: 20px;
+    font-weight: bold; }
+  /* line 769, static/scss/app/home.scss */
+  .premium-offer .wrapper #premiumOfferVid {
+    position: absolute;
+    right: -85px;
+    bottom: 20px;
+    transform: scale(0.5);
+    border-radius: 1000px;
+    z-index: 2; }
+  /* line 783, static/scss/app/home.scss */
+  .premium-offer .wrapper #upgradeBtn {
+    position: absolute;
+    left: 43px;
+    bottom: 20px;
+    width: 250px;
+    height: 40px;
+    padding-top: 4px;
+    background: #2832C2;
+    color: #fff;
+    box-shadow: 1px 1px 6px #222ba5, -1px -1px 6px #2e3adf;
+    text-align: center;
+    font-size: 17px; }
+  /* line 805, static/scss/app/home.scss */
+  .premium-offer .wrapper .invite-link {
+    position: relative;
+    bottom: 150px; }
+    /* line 810, static/scss/app/home.scss */
+    .premium-offer .wrapper .invite-link input {
+      width: 240px;
+      height: 37px;
+      float: left;
+      padding: 3px 10px 0 10px;
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa;
+      font-size: 13px; }
+    /* line 826, static/scss/app/home.scss */
+    .premium-offer .wrapper .invite-link #copyLinkBtn {
+      position: relative;
+      left: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+
+/* line 848, static/scss/app/home.scss */
+.account-preferences .wrapper {
+  position: relative;
+  width: 300px;
+  height: 350px;
+  padding: 20px;
+  border-radius: 20px;
+  background: #f6eadf; }
+  /* line 861, static/scss/app/home.scss */
+  .account-preferences .wrapper #closeAccountPreferences {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 50px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2px;
+    border-radius: 50px;
+    box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+    font-size: 40px;
+    cursor: pointer; }
+  /* line 888, static/scss/app/home.scss */
+  .account-preferences .wrapper #closeAccountPreferences.active {
+    box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+  /* line 895, static/scss/app/home.scss */
+  .account-preferences .wrapper .form-title {
+    position: relative;
+    top: 12px;
+    font-size: 25px; }
+  /* line 904, static/scss/app/home.scss */
+  .account-preferences .wrapper .fields {
+    position: relative;
+    top: 50px; }
+    /* line 909, static/scss/app/home.scss */
+    .account-preferences .wrapper .fields .field {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px; }
+      /* line 916, static/scss/app/home.scss */
+      .account-preferences .wrapper .fields .field .field-icon {
+        position: absolute;
+        left: 15px;
+        float: left; }
+      /* line 925, static/scss/app/home.scss */
+      .account-preferences .wrapper .fields .field #accountName {
+        padding: 2px 0 0 6px;
+        transform: scale(1.15); }
+      /* line 933, static/scss/app/home.scss */
+      .account-preferences .wrapper .fields .field #accountEmail {
+        padding: 4px 2px 0 0;
+        transform: scale(0.85); }
+      /* line 941, static/scss/app/home.scss */
+      .account-preferences .wrapper .fields .field #accountPassword {
+        left: 14px;
+        padding: 2px 2px 0 0;
+        transform: scale(0.9); }
+      /* line 951, static/scss/app/home.scss */
+      .account-preferences .wrapper .fields .field input {
+        float: left;
+        width: 190px;
+        padding: 26px 50px 20px 60px; }
+      /* line 961, static/scss/app/home.scss */
+      .account-preferences .wrapper .fields .field .error, .account-preferences .wrapper .fields .field .ok {
+        position: absolute;
+        right: 20px;
+        display: none;
+        transform: scale(1.3); }
+  /* line 976, static/scss/app/home.scss */
+  .account-preferences .wrapper .error {
+    fill: red; }
+
+/* line 988, static/scss/app/home.scss */
+.create-folder .wrapper {
+  position: relative;
+  width: 400px;
+  height: 170px;
+  padding: 35px;
+  border-radius: 50px;
+  background: #f6eadf; }
+  /* line 1001, static/scss/app/home.scss */
+  .create-folder .wrapper #closeNewFolderForm {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 45px; }
+  /* line 1014, static/scss/app/home.scss */
+  .create-folder .wrapper #closeNewFolderForm.active {
+    box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+  /* line 1022, static/scss/app/home.scss */
+  .create-folder .wrapper .form-title {
+    position: relative;
+    font-size: 25px; }
+  /* line 1032, static/scss/app/home.scss */
+  .create-folder .wrapper form #newFolderTitle {
+    position: relative;
+    top: 30px;
+    width: 320px;
+    height: 40px;
+    padding: 5px 20px 5px 20px; }
+  /* line 1044, static/scss/app/home.scss */
+  .create-folder .wrapper form .create-folder-btn {
+    position: relative;
+    top: 55px;
+    left: 40px;
+    width: 320px;
+    height: 50px;
+    font-size: 18px;
+    box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa; }
+  /* line 1060, static/scss/app/home.scss */
+  .create-folder .wrapper form .create-folder-btn.active {
+    box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+
+/* line 1076, static/scss/app/home.scss */
+.edit-folder .wrapper {
+  position: relative;
+  width: 400px;
+  height: 170px;
+  padding: 30px;
+  border-radius: 50px;
+  background: #f6eadf; }
+  /* line 1089, static/scss/app/home.scss */
+  .edit-folder .wrapper #closeEditFolderForm {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 50px;
+    height: 50px;
+    padding-top: 4px;
+    font-size: 40px; }
+  /* line 1104, static/scss/app/home.scss */
+  .edit-folder .wrapper button.active {
+    box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+  /* line 1111, static/scss/app/home.scss */
+  .edit-folder .wrapper .form-title {
+    position: relative;
+    font-size: 23px; }
+  /* line 1121, static/scss/app/home.scss */
+  .edit-folder .wrapper .form #editFolderTitle {
+    position: relative;
+    top: 30px;
+    width: 353px;
+    height: 35px;
+    padding: 5px 20px 5px 20px;
+    float: left; }
+  /* line 1135, static/scss/app/home.scss */
+  .edit-folder .wrapper .form .edit-folder-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    width: 300px;
+    height: 45px;
+    font-size: 18px; }
+  /* line 1148, static/scss/app/home.scss */
+  .edit-folder .wrapper .form .edit-folder-btn.active {
+    box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+  /* line 1157, static/scss/app/home.scss */
+  .edit-folder .wrapper .delete-folder-btn {
+    position: absolute;
+    left: 35px;
+    bottom: 20px;
+    width: 47px;
+    height: 47px;
+    padding-top: 5px; }
+
+/* line 1174, static/scss/app/home.scss */
+.photo-carousel {
+  z-index: 11; }
+  /* line 1178, static/scss/app/home.scss */
+  .photo-carousel button {
+    position: absolute;
+    box-shadow: none;
+    width: 45px;
+    height: 45px; }
+  /* line 1188, static/scss/app/home.scss */
+  .photo-carousel #closePhoto {
+    right: 20px;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3px;
+    font-size: 40px;
+    box-shadow: none; }
+  /* line 1205, static/scss/app/home.scss */
+  .photo-carousel #previousPhoto, .photo-carousel #nextPhoto {
+    top: 49%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(246, 234, 223, 0.7);
+    display: none; }
+  /* line 1222, static/scss/app/home.scss */
+  .photo-carousel #previousPhoto {
+    left: 20px;
+    padding: 4px 4px 0 0; }
+  /* line 1230, static/scss/app/home.scss */
+  .photo-carousel #nextPhoto {
+    right: 20px;
+    padding: 4px 0 0 4px; }
+  /* line 1238, static/scss/app/home.scss */
+  .photo-carousel img {
+    max-width: 90%;
+    max-height: 90%; }
+
+/* line 1247, static/scss/app/home.scss */
+.current-note {
+  position: fixed;
+  z-index: 10; }
+  /* line 1253, static/scss/app/home.scss */
+  .current-note .wrapper {
+    width: 98%;
+    height: 95%;
+    overflow-y: auto;
+    background: #f6eadf;
+    padding-bottom: 20px;
+    border-radius: 30px; }
+    /* line 1266, static/scss/app/home.scss */
+    .current-note .wrapper #currentNoteContents {
+      display: none; }
+  /* line 1270, static/scss/app/home.scss */
+  .current-note .top {
+    position: relative;
+    left: 0;
+    top: 10px;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center; }
+    /* line 1282, static/scss/app/home.scss */
+    .current-note .top input {
+      position: relative;
+      left: 2.5%;
+      width: calc(95% - 95px);
+      padding: 15px 20px 14px 20px;
+      font-size: 20px;
+      font-weight: bold; }
+    /* line 1296, static/scss/app/home.scss */
+    .current-note .top #closeCurrentNote {
+      position: absolute;
+      right: 12px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50px;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+      font-size: 40px;
+      padding: 2px 0 0 0; }
+    /* line 1314, static/scss/app/home.scss */
+    .current-note .top #closeCurrentNote.active {
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+  /* line 1323, static/scss/app/home.scss */
+  .current-note .photos {
+    position: relative;
+    width: calc(100% - 50px);
+    display: none;
+    align-items: center;
+    margin: 25px 25px 0 25px; }
+    /* line 1334, static/scss/app/home.scss */
+    .current-note .photos .photo {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      margin: 20px 20px 0 20px; }
+      /* line 1344, static/scss/app/home.scss */
+      .current-note .photos .photo #removePhoto {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        box-shadow: none;
+        backdrop-filter: blur(17px) saturate(180%);
+        -webkit-backdrop-filter: blur(17px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.43); }
+      /* line 1367, static/scss/app/home.scss */
+      .current-note .photos .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa; }
+  /* line 1385, static/scss/app/home.scss */
+  .current-note .rte {
+    position: relative;
+    top: 20px;
+    left: calc(2.5% - 20px);
+    width: calc(95% - 20px);
+    height: 100px; }
+    /* line 1394, static/scss/app/home.scss */
+    .current-note .rte .rte-wrapper {
+      position: absolute;
+      left: 0;
+      height: 70px;
+      width: 520px;
+      display: flex;
+      align-items: center;
+      margin: 20px;
+      padding: 0 10px 0 10px;
+      border-radius: 100px;
+      overflow-x: auto;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa; }
+      /* line 1415, static/scss/app/home.scss */
+      .current-note .rte .rte-wrapper button {
+        position: relative;
+        min-width: 45px;
+        height: 45px;
+        margin: 0 10px 0 10px;
+        border-radius: 50px;
+        font-size: 17px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa; }
+      /* line 1433, static/scss/app/home.scss */
+      .current-note .rte .rte-wrapper button.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+      /* line 1440, static/scss/app/home.scss */
+      .current-note .rte .rte-wrapper svg {
+        padding: 4px 0 0 0; }
+  /* line 1450, static/scss/app/home.scss */
+  .current-note .current-note-folders-form {
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    width: 300px;
+    height: 500px;
+    background: #f6eadf;
+    display: none;
+    opacity: 0;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+    z-index: 8; }
+    /* line 1472, static/scss/app/home.scss */
+    .current-note .current-note-folders-form #closeCurrentNoteFoldersForm {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      background: #f6eadf;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+      font-size: 40px;
+      cursor: pointer; }
+    /* line 1497, static/scss/app/home.scss */
+    .current-note .current-note-folders-form #closeCurrentNoteFoldersForm.active {
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+    /* line 1504, static/scss/app/home.scss */
+    .current-note .current-note-folders-form .folder-search {
+      position: relative;
+      top: 50px;
+      width: 270px;
+      padding: 10px 15px 10px 15px; }
+    /* line 1515, static/scss/app/home.scss */
+    .current-note .current-note-folders-form .folder-section-title {
+      margin-bottom: 20px;
+      font-size: 18px; }
+    /* line 1522, static/scss/app/home.scss */
+    .current-note .current-note-folders-form .folder-title {
+      position: absolute;
+      top: 20px;
+      left: 15px;
+      font-size: 20px; }
+    /* line 1532, static/scss/app/home.scss */
+    .current-note .current-note-folders-form .folder-list {
+      position: relative;
+      top: 70px;
+      width: 270px;
+      max-height: 360px;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+      padding: 15px;
+      border-radius: 20px;
+      overflow: hidden;
+      overflow-y: auto; }
+      /* line 1550, static/scss/app/home.scss */
+      .current-note .current-note-folders-form .folder-list input {
+        display: none; }
+      /* line 1552, static/scss/app/home.scss */
+      .current-note .current-note-folders-form .folder-list #noteFolder {
+        position: relative;
+        width: 250px;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 50px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer; }
+      /* line 1574, static/scss/app/home.scss */
+      .current-note .current-note-folders-form .folder-list #noteFolder.alone {
+        margin: 0; }
+      /* line 1580, static/scss/app/home.scss */
+      .current-note .current-note-folders-form .folder-list #noteFolder.inNote {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+    /* line 1589, static/scss/app/home.scss */
+    .current-note .current-note-folders-form .create-new-folder-from-search-current {
+      position: relative;
+      top: 85px;
+      display: none; }
+      /* line 1596, static/scss/app/home.scss */
+      .current-note .current-note-folders-form .create-new-folder-from-search-current #createFolderInNote {
+        padding: 10px;
+        font-size: 17px; }
+  /* line 1609, static/scss/app/home.scss */
+  .current-note .content {
+    position: relative;
+    top: 40px;
+    left: 2.5%;
+    width: 95%;
+    height: calc(100% - 230px);
+    overflow: visible; }
+    /* line 1620, static/scss/app/home.scss */
+    .current-note .content .current-note-content {
+      height: 100%;
+      overflow: auto;
+      padding: 25px;
+      border-radius: 30px;
+      font-size: 19px;
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+  /* line 1638, static/scss/app/home.scss */
+  .current-note .current-note-folders {
+    position: relative;
+    top: 100px;
+    left: 2.5%;
+    width: calc(100% - 100px);
+    min-height: 40px; }
+    /* line 1647, static/scss/app/home.scss */
+    .current-note .current-note-folders .folder {
+      position: relative;
+      height: 25px;
+      min-width: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px 10px 3px 10px;
+      margin: 0 15px 15px 0;
+      border-radius: 30px;
+      float: left;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa; }
+      /* line 1670, static/scss/app/home.scss */
+      .current-note .current-note-folders .folder #removeFolder {
+        position: absolute;
+        right: 0;
+        width: 31px;
+        height: 31px;
+        padding-top: 3px;
+        opacity: 0;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        font-size: 25px;
+        font-weight: bold; }
+      /* line 1690, static/scss/app/home.scss */
+      .current-note .current-note-folders .folder #removeFolder.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+
+/* line 1703, static/scss/app/home.scss */
+.new-note, .notes {
+  position: relative;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+/* line 1715, static/scss/app/home.scss */
+.new-note {
+  position: relative;
+  top: 120px;
+  height: 80px;
+  transition: height 0.75s ease-in-out; }
+  /* line 1725, static/scss/app/home.scss */
+  .new-note .wrapper {
+    position: relative;
+    width: 800px;
+    height: 60px;
+    display: block;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+    transition: all 0.75s ease-in-out; }
+    /* line 1741, static/scss/app/home.scss */
+    .new-note .wrapper .filters {
+      position: relative;
+      height: 60px;
+      width: 125px;
+      display: none;
+      align-items: center;
+      float: left; }
+      /* line 1753, static/scss/app/home.scss */
+      .new-note .wrapper .filters div {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 15px;
+        border-radius: 50px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        cursor: pointer;
+        transition: all 1s ease-in-out; }
+      /* line 1775, static/scss/app/home.scss */
+      .new-note .wrapper .filters div.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+    /* line 1784, static/scss/app/home.scss */
+    .new-note .wrapper #closeNewNote {
+      position: relative;
+      top: 8px;
+      left: 15px;
+      width: 45px;
+      height: 42px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding-top: 3px;
+      border-radius: 50px;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+      cursor: pointer;
+      font-size: 40px;
+      transition: all 1s ease-in-out; }
+    /* line 1812, static/scss/app/home.scss */
+    .new-note .wrapper #closeNewNote.active {
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+    /* line 1819, static/scss/app/home.scss */
+    .new-note .wrapper .new-note-title {
+      position: relative;
+      top: 5px;
+      left: 6px;
+      height: 50px;
+      width: 748px;
+      padding: 0 20px 0 20px;
+      float: left;
+      transition: all 1s ease-in-out, width 0s; }
+    /* line 1836, static/scss/app/home.scss */
+    .new-note .wrapper .new-note-rte {
+      position: relative;
+      top: 3px;
+      left: -8px;
+      width: 95.5%;
+      height: 100px;
+      display: none;
+      opacity: 0;
+      overflow: hidden;
+      overflow-x: auto; }
+      /* line 1851, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-rte button {
+        position: relative;
+        width: 45px;
+        height: 45px;
+        margin: 0 10px 0 10px;
+        border-radius: 50px;
+        font-size: 17px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        transition: all 0.75s ease-in-out; }
+      /* line 1871, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-rte button.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+      /* line 1878, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-rte .rte-wrapper {
+        position: absolute;
+        left: 0;
+        height: 70px;
+        width: 450px;
+        display: flex;
+        align-items: center;
+        margin: 20px;
+        padding: 0 10px 0 10px;
+        border-radius: 100px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        transition: all 0.75s ease-in-out; }
+        /* line 1899, static/scss/app/home.scss */
+        .new-note .wrapper .new-note-rte .rte-wrapper svg {
+          padding: 4px 0 0 0; }
+    /* line 1909, static/scss/app/home.scss */
+    .new-note .wrapper #newNoteContentCE {
+      position: relative;
+      top: 20px;
+      left: 10px;
+      width: 740px;
+      height: 300px;
+      display: none;
+      opacity: 0;
+      padding: 20px;
+      border-radius: 30px;
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa;
+      font-size: 19px;
+      overflow: auto;
+      transition: box-shadow 0.75s ease-in-out, background 0.75s ease-in-out; }
+    /* line 1938, static/scss/app/home.scss */
+    .new-note .wrapper #newNoteData input {
+      display: none; }
+    /* line 1940, static/scss/app/home.scss */
+    .new-note .wrapper #newNoteData .create-note-btn {
+      position: relative;
+      top: 42px;
+      width: 300px;
+      height: 50px;
+      display: none;
+      opacity: 0;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 19px;
+      border-radius: 100px;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+      transition: background 1s ease-in-out, box-shadow 1s ease-in-out, color 1s ease-in-out; }
+    /* line 1966, static/scss/app/home.scss */
+    .new-note .wrapper #newNoteData .create-note-btn.active {
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+    /* line 1975, static/scss/app/home.scss */
+    .new-note .wrapper .new-note-folders-form {
+      position: absolute;
+      right: 20px;
+      top: 60px;
+      width: 300px;
+      height: 500px;
+      background: #f6eadf;
+      display: none;
+      opacity: 0;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+      z-index: 8;
+      transition: background 0.75s ease-in-out, box-shadow 0.75s ease-in-out; }
+      /* line 1999, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-folders-form #closeNewNoteFoldersForm {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        background: #f6eadf;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        font-size: 40px;
+        cursor: pointer;
+        transition: all 0.75s ease-in-out; }
+      /* line 2026, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-folders-form #closeNewNoteFoldersForm.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+      /* line 2033, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-folders-form .new-note-folder-search {
+        position: relative;
+        top: 50px;
+        width: 270px;
+        padding: 10px 15px 10px 15px;
+        transition: all 0.75s ease-in-out; }
+      /* line 2046, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-folders-form .folder-section-title {
+        margin-bottom: 20px;
+        font-size: 18px; }
+      /* line 2053, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-folders-form .folder-title {
+        position: absolute;
+        top: 20px;
+        left: 15px;
+        font-size: 20px; }
+      /* line 2063, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-folders-form .new-note-folder-list {
+        position: relative;
+        top: 70px;
+        width: 270px;
+        max-height: 360px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        padding: 15px;
+        border-radius: 20px;
+        overflow: hidden;
+        overflow-y: auto;
+        transition: all 0.75s ease-in-out; }
+        /* line 2081, static/scss/app/home.scss */
+        .new-note .wrapper .new-note-folders-form .new-note-folder-list input {
+          display: none; }
+        /* line 2085, static/scss/app/home.scss */
+        .new-note .wrapper .new-note-folders-form .new-note-folder-list #newNoteFolder {
+          position: relative;
+          width: 250px;
+          padding: 10px;
+          margin-bottom: 20px;
+          border-radius: 50px;
+          box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          cursor: pointer;
+          transition: all 0.75s ease-in-out; }
+        /* line 2109, static/scss/app/home.scss */
+        .new-note .wrapper .new-note-folders-form .new-note-folder-list #newNoteFolder.alone {
+          margin: 0; }
+        /* line 2115, static/scss/app/home.scss */
+        .new-note .wrapper .new-note-folders-form .new-note-folder-list #newNoteFolder.inNote {
+          box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+      /* line 2124, static/scss/app/home.scss */
+      .new-note .wrapper .new-note-folders-form .create-new-folder-from-search {
+        position: relative;
+        top: 85px;
+        display: none; }
+        /* line 2131, static/scss/app/home.scss */
+        .new-note .wrapper .new-note-folders-form .create-new-folder-from-search #createFolderInNoteNew {
+          padding: 10px;
+          font-size: 17px; }
+
+/* line 2147, static/scss/app/home.scss */
+.new-note.open {
+  height: 610px; }
+  /* line 2151, static/scss/app/home.scss */
+  .new-note.open .wrapper {
+    top: 10px;
+    height: 610px;
+    display: block;
+    border-radius: 30px; }
+    /* line 2161, static/scss/app/home.scss */
+    .new-note.open .wrapper .filters {
+      display: flex; }
+    /* line 2167, static/scss/app/home.scss */
+    .new-note.open .wrapper .new-note-title {
+      top: 5px;
+      width: 565px; }
+    /* line 2175, static/scss/app/home.scss */
+    .new-note.open .wrapper #closeNewNote {
+      display: flex; }
+    /* line 2181, static/scss/app/home.scss */
+    .new-note.open .wrapper .new-note-rte {
+      display: block; }
+    /* line 2187, static/scss/app/home.scss */
+    .new-note.open .wrapper #newNoteContentCE {
+      display: block; }
+    /* line 2195, static/scss/app/home.scss */
+    .new-note.open .wrapper #newNoteData .create-note-btn {
+      display: block; }
+
+/* line 2207, static/scss/app/home.scss */
+.notes {
+  position: relative;
+  top: 150px;
+  height: calc(100% - 200px);
+  padding-bottom: 30px; }
+  /* line 2216, static/scss/app/home.scss */
+  .notes .failed-search {
+    position: relative;
+    top: 40px;
+    display: block;
+    font-weight: bold; }
+  /* line 2227, static/scss/app/home.scss */
+  .notes .note-section-title {
+    position: relative;
+    font-weight: bold;
+    font-size: 30px; }
+  /* line 2236, static/scss/app/home.scss */
+  .notes .note-section {
+    position: relative;
+    top: 10px;
+    padding-top: 20px; }
+    /* line 2243, static/scss/app/home.scss */
+    .notes .note-section .section-title {
+      font-size: 23px; }
+  /* line 2251, static/scss/app/home.scss */
+  .notes .note {
+    position: relative;
+    top: 20px;
+    min-height: 23px;
+    width: 600px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    box-shadow: 3px 3px 8px #c5bbb2, -3px -3px 8px #ffffff;
+    transition: all 1s ease-in-out; }
+    /* line 2269, static/scss/app/home.scss */
+    .notes .note .empty {
+      position: absolute;
+      top: 23px;
+      display: none;
+      color: #6e7267;
+      font-size: 19px; }
+    /* line 2281, static/scss/app/home.scss */
+    .notes .note .note-actions {
+      position: absolute;
+      top: 10px;
+      right: 9px;
+      opacity: 0;
+      z-index: 2; }
+      /* line 2291, static/scss/app/home.scss */
+      .notes .note .note-actions div {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 20px;
+        float: left;
+        border-radius: 100px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        cursor: pointer;
+        transition: all 1s ease-in-out; }
+      /* line 2314, static/scss/app/home.scss */
+      .notes .note .note-actions div.active {
+        box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+    /* line 2323, static/scss/app/home.scss */
+    .notes .note .text {
+      position: relative;
+      z-index: 1; }
+      /* line 2329, static/scss/app/home.scss */
+      .notes .note .text span {
+        position: relative; }
+      /* line 2331, static/scss/app/home.scss */
+      .notes .note .text .title {
+        top: 0;
+        font-weight: bold; }
+      /* line 2339, static/scss/app/home.scss */
+      .notes .note .text .content {
+        top: 5px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 15;
+        -webkit-box-orient: vertical; }
+    /* line 2353, static/scss/app/home.scss */
+    .notes .note .folders {
+      position: relative;
+      top: 10px;
+      width: calc(100% - 60px);
+      height: 45px;
+      padding: 5px;
+      overflow: hidden; }
+      /* line 2365, static/scss/app/home.scss */
+      .notes .note .folders .folder {
+        position: relative;
+        min-width: 15px;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6px 7px 5px 7px;
+        margin: 15px 15px 0 0;
+        border-radius: 100px;
+        box-shadow: 3px 3px 8px #d8cec4, -3px -3px 8px #fffffa;
+        transition: all 1s ease-in-out; }
+        /* line 2387, static/scss/app/home.scss */
+        .notes .note .folders .folder span {
+          font-size: 16px; }
+  /* line 2399, static/scss/app/home.scss */
+  .notes .empty-trash {
+    margin-bottom: 20px; }
+    /* line 2403, static/scss/app/home.scss */
+    .notes .empty-trash #emptyTrashBtn {
+      width: 300px;
+      height: 50px;
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 19px;
+      border-radius: 100px; }
+    /* line 2420, static/scss/app/home.scss */
+    .notes .empty-trash #emptyTrashBtn.active {
+      box-shadow: inset 3px 3px 8px #d8cec4, inset -3px -3px 8px #fffffa; }
+
+/* Premium offer */
+/* line 2433, static/scss/app/home.scss */
+.premium {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.5); }
+  /* line 2452, static/scss/app/home.scss */
+  .premium .wrapper {
+    position: relative;
+    height: 450px;
+    width: 300px;
+    background: #fff;
+    border-radius: 50px; }
+
+@media only screen and (max-width: 1150px) {
+  /* line 2471, static/scss/app/home.scss */
+  .new-note .wrapper {
+    width: 600px; }
+    /* line 2475, static/scss/app/home.scss */
+    .new-note .wrapper .new-note-title {
+      width: 548px; }
+    /* line 2481, static/scss/app/home.scss */
+    .new-note .wrapper #newNoteContentCE {
+      width: 540px; }
+  /* line 2495, static/scss/app/home.scss */
+  .new-note.open .wrapper .new-note-title {
+    width: 365px; } }
+
+@media only screen and (max-width: 870px) {
+  /* line 2509, static/scss/app/home.scss */
+  .new-note {
+    left: 30px; }
+  /* line 2515, static/scss/app/home.scss */
+  .notes {
+    left: 30px; } }
+
+/* Device width optimization */
+@media only screen and (max-width: 775px) {
+  /* line 2533, static/scss/app/home.scss */
+  .topnav .topnav-wrapper .search-notes #noteSearch {
+    width: clamp(100px, 10%, 150px);
+    padding-right: 50px; }
+  /* line 2541, static/scss/app/home.scss */
+  .topnav .topnav-wrapper .search-notes #cancelSearch {
+    right: 200px; }
+  /* line 2549, static/scss/app/home.scss */
+  .topnav .topnav-wrapper .premium-btn {
+    display: none; }
+  /* line 2555, static/scss/app/home.scss */
+  .topnav .topnav-wrapper .mode {
+    right: 120px; }
+  /* line 2569, static/scss/app/home.scss */
+  .current-note .rte .rte-wrapper {
+    width: 100%; } }
+
+/* Dark mode */
+/* line 2583, static/scss/app/home.scss */
+body.dark::-webkit-scrollbar-thumb {
+  background: #a3a7ab;
+  border-radius: 50px; }
+
+/* line 2590, static/scss/app/home.scss */
+body.dark {
+  background: #151718;
+  color: #a3a7ab; }
+  /* line 2597, static/scss/app/home.scss */
+  body.dark #Icon_feather-mail path {
+    stroke: #a3a7ab; }
+  /* line 2605, static/scss/app/home.scss */
+  body.dark input {
+    color: #a3a7ab;
+    background: #151718;
+    box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+  /* line 2615, static/scss/app/home.scss */
+  body.dark input::placeholder {
+    color: #6e7072; }
+  /* line 2621, static/scss/app/home.scss */
+  body.dark button {
+    background: #151718;
+    color: #a3a7ab;
+    box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+  /* line 2631, static/scss/app/home.scss */
+  body.dark svg {
+    fill: #a3a7ab; }
+  /* line 2637, static/scss/app/home.scss */
+  body.dark [contenteditable]:empty:before {
+    color: #6e7072; }
+  /* line 2643, static/scss/app/home.scss */
+  body.dark .wrapper {
+    background: #151718; }
+    /* line 2647, static/scss/app/home.scss */
+    body.dark .wrapper #closePremiumOfferBtn {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2654, static/scss/app/home.scss */
+    body.dark .wrapper #closePremiumOfferBtn.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+  /* line 2665, static/scss/app/home.scss */
+  body.dark .account-preferences #closeAccountPreferences {
+    box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+  /* line 2672, static/scss/app/home.scss */
+  body.dark .account-preferences #closeAccountPreferences.active {
+    box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+  /* line 2681, static/scss/app/home.scss */
+  body.dark .profile-dropdown {
+    background: #151718;
+    box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2692, static/scss/app/home.scss */
+    body.dark .profile-dropdown .buttons a .btn {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+  /* line 2707, static/scss/app/home.scss */
+  body.dark .create-folder .wrapper {
+    background: #151718; }
+    /* line 2711, static/scss/app/home.scss */
+    body.dark .create-folder .wrapper #closeNewFolderForm.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 2718, static/scss/app/home.scss */
+    body.dark .create-folder .wrapper .create-folder-btn {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2725, static/scss/app/home.scss */
+    body.dark .create-folder .wrapper .create-folder-btn.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+  /* line 2738, static/scss/app/home.scss */
+  body.dark .edit-folder .wrapper {
+    background: #151718; }
+    /* line 2744, static/scss/app/home.scss */
+    body.dark .edit-folder .wrapper .form .edit-folder-btn {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2751, static/scss/app/home.scss */
+    body.dark .edit-folder .wrapper .form .edit-folder-btn.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 2760, static/scss/app/home.scss */
+    body.dark .edit-folder .wrapper button.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+  /* line 2772, static/scss/app/home.scss */
+  body.dark .topnav {
+    background: #151718; }
+    /* line 2776, static/scss/app/home.scss */
+    body.dark .topnav .topnav-wrapper {
+      background: #151718;
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+      /* line 2783, static/scss/app/home.scss */
+      body.dark .topnav .topnav-wrapper #toggleSidenavBtn {
+        box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+      /* line 2790, static/scss/app/home.scss */
+      body.dark .topnav .topnav-wrapper #toggleSidenavBtn.active {
+        box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+      /* line 2797, static/scss/app/home.scss */
+      body.dark .topnav .topnav-wrapper .premium-btn {
+        box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+      /* line 2804, static/scss/app/home.scss */
+      body.dark .topnav .topnav-wrapper .initials {
+        box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+      /* line 2811, static/scss/app/home.scss */
+      body.dark .topnav .topnav-wrapper .initials.active {
+        box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+  /* line 2822, static/scss/app/home.scss */
+  body.dark .sidenav {
+    background: #151718;
+    transition: all 1s ease-in-out; }
+    /* line 2828, static/scss/app/home.scss */
+    body.dark .sidenav .page {
+      background: #151718;
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+      /* line 2835, static/scss/app/home.scss */
+      body.dark .sidenav .page .edit-folder-btn-init {
+        box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+      /* line 2842, static/scss/app/home.scss */
+      body.dark .sidenav .page .edit-folder-btn-init.active {
+        box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 2851, static/scss/app/home.scss */
+    body.dark .sidenav .page.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+  /* line 2860, static/scss/app/home.scss */
+  body.dark .sidenav.open {
+    box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px transparent; }
+  /* line 2867, static/scss/app/home.scss */
+  body.dark .sidenav::-webkit-scrollbar-thumb {
+    background: #a3a7ab; }
+  /* line 2875, static/scss/app/home.scss */
+  body.dark .new-note .wrapper {
+    box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2882, static/scss/app/home.scss */
+    body.dark .new-note .wrapper .filters div {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2889, static/scss/app/home.scss */
+    body.dark .new-note .wrapper .filters div.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 2898, static/scss/app/home.scss */
+    body.dark .new-note .wrapper #closeNewNote {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2905, static/scss/app/home.scss */
+    body.dark .new-note .wrapper #closeNewNote.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 2914, static/scss/app/home.scss */
+    body.dark .new-note .wrapper .new-note-rte .rte-wrapper {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2921, static/scss/app/home.scss */
+    body.dark .new-note .wrapper .new-note-rte .wrapper {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2928, static/scss/app/home.scss */
+    body.dark .new-note .wrapper .new-note-rte button {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2935, static/scss/app/home.scss */
+    body.dark .new-note .wrapper .new-note-rte button.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 2944, static/scss/app/home.scss */
+    body.dark .new-note .wrapper #newNoteContentCE {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 2953, static/scss/app/home.scss */
+    body.dark .new-note .wrapper #newNoteData .create-note-btn {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 2960, static/scss/app/home.scss */
+    body.dark .new-note .wrapper #newNoteData .create-note-btn.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 2969, static/scss/app/home.scss */
+    body.dark .new-note .wrapper .new-note-folders-form {
+      background: #151718;
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+      /* line 2976, static/scss/app/home.scss */
+      body.dark .new-note .wrapper .new-note-folders-form #closeNewNoteFoldersForm {
+        background: #151718;
+        box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+      /* line 2985, static/scss/app/home.scss */
+      body.dark .new-note .wrapper .new-note-folders-form #closeNewNoteFoldersForm.active {
+        box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+      /* line 2992, static/scss/app/home.scss */
+      body.dark .new-note .wrapper .new-note-folders-form .new-note-folder-list {
+        box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+        /* line 2997, static/scss/app/home.scss */
+        body.dark .new-note .wrapper .new-note-folders-form .new-note-folder-list #newNoteFolder {
+          box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+        /* line 3004, static/scss/app/home.scss */
+        body.dark .new-note .wrapper .new-note-folders-form .new-note-folder-list #newNoteFolder.inNote {
+          box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+      /* line 3013, static/scss/app/home.scss */
+      body.dark .new-note .wrapper .new-note-folders-form .new-note-folder-list::-webkit-scrollbar-thumb {
+        background: #a3a7ab; }
+  /* line 3027, static/scss/app/home.scss */
+  body.dark .photo-carousel #previousPhoto, body.dark .photo-carousel #nextPhoto {
+    background: rgba(21, 23, 24, 0.7);
+    box-shadow: none; }
+  /* line 3039, static/scss/app/home.scss */
+  body.dark .current-note #currentNoteWrapper::-webkit-scrollbar-thumb {
+    background: #a3a7ab; }
+  /* line 3045, static/scss/app/home.scss */
+  body.dark .current-note .wrapper {
+    background: #151718; }
+    /* line 3051, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .top #closeCurrentNote {
+      box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+    /* line 3064, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .photos .photo img {
+      box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+    /* line 3073, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .photos .photo #removePhoto svg {
+      fill: #151718; }
+    /* line 3087, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .rte .rte-wrapper {
+      box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+      /* line 3092, static/scss/app/home.scss */
+      body.dark .current-note .wrapper .rte .rte-wrapper button {
+        box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+      /* line 3099, static/scss/app/home.scss */
+      body.dark .current-note .wrapper .rte .rte-wrapper button.active {
+        box-shadow: inset 4px 4px 8px #0a0b0c, inset -4px -4px 8px #202324; }
+      /* line 3110, static/scss/app/home.scss */
+      body.dark .current-note .wrapper .rte .rte-wrapper #photoBtnCurrent svg path {
+        fill: #a3a7ab; }
+    /* line 3122, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .rte .rte-wrapper::-webkit-scrollbar-thumb {
+      background: #a3a7ab; }
+    /* line 3130, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .current-note-folders-form {
+      background: #151718;
+      box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+      /* line 3137, static/scss/app/home.scss */
+      body.dark .current-note .wrapper .current-note-folders-form #closeCurrentNoteFoldersForm {
+        background: #151718;
+        box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+      /* line 3146, static/scss/app/home.scss */
+      body.dark .current-note .wrapper .current-note-folders-form #closeCurrentNoteFoldersForm.active {
+        box-shadow: inset 4px 4px 8px #0a0b0c, inset -4px -4px 8px #202324; }
+      /* line 3153, static/scss/app/home.scss */
+      body.dark .current-note .wrapper .current-note-folders-form .folder-list::-webkit-scrollbar-thumb {
+        background: #a3a7ab; }
+      /* line 3159, static/scss/app/home.scss */
+      body.dark .current-note .wrapper .current-note-folders-form .folder-list {
+        box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+        /* line 3164, static/scss/app/home.scss */
+        body.dark .current-note .wrapper .current-note-folders-form .folder-list #noteFolder {
+          box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+        /* line 3171, static/scss/app/home.scss */
+        body.dark .current-note .wrapper .current-note-folders-form .folder-list #noteFolder.inNote {
+          box-shadow: inset 4px 4px 8px #0a0b0c, inset -4px -4px 8px #202324; }
+    /* line 3182, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .current-note-folders-form::-webkit-scrollbar-thumb {
+      background: #a3a7ab; }
+    /* line 3190, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .content .current-note-content {
+      box-shadow: inset 4px 4px 8px #0a0b0c, inset -4px -4px 8px #202324; }
+    /* line 3201, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .current-note-folders .folder {
+      box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+    /* line 3208, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .current-note-folders #removeFolder {
+      box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+    /* line 3215, static/scss/app/home.scss */
+    body.dark .current-note .wrapper .current-note-folders #removeFolder.active {
+      box-shadow: inset 4px 4px 8px #0a0b0c, inset -4px -4px 8px #202324; }
+  /* line 3228, static/scss/app/home.scss */
+  body.dark .note {
+    box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #202324; }
+    /* line 3233, static/scss/app/home.scss */
+    body.dark .note .empty {
+      color: #6e7072; }
+    /* line 3241, static/scss/app/home.scss */
+    body.dark .note .note-actions div {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+    /* line 3248, static/scss/app/home.scss */
+    body.dark .note .note-actions div.active {
+      box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+    /* line 3259, static/scss/app/home.scss */
+    body.dark .note .folders .folder {
+      box-shadow: 4px 4px 8px #0e1011, -4px -4px 8px #1c1e1f; }
+  /* line 3270, static/scss/app/home.scss */
+  body.dark #emptyTrashBtn.active {
+    box-shadow: inset 4px 4px 8px #0e1011, inset -4px -4px 8px #1c1e1f; }
+
+/* line 3281, static/scss/app/home.scss */
+svg.error path {
+  fill: red; }
+
+/* Toggle mode btn */
+/* line 3291, static/scss/app/home.scss */
+.toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0; }
+
+/* line 3299, static/scss/app/home.scss */
+.toggle-slot {
+  position: relative;
+  height: 10em;
+  width: 20em;
+  border-radius: 10em;
+  background: #f6eadf;
+  transition: background-color 250ms;
+  box-shadow: 3px 3px 8px #c5bbb2, -3px -3px 8px #fffffa;
+  transition: all 1s ease-in-out; }
+
+/* line 3312, static/scss/app/home.scss */
+.toggle-checkbox:checked ~ .toggle-slot {
+  background-color: #151718;
+  box-shadow: 4px 4px 8px #0a0b0c, -4px -4px 8px #1c1e1f; }
+
+/* line 3321, static/scss/app/home.scss */
+.toggle-button {
+  transform: translate(11.75em, 1.75em);
+  position: absolute;
+  height: 6.5em;
+  width: 6.5em;
+  border-radius: 50%;
+  background-color: #ffeccf;
+  box-shadow: inset 0px 0px 0px 0.75em #ffbb52;
+  transition: all 1s ease-in-out, transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71); }
+
+/* line 3332, static/scss/app/home.scss */
+.toggle-checkbox:checked ~ .toggle-slot .toggle-button {
+  background-color: #151718;
+  box-shadow: inset 0px 0px 0px 0.75em #a3a7ab;
+  transform: translate(1.75em, 1.75em); }
+
+/* line 3338, static/scss/app/home.scss */
+.sun-icon {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  color: #ffbb52;
+  transition: all 1s ease-in-out; }
+
+/* line 3348, static/scss/app/home.scss */
+.sun-icon-wrapper {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  opacity: 1;
+  transform: translate(2em, 2em) rotate(15deg);
+  transform-origin: 50% 50%;
+  transition: opacity 150ms, transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71); }
+
+/* line 3358, static/scss/app/home.scss */
+.toggle-checkbox:checked ~ .toggle-slot .sun-icon-wrapper {
+  opacity: 0;
+  transform: translate(3em, 2em) rotate(0deg); }
+
+/* line 3363, static/scss/app/home.scss */
+.moon-icon {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  color: #a3a7ab;
+  transition: all 1s ease-in-out; }
+
+/* line 3373, static/scss/app/home.scss */
+.moon-icon-wrapper {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  opacity: 0;
+  transform: translate(11em, 2em) rotate(0deg);
+  transform-origin: 50% 50%;
+  transition: opacity 150ms, transform 500ms cubic-bezier(0.26, 2.5, 0.46, 0.71); }
+
+/* line 3383, static/scss/app/home.scss */
+.toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
+  opacity: 1;
+  transform: translate(12em, 2em) rotate(-15deg); }

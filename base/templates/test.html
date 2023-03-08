@@ -1,0 +1,19 @@
+{% load compress %}
+{% load static %}
+
+<head>
+
+    {% compress css %}
+
+        <link rel="stylesheet" href="{% static 'scss/base/test.scss' %}" type="text/x-scss">
+
+    {% endcompress css %}
+
+</head>
+
+<div class="card radial">
+    <div class="border glow"></div>
+    <div class="border"></div>
+    <div class="border fill">I work in Chromium browsers</div>
+  </div>
+</div>

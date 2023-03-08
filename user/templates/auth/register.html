@@ -200,22 +200,6 @@
             return /\d/.test(myString);
         
         }
-
-        var n, e, p;
-
-        function v() {
-
-            if (n && e && p) {
-
-                $('#r').prop('disabled', false);
-
-            } else {
-
-                $('#r').prop('disabled', true);
-
-            }
-
-        }
         
         $('button').click(function() {
 
@@ -227,39 +211,10 @@
 
             }, 250);
             
-        })
-
-        document.getElementById('n').addEventListener('input', function() {
-
-            $('#ne').css('opacity', 0);
-
-            $('#r').prop('disabled', true);
-
         });
+        
 
-        document.getElementById('n').addEventListener('input', delay(function() {
-
-            if (!$('#n').val()) {
-
-                $('#ne').css('opacity', 1);
-                n = false;
-
-            } else {
-
-                n = true;
-
-            }
-
-            v();
-
-        }, 500));
-
-        function validateEmail(e) {
-
-            var re = /\S+@\S+\.\S+/;
-            return re.test(e);
-
-        }
+        /* Placeholder logic */
 
         $('input').focus(function() {
 
@@ -313,6 +268,54 @@
 
         });
 
+        var e = n = p = false;
+
+        function v() {
+
+            if (e && p && n) {
+
+                $('#r').prop('disabled', false);
+
+            } else {
+
+                $('#r').prop('disabled', true);
+
+            }
+
+        }
+
+        document.getElementById('n').addEventListener('input', function() {
+
+            $('#ne').css('opacity', 0);
+
+            $('#r').prop('disabled', true);
+
+        });
+
+        document.getElementById('n').addEventListener('input', delay(function() {
+
+            if (!$('#n').val()) {
+
+                $('#ne').css('opacity', 1);
+                n = false;
+
+            } else {
+
+                n = true;
+
+            }
+
+            v();
+
+        }, 500));
+
+        function validateEmail(e) {
+
+            var re = /\S+@\S+\.\S+/;
+            return re.test(e);
+
+        }
+
         /* Email */
 
         document.getElementById('e').addEventListener('input', function() {
@@ -354,6 +357,8 @@
                         } else {
                             
                             e = true;
+
+                            v();
 
                         }
 

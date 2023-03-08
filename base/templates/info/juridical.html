@@ -24,6 +24,8 @@
 
         {% endcompress %}
 
+        <script src="{% static 'packages/jquery-3.6.1.min.js' %}"></script>
+
     </head>
 
     <body>
@@ -242,5 +244,23 @@
         }
 
     </style>
+
+    <script>
+
+        $('.auth-btn').click(function() {
+
+            btn = $(this);
+
+            btn.addClass('in');
+
+            setTimeout(function() {
+
+                btn.removeClass('in');
+
+            }, 250);
+
+        });
+
+    </script>
 
 </html>

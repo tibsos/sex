@@ -137,7 +137,7 @@ body, html {
             cursor: pointer;
 
             box-shadow:  1px 1px 4px #b9b9b7,
-                    -1px -1px 4px #ffffff;
+                -1px -1px 4px #ffffff;
 
             float: left;
             
@@ -190,6 +190,13 @@ body, html {
             cursor: pointer;
 
         }
+
+    } 
+
+    div.in {
+
+        box-shadow: inset 1px 1px 4px #b9b9b7,
+            inset -1px -1px 4px #ffffff;
 
     }
 
@@ -392,7 +399,7 @@ textarea:hover {
     .message-submitted {
 
         position: relative;
-        top: 20px;
+        top: -20px;
 
         display: none;
         opacity: 0;

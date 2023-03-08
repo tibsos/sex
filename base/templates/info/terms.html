@@ -24,6 +24,8 @@
 
         {% endcompress %}
 
+        <script src="{% static 'packages/jquery-3.6.1.min.js' %}"></script>
+
     </head>
 
     <body>
@@ -197,6 +199,20 @@
 
         document.getElementById(id).href = '#';
         document.getElementsByClassName(id)[0].classList.add('active') = '#';
+
+        $('.auth-btn').click(function() {
+
+            btn = $(this);
+
+            btn.addClass('in');
+
+            setTimeout(function() {
+
+                btn.removeClass('in');
+
+            }, 250);
+
+        });
 
     </script>
 

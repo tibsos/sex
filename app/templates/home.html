@@ -1645,6 +1645,8 @@
 
             }, 500);
 
+            $(this).addClass('in');
+
         });
 
         $('#closePremiumOfferBtn').click(function() {
@@ -1666,6 +1668,8 @@
                 $('#closePremiumOfferBtn').removeClass('active');
 
             }, 250);
+
+            $('.premium-btn').removeClass('in');
 
         });
 
@@ -3635,6 +3639,8 @@
                             $('.premium-offer').hide();
 
                         }, 250);
+
+                        $('.premium-btn').removeClass('in');
 
                     } else if (editFolderFormShown) {
 
